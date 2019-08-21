@@ -1,0 +1,14 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
+  "author": "Auros",
+  "description": "A combination of different features to enhance your Beat Saber Experience",
+  "gameVersion": "1.2.0",
+  "id": "Enhancements",
+  "name": "Enhancements",
+  "version": "0.0.1-alpha",
+  "features": [],
+  "links": {
+    "donate": "http://ko-fi.com/aurosnex",
+    "project-source": "https://github.com/AurosTV/Enhancements"
+  }
+}
