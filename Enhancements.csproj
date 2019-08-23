@@ -41,6 +41,9 @@
     <Reference Include="BeatSaberCustomUI">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Plugins\BeatSaberCustomUI.dll</HintPath>
     </Reference>
+    <Reference Include="BS_Utils">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Plugins\BS_Utils.dll</HintPath>
+    </Reference>
     <Reference Include="IPA.Loader">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\IPA.Loader.dll</HintPath>
     </Reference>
@@ -69,18 +72,58 @@
     <Reference Include="UnityEngine.UIModule">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.UIModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestAudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.UnityWebRequestAudioModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UnityWebRequestModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.UnityWebRequestModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Breaktime\Breaktime.cs" />
+    <Compile Include="Breaktime\Imager.cs" />
+    <Compile Include="Breaktime\Radial.cs" />
+    <Compile Include="Clock\Clock.cs" />
+    <Compile Include="EnhancementsManager.cs" />
+    <Compile Include="Harmony\AudioPitchGainEffectStartEffect.cs" />
+    <Compile Include="Harmony\GameSongControllerStartSong.cs" />
+    <Compile Include="Harmony\MainSettingsModelLoad.cs" />
+    <Compile Include="Harmony\NoteAndMissAudioSoundEffect.cs" />
+    <Compile Include="Harmony\SongPreviewPlayerCrossfadeTo.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Logger.cs" />
-    <Compile Include="PluginConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SongSkip\SongSkip.cs" />
+    <Compile Include="Utilities\WavUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Modules\" />
+    <EmbeddedResource Include="Resources\sectionpass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\bobbie.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\arrow\Awesome.wav" />
+    <EmbeddedResource Include="Resources\arrow\Excelent.wav" />
+    <EmbeddedResource Include="Resources\arrow\Good.wav" />
+    <EmbeddedResource Include="Resources\arrow\Great.wav" />
+    <EmbeddedResource Include="Resources\arrow\Nice.wav" />
+    <EmbeddedResource Include="Resources\arrow\Perfect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\bobbie1.wav" />
+    <EmbeddedResource Include="Resources\bobbie2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\sectionpass.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
