@@ -431,6 +431,14 @@ namespace Enhancements
                         tmenu.SetValue += delegate (bool value) { Settings.BTSettings.Enable = value; };
                     }
                 }
+                else if (menuName.Contains("Clock"))
+                {
+                    if (name == "Enable")
+                    {
+                        tmenu.GetValue += delegate { return Settings.CLSettings.Enable; };
+                        tmenu.SetValue += delegate (bool value) { Settings.CLSettings.Enable = value; };
+                    }
+                }
                 else if (menuName.Contains("SongSkip"))
                 {
                     if (name == "Radial")

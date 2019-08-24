@@ -40,7 +40,7 @@ namespace Enhancements.Breaktime
 
             _panelLeft.material.color = new Color(1, 1, 1, 1);
 
-            _panelLeft.mainTexture.wrapMode = TextureWrapMode.Clamp;
+            
             _panelLeft.material.renderQueue = 4000;
             
         }
@@ -53,6 +53,7 @@ namespace Enhancements.Breaktime
         public void EnableImager(Sprite sprite)
         {
             _panelLeft.sprite = sprite;
+            _panelLeft.sprite.texture.wrapMode = TextureWrapMode.Clamp;
         }
         public void DisableImager()
         {

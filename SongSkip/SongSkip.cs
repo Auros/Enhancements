@@ -138,7 +138,7 @@ namespace Enhancements.SongSkip
 
         private IEnumerator Generator(Skip type, float skipTo)
         {
-            yield return new WaitForSecondsRealtime(.5f);
+            yield return new WaitForSecondsRealtime(.75f);
 
             enumeratorsMakeMeWantDie = true;
             if (type == Skip.Intro)
@@ -158,9 +158,9 @@ namespace Enhancements.SongSkip
                     float percent = 0f;
                     while (percent < 1f)
                     {
-                        string _text = $"<size=35%>Press Trigger </size><size=35%>To Skip</size>\n{Mathf.Round(skipTo - _audioTimeSyncController.songTime)}";
+                        string _text = $"<size=35%>Loading...</size>\n{Mathf.Round(skipTo - _audioTimeSyncController.songTime)}";
                         percent += .1f;
-                        CheckSkip(skipTo);
+                        //CheckSkip(skipTo);
                         radial.UpdateRadial(_text, percent, new Color(1f, 1f, 1f, Mathf.Clamp(percent + .2f, 0f, 1f)));
                         yield return new WaitForSecondsRealtime(.05f);
                     }
@@ -237,9 +237,10 @@ namespace Enhancements.SongSkip
 
         private IEnumerator ActivateSkip(float toSkipTo)
         {
-            yield return new WaitForSecondsRealtime(.01f);
+            //yield return new WaitForSecondsRealtime(.25f);
             var _songAudio = _audioTimeSyncController.GetPrivateField<AudioSource>("_audioSource");
             _songAudio.time = toSkipTo - 1.5f;
+            yield return null;
         }
 
         private IEnumerator SetAudioLength()
