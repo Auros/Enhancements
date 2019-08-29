@@ -21,6 +21,35 @@ namespace Enhancements.UI
             applycomment.text = $"<size=75%>You <color=\"red\">DO NOT</color> have to press the <color=\"green\">APPLY</color> or <color=\"green\">OK</color> buttons for all settings involved with Enhancements. Once you change the values, just press Cancel! Hover over settings to learn more about them. </size>";
         }
 
-        
+
+        //BREAKTIME
+
+        [UIValue("breaktime_enable")]
+        private bool breaktime_enable = EnhancementsManager.Settings.BTSettings.Enable;
+
+        [UIAction("breaktime_enable")]
+        private void Apply_BreaktimeEnable(bool value)
+        {
+            EnhancementsManager.Settings.BTSettings.Enable = value;
+        }
+
+        [UIValue("breaktime_radial")]
+        private bool breaktime_radial = EnhancementsManager.Settings.BTSettings.Radial;
+
+        [UIAction("breaktime_radial")]
+        private void Apply_BreaktimeRadial(bool value)
+        {
+            EnhancementsManager.Settings.BTSettings.Radial = value;
+        }
+
+        [UIValue("breaktime_timer")]
+        private bool breaktime_timer = EnhancementsManager.Settings.BTSettings.Timer;
+
+        [UIAction("breaktime_timer")]
+        private void Apply_BreaktimeTimer(bool value)
+        {
+            EnhancementsManager.Settings.BTSettings.Timer = value;
+        }
+
     }
 }

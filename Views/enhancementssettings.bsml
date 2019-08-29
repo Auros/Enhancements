@@ -5,4 +5,14 @@
 	<horizontal pref-width='90'>
 	  <text id='applyimmediatenotice'></text>
 	</horizontal>
+	<settings-submenu text='Breaktime' hover-hint='Breaktime Module (Idea from RangeValley)'>
+	  <settings-container>
+		<horizontal pref-width='90'>
+		  <clickable-text text='[-] Back' click-event='back'></clickable-text>
+		</horizontal>
+      <bool-setting text='Enable' value='breaktime_enable' apply-on-change='true' on-change='breaktime_enable'></bool-setting>
+      <bool-setting text='Radial' value='breaktime_radial' apply-on-change='true' on-change='breaktime_radial'></bool-setting>
+      <bool-setting text='Timer' value='breaktime_timer' apply-on-change='true' on-change='breaktime_timer'></bool-setting>
+	  </settings-container>
+	</settings-submenu>
 </settings-container>

@@ -174,7 +174,7 @@ namespace Enhancements
         }
 
         private string _beatSaberDirectory;
-        internal static BS_Utils.Utilities.Config Config = new BS_Utils.Utilities.Config("Lifeline Mods");
+        internal static BS_Utils.Utilities.Config Config = new BS_Utils.Utilities.Config("[LM] - Enhancements");
         public static bool noHud = false;
         public SongPreviewPlayer menuPlayer;
         
