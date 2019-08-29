@@ -1,5 +1,6 @@
 ﻿using CustomUI.Settings;
 using CustomUI.UIElements;
+using HMUI;
 using IPA.Utilities;
 using System;
 using System.Collections.Generic;
@@ -215,7 +216,7 @@ namespace Enhancements
         {
             if (newScene.name == "GameCore")
             {
-                noHud = Resources.FindObjectsOfTypeAll<PlayerDataModelSO>().FirstOrDefault().currentLocalPlayer.playerSpecificSettings.noTextsAndHuds;
+                noHud = Resources.FindObjectsOfTypeAll<PlayerDataModelSO>().FirstOrDefault().playerData.playerSpecificSettings.noTextsAndHuds;
 
                 if (noHud)
                     Clock.Clock.Instance.UpdateClockState(false);
@@ -481,7 +482,7 @@ namespace Enhancements
                     float storeValue = property;
                     if (slider != null)
                     {
-                        slider.Scrollbar.onValueChanged.AddListener(delegate (float value)
+                        slider.Scrollbar.valueDidChangeEvent += delegate (RangeValuesTextSlider slide, float value)
                         {
                             storeValue = property;
                             slider.SetCurrentValueFromPercentage(value);
@@ -617,7 +618,7 @@ namespace Enhancements
                                     Settings.SongSkip.Notification = new Color(cc.r, cc.g, cc.b, property);
                                 }
                             }
-                        });
+                        };
                         return storeValue;
                     }
                     else
