@@ -1,5 +1,8 @@
 ﻿<settings-container>
 	<horizontal pref-width='90'>
-		<text text="<size=75%>You <color=\"red\">DO NOT</color> have to press the <color=\"green\">APPLY</color> or <color=\"green\">OK</color> buttons for all settings with the arrows on the left & right. Once you change the values, just press Cancel! Hover over settings to learn more about them. </size>"></text>
+	  <text id='firstnotice'></text>	
+	</horizontal>
+	<horizontal pref-width='90'>
+	  <text id='applyimmediatenotice'></text>
 	</horizontal>
 </settings-container>

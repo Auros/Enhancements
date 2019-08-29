@@ -203,6 +203,8 @@ namespace Enhancements
         {
             SceneManager.activeSceneChanged += OnSceneChange;
             SceneManager.sceneLoaded += OnSceneLoad;
+
+
         }
 
         public string BeatSaberDirectory()
@@ -263,6 +265,8 @@ namespace Enhancements
         {
             if (scene.name == "MenuCore")
             {
+                BeatSaberMarkupLanguage.Settings.BSMLSettings.instance.AddSettingsMenu("Enhancements", "Enhancements.Views.enhancementssettings.bsml", PersistentSingleton<UI.EnhancementsSettings>.instance);
+                PersistentSingleton<UI.EnhancementsSettings>.instance.SetTexts();
                 CreateUI();
                 if (Settings.CLSettings.Enable)
                 {
