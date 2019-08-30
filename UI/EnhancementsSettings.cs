@@ -1,16 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BeatSaberMarkupLanguage.Attributes;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Enhancements.UI
 {
     public class EnhancementsSettings : PersistentSingleton<EnhancementsSettings>
     {
+        [UIComponent("auros")]
+        private RawImage auros;
+
+        [UIComponent("range")]
+        private RawImage range;
+
+        [UIComponent("kyle")]
+        private RawImage kyle;
+
+        [UIComponent("taz")]
+        private RawImage taz;
+
+
         [UIComponent("firstnotice")]
         private TextMeshProUGUI firstcomment;
 
@@ -22,16 +37,58 @@ namespace Enhancements.UI
         public void SetTexts()
         {
             firstcomment.text = $"<align=\"center\"><b>For your <color=#00ffff>convience</color>...</b></align>";
-            applycomment.text = $"<size=75%>You <color=\"red\">DO NOT</color> have to press the <color=\"green\">APPLY</color> or <color=\"green\">OK</color> buttons for all settings involved with Enhancements. Once you change the values, just press Cancel! Hover over settings to learn more about them. </size>";
+            applycomment.text = $"<size=65%>You <color=\"red\">DO NOT</color> have to press the <color=\"green\">APPLY</color> or <color=\"green\">OK</color> buttons for all settings involved with Enhancements. Once you change the values, just press Cancel! Hover over settings to learn more about them. </size>";
             visualizationhelp.text = $"<align=\"center\"><b><color=#3bffcb><u>Visualization</u></color></b></align>\n" +
-                $"<size=65%><align=\"center\">" +
+                $"<size=45%><align=\"center\">" +
                 $"When visualization is activated, an image and audio effect will activate. You can adjust the individual settings for the visualization here. You can " +
                 $"also set the visualization to Custom and put your own files (.wav and .png) into the folder below. If you have one audio file & image in the folder, it " +
                 $"will always play those. Multiple files will randomize the values!</align></size>";
 
             ChangeClockSetting();
+
+            var element = auros.gameObject.AddComponent<AspectRatioFitter>();
+            element.aspectRatio = 1f;
+            element.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+
+            var element1 = range.gameObject.AddComponent<AspectRatioFitter>();
+            element1.aspectRatio = 1f;
+            element1.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+
+            var element2 = kyle.gameObject.AddComponent<AspectRatioFitter>();
+            element2.aspectRatio = 1f;
+            element2.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+
+            var element3 = taz.gameObject.AddComponent<AspectRatioFitter>();
+            element3.aspectRatio = 1f;
+            element3.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+
+            auros.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.auros.jpg");
+            range.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.range.png");
+            kyle.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.kyle.png");
+            taz.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.taz.png");
+
+            auros.texture.wrapMode = TextureWrapMode.Clamp;
+            range.texture.wrapMode = TextureWrapMode.Clamp;
+            kyle.texture.wrapMode = TextureWrapMode.Clamp;
+            taz.texture.wrapMode = TextureWrapMode.Clamp;
         }
 
+        [UIAction("openfolder")]
+        private void OpenFolder()
+        {
+            if (!Directory.Exists(Environment.CurrentDirectory.Replace('\\', '/') + "/UserData/Lifeline/Breaktime"))
+            {
+                Directory.CreateDirectory(Environment.CurrentDirectory.Replace('\\', '/') + "/UserData/Lifeline/Breaktime");
+            }
+
+            ShowExplorer(EnhancementsManager.Instance.BeatSaberDirectory() + "/UserData/Lifeline/Breaktime/");
+        }
+
+        public void ShowExplorer(string itemPath)
+        {
+            itemPath = itemPath.Replace(@"/", @"\");
+            System.Diagnostics.Process.Start("explorer.exe", "/select," + itemPath);
+        }
 
         //BREAKTIME
 

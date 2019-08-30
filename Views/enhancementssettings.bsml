@@ -36,6 +36,9 @@
           <dropdown-list-setting text='Visualization' value='vis-choice' choices='vis-options'  apply-on-change='true' on-change='breaktime_visualization'></dropdown-list-setting>
           <bool-setting text='Images' value='breaktime_image' apply-on-change='true' on-change='breaktime_image'></bool-setting>
           <bool-setting text='Audio' value='breaktime_audio' apply-on-change='true' on-change='breaktime_audio'></bool-setting>
+          <horizontal pref-width='90'>
+            <clickable-text text='Click me to open folder!' on-click='openfolder'></clickable-text>
+          </horizontal>
         </settings-container>
       </settings-submenu>
 	  </settings-container>
@@ -118,7 +121,30 @@
           <slider-setting text='A' min='0' max='1' increment='.049' value='songskip_a' on-change='songskip_a' integer-only='false'></slider-setting>
         </settings-container>
       </settings-submenu>
-      
+    </settings-container>
+  </settings-submenu>
+
+  <settings-submenu text='Credits' hover-hint='People!'>
+    <settings-container>
+      <horizontal pref-width='90'>
+        <clickable-text text='[-] Back' click-event='back'></clickable-text>
+      </horizontal>
+      <horizontal pref-width='70'>
+        <image id='auros' pref-width='10' pref-height='10'></image>
+        <text text='Auros: The maker and current maintainer of this mod!' align='Left'></text>
+      </horizontal>
+      <horizontal pref-width='70'>
+        <image id='range' pref-width='10' pref-height='10'></image>
+        <text text='RangeValley: Idea and logic for Breaktime, also inspiration~' align='Left'></text>
+      </horizontal>
+      <horizontal pref-width='70'>
+        <image id='kyle' pref-width='10' pref-height='10'></image>
+        <text text='Kyle1413: The maker of IntroSkip.' align='Left'></text>
+      </horizontal>
+      <horizontal pref-width='70'>
+        <image id='taz' pref-width='10' pref-height='10'></image>
+        <text text='Taz: The original maker of Beat Saber Tweaks.' align='Left'></text>
+      </horizontal>
     </settings-container>
   </settings-submenu>
 </settings-container>
