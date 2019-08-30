@@ -45,6 +45,11 @@
       <horizontal pref-width='90'>
         <clickable-text text='[-] Back' click-event='back'></clickable-text>
       </horizontal>
+      
+      <bool-setting text='Enable' value='clock_enable' apply-on-change='true' on-change='clock_enable'></bool-setting>
+      <slider-setting text='Font Size' min='1' max='20' increment='.97' value='clock_size' on-change='clock_size' integer-only='false'></slider-setting>
+      <dropdown-list-setting text='Time Format' value='time-choice' choices='time-options' apply-on-change='true' on-change='clock_format'></dropdown-list-setting>
+      
 		<settings-submenu text='Color' hover-hint='Color Adjustments'>
 		  <settings-container>
 			<horizontal pref-width='90'>
@@ -78,5 +83,42 @@
       </settings-submenu>
     </settings-container>
 	</settings-submenu>
-	
+  <settings-submenu text='Volume Assistant' hover-hint='It does not play despacito'>
+    <settings-container>
+      <horizontal pref-width='90'>
+        <clickable-text text='[-] Back' click-event='back'></clickable-text>
+      </horizontal>
+      <slider-setting text='Note Hit' min='0' max='1' increment='0.1' value='va_hit' on-change='va_hit' integer-only='false'></slider-setting>
+      <slider-setting text='Note Miss' min='0' max='1' increment='0.1' value='va_miss' on-change='va_miss' integer-only='false'></slider-setting>
+      <slider-setting text='Music' min='0' max='1' increment='0.1' value='va_music' on-change='va_music' integer-only='false'></slider-setting>
+      <slider-setting text='Background' min='0' max='1' increment='0.1' value='va_background' on-change='va_background' integer-only='false'></slider-setting>
+      <slider-setting text='Song Preview' min='0' max='1' increment='0.1' value='va_preview' on-change='va_preview' integer-only='false'></slider-setting>
+    </settings-container>
+  </settings-submenu>
+  
+  <settings-submenu text='SongSkip' hover-hint='DO NOT DO !bsr f'>
+    <settings-container>
+      <horizontal pref-width='90'>
+        <clickable-text text='[-] Back' click-event='back'></clickable-text>
+      </horizontal>
+      <bool-setting text='Enable' value='songskip_enable' apply-on-change='true' on-change='songskip_enable'></bool-setting>
+      <bool-setting text='Skip Intro' value='songskip_intro' apply-on-change='true' on-change='songskip_intro'></bool-setting>
+      <bool-setting text='Skip Outro' value='songskip_outro' apply-on-change='true' on-change='songskip_outro'></bool-setting>
+      <bool-setting text='Radial' value='songskip_radial' apply-on-change='true' on-change='songskip_radial'></bool-setting>
+      <bool-setting text='Text' value='songskip_text' apply-on-change='true' on-change='songskip_text'></bool-setting>
+      <slider-setting text='Song Preview' min='3' max='10' increment='0.1' value='songskip_minintro' on-change='songskip_minintro' integer-only='false'></slider-setting>
+      <settings-submenu text='Color' hover-hint='Color Adjustments'>
+        <settings-container>
+          <horizontal pref-width='90'>
+            <clickable-text text='[-] Back' click-event='back'></clickable-text>
+          </horizontal>
+          <slider-setting text='R' min='0' max='1' increment='.049' value='songskip_r' on-change='songskip_r' integer-only='false'></slider-setting>
+          <slider-setting text='G' min='0' max='1' increment='.049' value='songskip_g' on-change='songskip_g' integer-only='false'></slider-setting>
+          <slider-setting text='B' min='0' max='1' increment='.049' value='songskip_b' on-change='songskip_b' integer-only='false'></slider-setting>
+          <slider-setting text='A' min='0' max='1' increment='.049' value='songskip_a' on-change='songskip_a' integer-only='false'></slider-setting>
+        </settings-container>
+      </settings-submenu>
+      
+    </settings-container>
+  </settings-submenu>
 </settings-container>
