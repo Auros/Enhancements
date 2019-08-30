@@ -40,7 +40,7 @@ namespace Enhancements.Clock
             _timePos = pos;
             _timeRot = Quaternion.Euler(rot);
             _timeSize = size;
-            _timeFormat = timeType[timeValue];
+            _timeFormat = (string)timeType[timeValue];
             _color = col;
 
             CreateClock();
@@ -120,7 +120,7 @@ namespace Enhancements.Clock
 
         public void UpdateFormat(int place)
         {
-            _timeFormat = timeType[place];
+            _timeFormat = (string)timeType[place];
         }
 
         public void UpdateColor(Color col)
@@ -128,7 +128,7 @@ namespace Enhancements.Clock
             _text.color = col;
         }
 
-        public static readonly List<string> timeType = new List<string>()
+        public static readonly List<object> timeType = new List<object>()
         {
             "h:mm tt",
             "h:mm:ss tt",

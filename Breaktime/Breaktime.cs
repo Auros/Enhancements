@@ -499,7 +499,7 @@ namespace Enhancements.Breaktime
         }
 
 
-        public static readonly List<string> animType = new List<string>()
+        public static readonly List<object> animType = new List<object>()
         {
             "Default",
             "Osu",

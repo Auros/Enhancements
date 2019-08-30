@@ -399,7 +399,7 @@ namespace Enhancements
         }
 
 
-        private object MenuPropertyGenerator(SubMenu menu, string menuName, MenuType type, string name, object setting, string hint = "", List<string> array = null, float min = 0, float max = 10, float inc = 1, float def = 5f)
+        private object MenuPropertyGenerator(SubMenu menu, string menuName, MenuType type, string name, object setting, string hint = "", List<object> array = null, float min = 0, float max = 10, float inc = 1, float def = 5f)
         {
             if (type == MenuType.Bool)
             {
@@ -648,13 +648,13 @@ namespace Enhancements
                 {
                     tMenu.GetValue += delegate { return Settings.CLSettings.TimeFormat; };
                     tMenu.SetValue += delegate (float value) { Settings.CLSettings.TimeFormat = (int)value; };
-                    tMenu.FormatValue += delegate (float value) { return DateTime.Now.ToString(array[(int)value]); };
+                    tMenu.FormatValue += delegate (float value) { return DateTime.Now.ToString((string)array[(int)value]); };
                 }
                 else if (name.Contains("Visualization"))
                 {
                     tMenu.GetValue += delegate { return Settings.BTSettings.Visualization; };
                     tMenu.SetValue += delegate (float value) { Settings.BTSettings.Visualization = (int)value; };
-                    tMenu.FormatValue += delegate (float value) { return array[(int)value]; };
+                    tMenu.FormatValue += delegate (float value) { return (string)array[(int)value]; };
                 }
                 return tMenu;
             }
