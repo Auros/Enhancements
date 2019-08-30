@@ -11,7 +11,7 @@ namespace Enhancements.Harmony
     {
         static bool Prefix(AudioPitchGainEffect __instance, float volumeScale, Action finishCallback)
         {
-            __instance.StartEffect(Settings.VolumeAssistant.Music, finishCallback);
+            __instance.StartCoroutine(__instance.StartEffectCoroutine(Settings.VolumeAssistant.Music, finishCallback));
             return false;
         }
     }
