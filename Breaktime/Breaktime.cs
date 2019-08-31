@@ -189,9 +189,8 @@ namespace Enhancements.Breaktime
 
             _toNext = noteData.timeToNextBasicNote + _audioTimeSyncController.songTime;
 
-            if (noteData.timeToNextBasicNote > 400000f)
+            if (noteData.timeToNextBasicNote > 59f || noteData.timeToNextBasicNote < 0)
                 return;
-
             if (!IHateEnumerators)
                 StartCoroutine(Timer(noteData.timeToNextBasicNote));
 
@@ -435,7 +434,7 @@ namespace Enhancements.Breaktime
             {
                 _timeUntil = _toNext - _audioTimeSyncController.songTime;
                 _countUp += .01f;
-                radial.UpdateRadial(Math.Round(_timeUntil - .75f, 2).ToString(), (_toNext - _audioTimeSyncController.songTime - .75f) / _cloned, new Color(radialColor.r, radialColor.g, radialColor.b, Mathf.Clamp(_countUp, .25f, 1f)));
+                radial.UpdateRadial(Mathf.Clamp((float)Math.Round(_timeUntil - .75f, 2), 0f, 59f).ToString(), (_toNext - _audioTimeSyncController.songTime - .75f) / _cloned, new Color(radialColor.r, radialColor.g, radialColor.b, Mathf.Clamp(_countUp, .25f, 1f)));
                 yield return new WaitForSeconds(.01f * timeScale);
 
             }
@@ -454,7 +453,7 @@ namespace Enhancements.Breaktime
                 _countUp += .01f;
 
                 var clamedNonRed = Mathf.Clamp(nonred + .4f, 0f, 1f);
-                radial.UpdateRadial(Math.Round(_timeUntil - .75f, 2).ToString(), (_toNext - _audioTimeSyncController.songTime - .75f) / _cloned, new Color(1, nong, nonb, clamedNonRed + .15f));
+                radial.UpdateRadial(Mathf.Clamp((float)Math.Round(_timeUntil - .75f, 2), 0f, 59f).ToString(), (_toNext - _audioTimeSyncController.songTime - .75f) / _cloned, new Color(1, nong, nonb, clamedNonRed + .15f));
                 yield return new WaitForSeconds(.01f * timeScale);
             }
 
@@ -468,7 +467,7 @@ namespace Enhancements.Breaktime
                 _countUp += .01f;
 
                 var clamedNonRed = Mathf.Clamp(nonred + .4f, 0f, 1f) + .15f;
-                radial.UpdateRadial(Math.Round(_timeUntil - .75f, 2).ToString(), (_toNext - _audioTimeSyncController.songTime - .75f) / _cloned, new Color(1, nong, nonb, clamedNonRed));
+                radial.UpdateRadial(Mathf.Clamp((float)Math.Round(_timeUntil - .75f, 2), 0f, 59f).ToString(), (_toNext - _audioTimeSyncController.songTime - .75f) / _cloned, new Color(1, nong, nonb, clamedNonRed));
                 yield return new WaitForSeconds(.01f * timeScale);
             }
 
