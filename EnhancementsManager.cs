@@ -257,7 +257,7 @@ namespace Enhancements
             }
             else if (newScene.name == "MenuCore")
             {
-                Clock.Clock.Instance.UpdateClockState(true);
+                Clock.Clock.Instance.UpdateClockState(Settings.CLSettings.Enable);
             }
         }
 
@@ -267,8 +267,7 @@ namespace Enhancements
             {
                 BeatSaberMarkupLanguage.Settings.BSMLSettings.instance.AddSettingsMenu("Enhancements", "Enhancements.Views.enhancementssettings.bsml", PersistentSingleton<UI.EnhancementsSettings>.instance);
                 PersistentSingleton<UI.EnhancementsSettings>.instance.SetTexts();
-                if (Settings.CLSettings.Enable)
-                {
+
                     if (Clock.Clock._instance == null)
                         Clock.Clock.Instance.Init
                         (
@@ -279,7 +278,8 @@ namespace Enhancements
                             Settings.CLSettings.TimeFormat,
                             Settings.CLSettings.ClockColor
                         );
-                }
+
+                Clock.Clock.Instance.UpdateClockState(Settings.CLSettings.Enable);
             }
         }
 
@@ -287,73 +287,6 @@ namespace Enhancements
         {
             SceneManager.activeSceneChanged -= OnSceneChange;
             SceneManager.sceneLoaded -= OnSceneLoad;
-        }
-
-        private class ClickableComment : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler, IEventSystemHandler
-        {
-            public void OnPointerClick(PointerEventData eventData)
-            {
-                if (!Directory.Exists(Environment.CurrentDirectory.Replace('\\', '/') + "/UserData/Lifeline/Breaktime"))
-                {
-                    Directory.CreateDirectory(Environment.CurrentDirectory.Replace('\\', '/') + "/UserData/Lifeline/Breaktime");
-                }
-
-                ShowExplorer(Instance.BeatSaberDirectory() + "/UserData/Lifeline/Breaktime/");
-            }
-
-            public void OnPointerEnter(PointerEventData eventData)
-            {
-                var controller = gameObject.GetComponent<BoolViewController>();
-                var text = controller.GetComponentInChildren<TMP_Text>();
-                text.color = new Color(1f, .7f, .4f);
-            }
-
-            public void OnPointerExit(PointerEventData eventData)
-            {
-                var controller = gameObject.GetComponent<BoolViewController>();
-                var text = controller.GetComponentInChildren<TMP_Text>();
-                text.color = Color.white;
-            }
-
-            public void ShowExplorer(string itemPath)
-            {
-                itemPath = itemPath.Replace(@"/", @"\");
-                System.Diagnostics.Process.Start("explorer.exe", "/select," + itemPath);
-            }
-        }
-
-        private class BreaktimeCommentColorChanger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IEventSystemHandler
-        {
-            public void OnPointerEnter(PointerEventData eventData)
-            {
-                var controller = gameObject.GetComponent<BoolViewController>();
-                var text = controller.GetComponentInChildren<TMP_Text>();
-                text.color = Settings.BTSettings.RadialColor;
-            }
-
-            public void OnPointerExit(PointerEventData eventData)
-            {
-                var controller = gameObject.GetComponent<BoolViewController>();
-                var text = controller.GetComponentInChildren<TMP_Text>();
-                text.color = Settings.BTSettings.RadialColor;
-            }
-        }
-
-        private class SongSkipCommentColorChanger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IEventSystemHandler
-        {
-            public void OnPointerEnter(PointerEventData eventData)
-            {
-                var controller = gameObject.GetComponent<BoolViewController>();
-                var text = controller.GetComponentInChildren<TMP_Text>();
-                text.color = Settings.SongSkip.Notification;
-            }
-
-            public void OnPointerExit(PointerEventData eventData)
-            {
-                var controller = gameObject.GetComponent<BoolViewController>();
-                var text = controller.GetComponentInChildren<TMP_Text>();
-                text.color = Settings.SongSkip.Notification;
-            }
         }
     }
 }
