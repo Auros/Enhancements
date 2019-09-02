@@ -6,7 +6,7 @@ All defualt settings are in parentheses.
 Breaktime creates a timer which tells you the time until the next note during breaks (time with no notes). It also brings visuals to it too (Customizable) read settings in game for more info!
 
 #### Settings
-Enable (On): This setting will enable the breaktime module
+Enable (Off): This setting will enable the breaktime module
 
 Radial (On): This setting controls whether or not the radial that apppears during a break.
 
@@ -46,7 +46,7 @@ Enable (On): This setting controls whether or not SongSkip is activated
 
 Skip Intro (On): This setting controls whether or not the intro of the song can be skipped. (If long enough)
 
-Skip Outro (Off): This setting controls whether or not the outro of the song can be skipped. (If long enough)
+Skip Outro (On): This setting controls whether or not the outro of the song can be skipped. (If long enough)
 
 Radial (On): This controls whether or not the radial appears when you can skip a song.
 
