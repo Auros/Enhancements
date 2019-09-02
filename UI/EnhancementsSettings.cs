@@ -318,6 +318,13 @@ namespace Enhancements.UI
             Clock.Clock.Instance.UpdateRot(EnhancementsManager.Settings.CLSettings.ClockRotation);
         }
 
+        [UIAction("clock_resetpos")]
+        private void ResetClockPos()
+        {
+            EnhancementsManager.Settings.CLSettings.ClockPosition = new Vector3(0f, 2.7f, 2.5f);
+            Clock.Clock.Instance.UpdatePos(EnhancementsManager.Settings.CLSettings.ClockPosition);
+        }
+
         [UIValue("clock_enable")]
         private bool clock_enable = EnhancementsManager.Settings.CLSettings.Enable;
 

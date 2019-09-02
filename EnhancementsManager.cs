@@ -33,7 +33,7 @@ namespace Enhancements
                 public static bool Image { get; set; } = true;
                 public static bool Audio { get; set; } = true;
                 public static float MinimumBreakTime { get; set; } = 5f;
-                public static bool Enable { get; set; } = true;
+                public static bool Enable { get; set; } = false;
             }
             public class CLSettings
             {
@@ -72,7 +72,7 @@ namespace Enhancements
                 BTSettings.Image = Config.GetBool(BuildUIString("Breaktime"), "Image", true, true);
                 BTSettings.Audio = Config.GetBool(BuildUIString("Breaktime"), "Audio", true, true);
                 BTSettings.MinimumBreakTime = Config.GetFloat(BuildUIString("Breaktime"), "Minimum Break Time", 5f, true);
-                BTSettings.Enable = ModuleEnabled("Breaktime");
+                BTSettings.Enable = ModuleEnabled("Breaktime", false);
 
                 CLSettings.ClockPosition = VectorBuilderFromConfig("Clock", "Position", defaults);
                 CLSettings.ClockRotation = VectorBuilderFromConfig("Clock", "Rotation", rotDefaults);
@@ -148,9 +148,9 @@ namespace Enhancements
                 return $"Enhancements - {name}";
             }
 
-            private static bool ModuleEnabled(string name)
+            private static bool ModuleEnabled(string name, bool defval = true)
             {
-                return Config.GetBool(BuildUIString(name), "Enable", true, true);
+                return Config.GetBool(BuildUIString(name), "Enable", defval, true);
             }
 
             private static Vector3 VectorBuilderFromConfig(string category, string name, float[] defaults)
