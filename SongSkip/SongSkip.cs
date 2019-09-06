@@ -26,7 +26,7 @@ namespace Enhancements.SongSkip
 
         public static void Load(bool SkipIntro, bool SkipOutro, float MinIntroTime, bool Radial, bool Text, Color Notif)
         {
-            if (!SkipIntro && !SkipOutro)
+            if (!SkipIntro && !SkipOutro || Gamemode.IsIsolatedLevel)
                 return;
             var ss = new GameObject("SongSkip").AddComponent<SongSkip>();
             ss.ApplySettings(SkipIntro, SkipOutro, MinIntroTime, Radial, Text, Notif);
@@ -229,7 +229,7 @@ namespace Enhancements.SongSkip
 
         private void CheckSkip(float toSkipTo)
         {
-            if (Controller(CT.Left).triggerValue == 1 || Controller(CT.Right).triggerValue == 1)
+            if (Controller(CT.Left).triggerValue > .95 || Controller(CT.Right).triggerValue > .95)
             {
                 StartCoroutine(ActivateSkip(toSkipTo));
             }
