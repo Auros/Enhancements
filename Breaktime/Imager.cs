@@ -29,7 +29,7 @@ namespace Enhancements.Breaktime
             rectTransform.sizeDelta = new Vector2(100, 50);
 
             _panelLeft = new GameObject("Imager").AddComponent<Image>();
-            _panelLeft.material = CustomUI.Utilities.UIUtilities.NoGlowMaterial;
+            _panelLeft.material = new Material(CustomUI.Utilities.UIUtilities.NoGlowMaterial);
             _panelLeft.rectTransform.SetParent(_imageCanvas.transform, false);
             _panelLeft.rectTransform.anchorMin = new Vector2(0.5f, 0.5f);
             _panelLeft.rectTransform.anchorMax = new Vector2(0.5f, 0.5f);
