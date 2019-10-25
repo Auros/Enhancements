@@ -1,5 +1,6 @@
 ﻿using CustomUI.Settings;
 using CustomUI.UIElements;
+using Enhancements.GameAdjustments;
 using HMUI;
 using IPA.Utilities;
 using System;
@@ -63,6 +64,13 @@ namespace Enhancements
                 public static bool Enable { get; set; } = true;
             }
 
+            public class GameAdjustments
+            {
+                public static bool ButtonLock { get; set; } = false;
+                public static float ButtonLockTime { get; set; } = .3f;
+                
+            }
+
             public static void Load()
             {
                 BTSettings.Radial = Config.GetBool(BuildUIString("Breaktime"), "Radial", true, true);
@@ -94,6 +102,9 @@ namespace Enhancements
                 SongSkip.Notification = ColorBuilderFromConfig("SongSkip", "Notification Color", kirby);
                 SongSkip.MinimumIntroTime = Config.GetFloat(BuildUIString("SongSkip"), "Minimum Intro Time", 5f, true);
                 SongSkip.Enable = ModuleEnabled("SongSkip");
+
+                GameAdjustments.ButtonLock = Config.GetBool(BuildUIString("GameAdjustments"), "Button Lock", false, true);
+                GameAdjustments.ButtonLockTime = Config.GetFloat(BuildUIString("GameAdjustments"), "Button Lock Time", .3f, true);
             }
 
             public static void Save()
@@ -141,6 +152,8 @@ namespace Enhancements
                 Config.SetFloat(BuildUIString("SongSkip"), "Minimum Intro Time", SongSkip.MinimumIntroTime);
                 Config.SetBool(BuildUIString("SongSkip"), "Enable", SongSkip.Enable);
 
+                Config.SetBool(BuildUIString("GameAdjustments"), "Button Lock", GameAdjustments.ButtonLock);
+                Config.SetFloat(BuildUIString("GameAdjustments"), "Button Lock Time", GameAdjustments.ButtonLockTime);
             }
 
             private static string BuildUIString(string name)
@@ -218,6 +231,7 @@ namespace Enhancements
         {
             if (newScene.name == "GameCore")
             {
+                new GameObject("Button Locker").AddComponent<ButtonLock>();
                 noHud = Resources.FindObjectsOfTypeAll<PlayerDataModelSO>().FirstOrDefault().playerData.playerSpecificSettings.noTextsAndHuds;
 
                 if (noHud)

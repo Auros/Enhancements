@@ -32,8 +32,12 @@ namespace Enhancements.UI
         [UIComponent("applyimmediatenotice")]
         private TextMeshProUGUI applycomment;
 
+        [UIComponent("buttonlocktext")]
+        private TextMeshProUGUI btnlck;
+
         [UIComponent("visualizationhelp")]
         private TextMeshProUGUI visualizationhelp;
+
         public void SetTexts()
         {
             firstcomment.text = $"<align=\"center\"><b>For your <color=#00ffff>convience</color>...</b></align>";
@@ -43,6 +47,9 @@ namespace Enhancements.UI
                 $"When visualization is activated, an image and audio effect will activate. You can adjust the individual settings for the visualization here. You can " +
                 $"also set the visualization to Custom and put your own files (.wav and .png) into the folder below. If you have one audio file & image in the folder, it " +
                 $"will always play those. Multiple files will randomize the values!</align></size>";
+            btnlck.text = $"<align=\"center\">Button Lock will temporarily disable the MENU, RESTART, and CONTINUE buttons in the pause menu so you don't accidentally pause and immediately press them. The time is how long" +
+                $"the buttons are deactivated.</align>";
+
 
             ChangeClockSetting();
 
@@ -62,7 +69,7 @@ namespace Enhancements.UI
             element3.aspectRatio = 1f;
             element3.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
 
-            auros.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.auros.jpg");
+            auros.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.auros.png");
             range.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.range.png");
             kyle.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.kyle.png");
             taz.texture = CustomUI.Utilities.UIUtilities.LoadTextureFromResources("Enhancements.Resources.taz.png");
@@ -523,6 +530,24 @@ namespace Enhancements.UI
         {
             var col = EnhancementsManager.Settings.SongSkip.Notification;
             EnhancementsManager.Settings.SongSkip.Notification = new Color(col.r, col.g, col.b, value);
+        }
+
+        [UIValue("buttonlock")]
+        private bool buttonlock = EnhancementsManager.Settings.GameAdjustments.ButtonLock;
+
+        [UIAction("buttonlock")]
+        private void Apply_BL(bool value)
+        {
+            EnhancementsManager.Settings.GameAdjustments.ButtonLock = value;
+        }
+
+        [UIValue("buttonlocktime")]
+        private float buttonlocktime = EnhancementsManager.Settings.GameAdjustments.ButtonLockTime;
+
+        [UIAction("buttonlocktime")]
+        private void Apply_BLT(float value)
+        {
+            EnhancementsManager.Settings.GameAdjustments.ButtonLockTime = value;
         }
     }
 }

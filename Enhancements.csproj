@@ -90,11 +90,13 @@
     <Compile Include="Breaktime\Radial.cs" />
     <Compile Include="Clock\Clock.cs" />
     <Compile Include="EnhancementsManager.cs" />
+    <Compile Include="GameAdjustments\ButtonLock.cs" />
     <Compile Include="Harmony\AudioPitchGainEffectStartEffect.cs" />
     <Compile Include="Harmony\GameSongControllerStartSong.cs" />
     <Compile Include="Harmony\MainSettingsModelLoad.cs" />
     <Compile Include="Harmony\NoteAndMissAudioSoundEffect.cs" />
     <Compile Include="Harmony\SongPreviewPlayerCrossfadeTo.cs" />
+    <Compile Include="Harmony\StandardLevelGameplayManagerPause.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -133,14 +135,14 @@
     <EmbeddedResource Include="Views\enhancementssettings.bsml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\auros.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\kyle.png" />
     <EmbeddedResource Include="Resources\taz.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\range.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\auros.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
