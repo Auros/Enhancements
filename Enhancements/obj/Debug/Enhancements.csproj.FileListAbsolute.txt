@@ -1,8 +1,0 @@
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\bin\Debug\Enhancements.dll
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\bin\Debug\Enhancements.pdb
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\obj\Debug\Enhancements.csprojAssemblyReference.cache
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\obj\Debug\Enhancements.dll
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\obj\Debug\Enhancements.pdb
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\bin\Debug\SemVer.1.2.0.0.dll
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\obj\Debug\Enhancements.csproj.CopyComplete
-C:\Users\Aurora\Documents\Mods\Enhancements\Enhancements\bin\Debug\SiaUtil.dll
