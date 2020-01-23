@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using IPA;
+﻿using IPA;
 using IPA.Config;
-using IPA.Utilities;
-using UnityEngine.SceneManagement;
-using SemVer;
 using UnityEngine;
-using IPALogger = IPA.Logging.Logger;
+using IPA.Utilities;
 using Version = SemVer.Version;
+using UnityEngine.SceneManagement;
+using IPALogger = IPA.Logging.Logger;
 
 namespace Enhancements
 {
@@ -54,7 +49,7 @@ namespace Enhancements
 
         public void OnApplicationQuit()
         {
-            
+            configProvider.Store(config.Value);
         }
 
         public void OnFixedUpdate()
@@ -64,17 +59,22 @@ namespace Enhancements
 
         public void OnUpdate()
         {
+#if DEBUG
             if (Input.GetKeyDown(KeyCode.Y) && Enhancements.ClockInstance != null)
                 Enhancements.ClockInstance.Active = false;
             else if (Input.GetKeyDown(KeyCode.Y) && Enhancements.ClockInstance == null)
             {
                 Enhancements.Instance.InitializeClock();
             }
+#endif
         }
 
         public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
         {
-
+            if (nextScene.name == "MenuViewControllers")
+                Enhancements.Instance.OnMenu();
+            if (nextScene.name == "GameCore")
+                Enhancements.Instance.OnGame();
         }
 
         public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
@@ -84,7 +84,7 @@ namespace Enhancements
                 if (Enhancements.Instance == null)
                 {
                     var e = new GameObject("[E2] - Instance").AddComponent<Enhancements>();
-                    UnityEngine.Object.DontDestroyOnLoad(e.gameObject);
+                    Object.DontDestroyOnLoad(e.gameObject);
                     e.SetupAll();
                 }
             }

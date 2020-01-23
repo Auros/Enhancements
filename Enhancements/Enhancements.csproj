@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BSML">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Plugins\BSML.dll</HintPath>
+    </Reference>
+    <Reference Include="HMLib">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\HMLib.dll</HintPath>
+    </Reference>
     <Reference Include="SemVer.1.2.0.0">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Libs\SemVer.1.2.0.0.dll</HintPath>
     </Reference>
@@ -87,12 +93,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clock\ClockConfig.cs" />
     <Compile Include="Clock\ClockObject.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="PluginConfig.cs" />
     <Compile Include="Enhancements.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings\BSScene.cs" />
+    <Compile Include="Settings\Color4.cs" />
+    <Compile Include="Settings\Float3.cs" />
+    <Compile Include="Settings\Settings.cs" />
+    <Compile Include="Utilities\Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
@@ -100,6 +112,7 @@
   <ItemGroup>
     <None Include="CreateJunctions.bat" />
     <None Include=".gitignore" />
+    <EmbeddedResource Include="Views\settings.bsml" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

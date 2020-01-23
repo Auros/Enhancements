@@ -1,0 +1,41 @@
+﻿<scrollable-settings-container>
+  <horizontal pref-width="90">
+    <text text="Enhancements Menu"></text>
+  </horizontal>
+  <settings-submenu text="Clock">
+    <scrollable-settings-container>
+      <clickable-text text="[-] Back" click-event="back"></clickable-text>
+      <bool-setting text="Enabled" value="clock-enabled" on-change="clock-ena" apply-on-change="true"></bool-setting>
+      <slider-setting text="Size" min=".1" max="20" increment=".1" value="clock_size" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false" ></slider-setting>
+      <dropdown-list-setting text="Active During" value="clock_mode" choices="clock_modes" formatter="clock_fmodes" on-change="clock_update" apply-on-change="true"></dropdown-list-setting>
+      <dropdown-list-setting text="Format" value="clock_format" choices="clock_formats" formatter="clock_formatter" on-change="clock_update" apply-on-change="true"></dropdown-list-setting>
+      <settings-submenu text="Position">
+        <scrollable-settings-container>
+          <clickable-text text="[-] Back" click-event="back"></clickable-text>
+          <slider-setting text="X" min="-4" max="4" increment=".1" value="clock_x" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false"></slider-setting>
+          <slider-setting text="Y" min="0" max="4" increment=".1" value="clock_y" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false" ></slider-setting>
+          <slider-setting text="Z" min="0" max="8" increment=".1" value="clock_z" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false" ></slider-setting>
+          <clickable-text text="Reset Clock To Default" on-click="clock_resetpos"></clickable-text>
+        </scrollable-settings-container>
+      </settings-submenu>
+      <settings-submenu text="Rotation">
+        <scrollable-settings-container>
+          <clickable-text text="[-] Back" click-event="back"></clickable-text>
+          <slider-setting text="X" min="-180" max="180" increment="10" value="clock_j" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false"></slider-setting>
+          <slider-setting text="Y" min="-180" max="180" increment="10" value="clock_k" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false" ></slider-setting>
+          <slider-setting text="Z" min="-180" max="180" increment="10" value="clock_l" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false" ></slider-setting>
+          <clickable-text text="Reset Clock To Default" on-click="clock_resetpos"></clickable-text>
+        </scrollable-settings-container>
+      </settings-submenu>
+      <settings-submenu text="Color">
+        <scrollable-settings-container>
+          <clickable-text text="[-] Back" click-event="back"></clickable-text>
+          <slider-setting text="R" min="0" max="1" increment=".1" value="clock_r" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false"></slider-setting>
+          <slider-setting text="G" min="0" max="1" increment=".1" value="clock_g" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false" ></slider-setting>
+          <slider-setting text="B" min="0" max="1" increment=".1" value="clock_b" on-change="clock_update" apply-on-change="true" get-event="clock_update" integer-only="false" ></slider-setting>
+          <clickable-text text="Reset Clock To Default" on-click="clock_resetpos"></clickable-text>
+        </scrollable-settings-container>
+      </settings-submenu>
+    </scrollable-settings-container>
+  </settings-submenu>
+</scrollable-settings-container>

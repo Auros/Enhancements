@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-
+using System.Collections;
+using Enhancements.Utilities;
 using Message = SiaUtil.Visualizers.WorldSpaceMessage;
 
 namespace Enhancements.Clock
@@ -13,7 +9,8 @@ namespace Enhancements.Clock
     public class ClockObject : MonoBehaviour
     {
         public Message text { get; set; }
-        public bool Active { get; set; } = false;
+        public bool Active { get; internal set; } = false;
+        public string format = "h:mm tt";
 
         public void Activate()
         {
@@ -26,14 +23,29 @@ namespace Enhancements.Clock
         private IEnumerator UpdateClock()
         {
             Active = true;
-            while (Active == true) //Oh yes ping me every 1/4 seconds
+            while (Active == true) //Oh yes papi chulo ping me every 1/4 seconds
             {
-                text.Text = DateTime.Now.ToString("h:mm:ss tt");
-                yield return new WaitForSecondsRealtime(.25f);
+                text.Text = DateTime.Now.ToString(format);
+                if (format != "yyyy MM dd THH:mm:ss.fffffffK")
+                    yield return new WaitForSecondsRealtime(.25f);
+                else
+                    yield return new WaitForEndOfFrame();
             }
             Active = false;
             text.Text = "";
             Destroy(this);
+        }
+
+        public void ConfigSet(ClockConfig cfg)
+        {
+            if (Active)
+            {
+                text.Color = cfg.color.ToColor();
+                text.transform.localPosition = cfg.position.ToVector3();
+                text.transform.localRotation = Quaternion.Euler(cfg.rotation.ToVector3());
+                text._messagePrompt.fontSize = cfg.fontSize;
+                format = cfg.format;
+            }
         }
     }
 }
