@@ -1,72 +1,45 @@
 ﻿using IPA;
+using HarmonyLib;
 using IPA.Config;
 using UnityEngine;
-using IPA.Utilities;
+using IPA.Config.Stores;
 using Version = SemVer.Version;
 using UnityEngine.SceneManagement;
 using IPALogger = IPA.Logging.Logger;
 
 namespace Enhancements
 {
-    public class Plugin : IBeatSaberPlugin, IDisablablePlugin
+    [Plugin(RuntimeOptions.DynamicInit)]
+    public class Plugin
     {
         internal static string Name => "Enhancements";
         internal static Version Version => new Version("2.0.0-alpha");
-        internal static Ref<PluginConfig> config;
-        internal static IConfigProvider configProvider;
-
-        public void Init(IPALogger logger, [Config.Prefer("json")] IConfigProvider cfgProvider)
+        internal static PluginConfig config;
+        internal static Harmony harmony;
+        [Init]
+        public void Init(IPALogger logger, Config conf)
         {
             Logger.log = logger;
-            configProvider = cfgProvider;
-            config = configProvider.MakeLink<PluginConfig>((p, v) =>
-            {
-                if (v.Value == null || v.Value.RegenerateConfig)
-                {
-                    p.Store(v.Value = new PluginConfig()
-                    {
-                        RegenerateConfig = false
-                    });
-                }
-                config = v;
-            });
+            config = conf.Generated<PluginConfig>();
         }
 
-        public void OnEnable()
+        [OnEnable]
+        public void Enable()
         {
-            
+            SceneManager.activeSceneChanged += OnActiveSceneChanged;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+            harmony = new Harmony($"com.auros.BeatSaber.{Name}");
+            harmony.PatchAll(System.Reflection.Assembly.GetExecutingAssembly());
         }
 
-        public void OnDisable()
+        [OnDisable]
+        public void Disable()
         {
-            
-        }
+            SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            harmony?.UnpatchAll();
 
-        public void OnApplicationStart()
-        {
-            
-        }
-
-        public void OnApplicationQuit()
-        {
-            configProvider.Store(config.Value);
-        }
-
-        public void OnFixedUpdate()
-        {
-
-        }
-
-        public void OnUpdate()
-        {
-#if DEBUG
-            if (Input.GetKeyDown(KeyCode.Y) && Enhancements.ClockInstance != null)
-                Enhancements.ClockInstance.Active = false;
-            else if (Input.GetKeyDown(KeyCode.Y) && Enhancements.ClockInstance == null)
-            {
-                Enhancements.Instance.InitializeClock();
-            }
-#endif
+            Enhancements.WrapItUpBoysItsTimeToGo();
         }
 
         public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
@@ -88,11 +61,6 @@ namespace Enhancements
                     e.SetupAll();
                 }
             }
-        }
-
-        public void OnSceneUnloaded(Scene scene)
-        {
-
         }
     }
 }

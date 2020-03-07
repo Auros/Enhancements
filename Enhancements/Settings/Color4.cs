@@ -18,6 +18,13 @@ namespace Enhancements.Settings
             this.b = b;
             this.a = a;
         }
+        public Color4(Color color)
+        {
+            r = color.r;
+            g = color.g;
+            b = color.b;
+            a = color.a;
+        }
         public static Color ToColor(Color4 color4) => new Color()
         {
             r = color4.r,
