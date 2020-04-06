@@ -1,0 +1,13 @@
+﻿{
+  "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
+  "author": "Auros",
+  "description": "",
+  "gameVersion": "1.8.0",
+  "id": "Enhancements",
+  "name": "Enhancements",
+  "version": "2.0.0-alpha",
+  "dependsOn": {
+
+  },
+  "features": []
+}
