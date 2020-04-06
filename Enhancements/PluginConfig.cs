@@ -7,6 +7,7 @@ namespace Enhancements
 {
     public class PluginConfig
     {
+        public virtual string version { get; set; } = Plugin.Version.ToString();
         public virtual ClockConfig clock { get; set; } = new ClockConfig();
         public virtual MiniTweaksConfig minitweaks { get; set; } = new MiniTweaksConfig();
         public virtual VolumeConfig volume { get; set; } = new VolumeConfig();
