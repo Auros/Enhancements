@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using Enhancements.Clock;
-using SiaUtil.Visualizers;
 using Enhancements.MiniTweaks;
 using Enhancements.Utilities;
+using System.Collections.Generic;
+using TMPro;
+using System.Linq;
 
 namespace Enhancements
 {
@@ -28,6 +30,10 @@ namespace Enhancements
             {
                 InitializeClock();
             }
+            else if (Input.GetKeyDown(KeyCode.U))
+            {
+                _ = Extensions.ArcadePix;
+            }
 #endif
         }
 
@@ -38,14 +44,20 @@ namespace Enhancements
 
         public void OnGame()
         {
+            var model = Resources.FindObjectsOfTypeAll<PlayerDataModel>().FirstOrDefault();
             var config = Plugin.config;
+            
             var clock = config.clock;
             if (clock.enabled == true)
-                ChangeClockState(clock.activeIn.HasFlag(Settings.BSScene.Game) || clock.activeIn == 0);
+                ChangeClockState((clock.activeIn.HasFlag(Settings.BSScene.Game) || clock.activeIn == 0) && !model.playerData.playerSpecificSettings.noTextsAndHuds);
             if (config.minitweaks.buttonlockenabled)
                 new GameObject("[E2] - Button Lock").AddComponent<ButtonLock>();
-            if (config.songskip.skipIntro || config.songskip.skipOutro)
-                SongSkip.SongSkip.Load(config.songskip.skipIntro, config.songskip.skipOutro, config.songskip.minimumIntroTime, config.songskip.notificationColor.ToColor());
+            if (config.breaktime.Enabled)
+            {
+                var bt = Breaktime.BreaktimeManager.CreateBreaktimeScreen();
+                
+            }
+            
         }
 
         public void OnMenu()
@@ -53,6 +65,8 @@ namespace Enhancements
             var clock = Plugin.config.clock;
             if (clock.enabled == true)
                 ChangeClockState(clock.activeIn.HasFlag(Settings.BSScene.Menu) || clock.activeIn == 0);
+            if (menuPlayer != null)
+                menuPlayer.volume = Plugin.config.volume.MenuBackground;
         }
 
         #region Clock
@@ -72,8 +86,9 @@ namespace Enhancements
             {
                 var clock = new GameObject("[E2] - Clock").AddComponent<ClockObject>();
                 DontDestroyOnLoad(clock.gameObject);
-                clock.text = WorldSpaceMessage.Create("00:00", Vector2.zero);
-                clock.text.transform.SetParent(clock.gameObject.transform);
+                clock.Text = WorldSpaceMessage.Create("00:00", Vector2.zero);
+                Teko = clock.Text.FontX;
+                clock.Text.transform.SetParent(clock.gameObject.transform);
                 _ = clock.gameObject;
                 ClockInstance = clock;
 
@@ -81,6 +96,24 @@ namespace Enhancements
                 ClockInstance.ConfigSet(Plugin.config.clock);
             }
         }
+
+        public static TMP_FontAsset Teko { get; set; }
+        public Dictionary<string, TMP_FontAsset> fontPairs = new Dictionary<string, TMP_FontAsset>()
+        {
+            { "Teko (Default)", Teko },
+            { "ArcadePix", Extensions.ArcadePix },
+            { "Assistant", Extensions.Assistant },
+            { "BLACK METAL", Extensions.BLACKMETAL },
+            { "Caveat", Extensions.Caveat },
+            { "Comic Sans", Extensions.ComicSans },
+            { "LiterallyNatural", Extensions.LiterallyNatural },
+            { "Minecraft Enchantment", Extensions.MinecraftEnchantment },
+            { "Minecrafter 3", Extensions.Minecrafter3 },
+            { "Minecraftia", Extensions.Minecraftia },
+            { "PermanentMarker", Extensions.PermanentMarker },
+            { "SpicyRice", Extensions.SpicyRice },
+
+        };
         #endregion
 
         internal static void WrapItUpBoysItsTimeToGo()

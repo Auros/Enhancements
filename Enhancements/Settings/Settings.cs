@@ -4,6 +4,7 @@ using Enhancements.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,12 +25,60 @@ namespace Enhancements.Settings
             }
         }
 
+        [UIAction("#post-parse")]
+        public void Parsed()
+        {
+            
+        }
+
         [UIParams] public BSMLParserParams parserParams;
 
-        [UIValue("clock-enabled")] public bool Enabled { get => Plugin.config.clock.enabled; set => Plugin.config.clock.enabled = value; }
+        [UIValue("breaktime_enabled")] public bool BreaktimeEnabled { get => Plugin.config.breaktime.Enabled; set => Plugin.config.breaktime.Enabled = value; }
+        [UIValue("breaktime_time")] public float BreaktimeTime { get => Plugin.config.breaktime.MinimumBreakTime; set => Plugin.config.breaktime.MinimumBreakTime = value; }
+        [UIValue("breaktime_image")] public bool BreaktimeImage { get => Plugin.config.breaktime.ShowImage; set => Plugin.config.breaktime.ShowImage = value; }
+        [UIValue("breaktime_audio")] public bool BreaktimeAudio { get => Plugin.config.breaktime.PlayAudio; set => Plugin.config.breaktime.PlayAudio = value; }
+        [UIValue("breaktime_r")] public float Breaktime_R { get => Plugin.config.breaktime.Color.r; set => Plugin.config.breaktime.Color.r = value; }
+        [UIValue("breaktime_g")] public float Breaktime_G { get => Plugin.config.breaktime.Color.g; set => Plugin.config.breaktime.Color.g = value; }
+        [UIValue("breaktime_b")] public float Breaktime_B { get => Plugin.config.breaktime.Color.b; set => Plugin.config.breaktime.Color.b = value; }
+        [UIValue("breaktime_profile")]
+        public string BreaktimeProfile
+        {
+            get => Plugin.config.breaktime.SelectedProfile;
+            set => Plugin.config.breaktime.SelectedProfile = value;
+        }
+
+        [UIValue("breaktime_profiles")]
+        public List<object> Profiles => BTProfiles().ToList();
+
+        internal object[] BTProfiles()
+        {
+            List<object> list = new List<object>
+            {
+                "Default",
+                "osu!",
+                "Bobbie"
+            };
+            var pr = Breaktime.BreaktimeManager.GetValidBreaktimePaths();
+            for (int i = 0; i < pr.Length; i++)
+            {
+                list.Add(pr[i].Name);
+            }
+            return list.ToArray();
+        }
+
+        /*[UIAction("breaktime_fprofile")]
+        public string FormatProfile(object o)
+        {
+            //if (o.GetType() == typeof(DirectoryInfo))
+                //return (o as DirectoryInfo).Name;
+            return o.ToString();
+        }*/
+
+        [UIValue("clock-enabled")] public bool ClockEnabled { get => Plugin.config.clock.enabled; set => Plugin.config.clock.enabled = value; }
         [UIValue("clock_size")] public float Clock_Size { get => Plugin.config.clock.fontSize; set => Plugin.config.clock.fontSize = value; }
         [UIValue("clock_mode")] public BSScene Scene { get => Plugin.config.clock.activeIn; set => Plugin.config.clock.activeIn = value; }
         [UIValue("clock_format")] public string Format { get => Plugin.config.clock.format; set => Plugin.config.clock.format = value; }
+        [UIValue("clock_font")] public string Font { get => Plugin.config.clock.font; set => Plugin.config.clock.font = value; }
 
         [UIValue("clock_x")] public float Clock_X { get => Plugin.config.clock.position.x; set => Plugin.config.clock.position.x = value; }
         [UIValue("clock_y")] public float Clock_Y { get => Plugin.config.clock.position.y; set => Plugin.config.clock.position.y = value; }
@@ -57,10 +106,27 @@ namespace Enhancements.Settings
             Enhancements.ClockInstance.ConfigSet(Plugin.config.clock);
         }
 
-        [UIAction("clock_resetpos")] public void Reset()
+        [UIAction("clock_resetpos")]
+        public void ResetPos()
         {
             Plugin.config.clock.position = new Float3(0f, 2.8f, 2.4f);
+            if (Enhancements.ClockInstance != null)
+                Enhancements.ClockInstance.ConfigSet(Plugin.config.clock);
+            parserParams.EmitEvent("clock_update");
+        }
+
+        [UIAction("clock_resetrot")]
+        public void ResetRot()
+        {
             Plugin.config.clock.rotation = Float3.zero;
+            if (Enhancements.ClockInstance != null)
+                Enhancements.ClockInstance.ConfigSet(Plugin.config.clock);
+            parserParams.EmitEvent("clock_update");
+        }
+
+        [UIAction("clock_resetcol")]
+        public void ResetCol()
+        {
             Plugin.config.clock.color = new Color4(1f, 1f, 1f, 1f);
             if (Enhancements.ClockInstance != null)
                 Enhancements.ClockInstance.ConfigSet(Plugin.config.clock);
@@ -97,6 +163,27 @@ namespace Enhancements.Settings
 
         [UIAction("clock_formatter")]
         public string FormatTimes(string f) => DateTime.Now.ToString(f);
+
+        [UIValue("clock_fonts")]
+        internal List<object> ClockFonts = new object[]
+        {
+            "Teko (Default)",
+            "ArcadePix",
+            "Assistant",
+            "BLACK METAL",
+            "Caveat",
+            "Comic Sans",
+            "LiterallyNatural",
+            "Minecraft Enchantment",
+            "Minecrafter 3",
+            "Minecraftia",
+            "PermanentMarker",
+            "SpicyRice"
+        }.ToList();
+
+        [UIAction("clock_font_formatter")]
+        public string FormatFonts(string f) => f.ToString();
+
         [UIValue("buttonlock-enabled")]
         public bool BLEnabled { get => Plugin.config.minitweaks.buttonlockenabled; set => Plugin.config.minitweaks.buttonlockenabled = value; }
         [UIValue("buttonlock-time")]
@@ -112,25 +199,12 @@ namespace Enhancements.Settings
         [UIValue("v-preview")]
         public float VPreview { get => Plugin.config.volume.SongPreview; set => Plugin.config.volume.SongPreview = value; }
         [UIValue("v-background")]
-        public float VBackground { get => Plugin.config.volume.GoodCuts; set
+        public float VBackground { get => Plugin.config.volume.MenuBackground; set
             {
-                Plugin.config.volume.GoodCuts = value;
+                Plugin.config.volume.MenuBackground = value;
                 if (Enhancements.menuPlayer != null)
                     Enhancements.menuPlayer.volume = value;
             }
-        }
-
-        [UIValue("ss-intro")]
-        public bool SSIntro { get => Plugin.config.songskip.skipIntro; set => Plugin.config.songskip.skipIntro = value; }
-        [UIValue("ss-outro")]
-        public bool SSOutro { get => Plugin.config.songskip.skipOutro; set => Plugin.config.songskip.skipOutro = value; }
-        [UIValue("ss-time")]
-        public float SSTime { get => Plugin.config.songskip.minimumIntroTime; set => Plugin.config.songskip.minimumIntroTime = value; }
-        [UIValue("ss-color")]
-        public Color SSColor
-        {
-            get => Plugin.config.songskip.notificationColor.ToColor();
-            set => Plugin.config.songskip.notificationColor = new Color4(value);
         }
     }
 }

@@ -51,9 +51,6 @@
     <Reference Include="SemVer">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Libs\SemVer.dll</HintPath>
     </Reference>
-    <Reference Include="SiaUtil">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Plugins\SiaUtil.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -75,6 +72,9 @@
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.AssetBundleModule">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AudioModule">
       <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Beat Saber\Beat Saber_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
@@ -104,6 +104,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Breaktime\BreaktimeConfig.cs" />
+    <Compile Include="Breaktime\BreaktimeManager.cs" />
     <Compile Include="Clock\ClockConfig.cs" />
     <Compile Include="Clock\ClockObject.cs" />
     <Compile Include="HarmonyPatches\AudioPitchGainEffect_StartEffect.cs" />
@@ -124,9 +126,11 @@
     <Compile Include="Settings\Float3.cs" />
     <Compile Include="Settings\Settings.cs" />
     <Compile Include="Settings\VolumeConfig.cs" />
-    <Compile Include="SongSkip\SkipConfig.cs" />
-    <Compile Include="SongSkip\SongSkip.cs" />
+    <Compile Include="Utilities\AudioUtil.cs" />
     <Compile Include="Utilities\Extensions.cs" />
+    <Compile Include="Utilities\FontExport.cs" />
+    <Compile Include="Utilities\WavUtility.cs" />
+    <Compile Include="Utilities\WorldSpaceMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
@@ -135,8 +139,18 @@
     <None Include="CreateJunctions.bat" />
     <None Include=".gitignore" />
     <EmbeddedResource Include="Views\settings.bsml" />
+    <EmbeddedResource Include="Utilities\Shader.asset" />
+    <EmbeddedResource Include="Utilities\Fonts" />
+    <EmbeddedResource Include="Views\breaktime.bsml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Default.png" />
+    <EmbeddedResource Include="Resources\Bobbie.png" />
+    <EmbeddedResource Include="Resources\Bobbie.wav" />
+    <EmbeddedResource Include="Resources\Default.wav" />
+    <EmbeddedResource Include="Resources\osu!.png" />
+    <EmbeddedResource Include="Resources\osu!.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--Build Targets-->
   <Target Name="CopyToPlugins" AfterTargets="Build" Condition="'$(NCrunch)' != '1'">

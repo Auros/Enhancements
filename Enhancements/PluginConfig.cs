@@ -1,7 +1,7 @@
 ﻿using Enhancements.Clock;
 using Enhancements.Settings;
+using Enhancements.Breaktime;
 using Enhancements.MiniTweaks;
-using Enhancements.SongSkip;
 
 namespace Enhancements
 {
@@ -10,6 +10,6 @@ namespace Enhancements
         public virtual ClockConfig clock { get; set; } = new ClockConfig();
         public virtual MiniTweaksConfig minitweaks { get; set; } = new MiniTweaksConfig();
         public virtual VolumeConfig volume { get; set; } = new VolumeConfig();
-        public virtual SkipConfig songskip { get; set; } = new SkipConfig();
+        public virtual BreaktimeConfig breaktime { get; set; } = new BreaktimeConfig();
     }
 }

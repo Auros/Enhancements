@@ -9,6 +9,65 @@
       font-size="7"/>
   </horizontal>
   <settings-submenu
+    text="Breaktime">
+    <scrollable-settings-container>
+      <clickable-text
+        text="[-] Back"
+        click-event="back"/>
+      <bool-setting
+        text="Enabled"
+        value="breaktime_enabled"/>
+      <slider-setting
+        text="Minimum Break Time"
+        hover-hint="The amount of time between notes it takes for the Breaktime Module to activate"
+        min="3"
+        max="20"
+        increment=".5"
+        value="breaktime_time"
+        integer-only="false"/>
+      <bool-setting
+        text="Show Image"
+        value="breaktime_image"/>
+      <bool-setting
+        text="Play Audio"
+        value="breaktime_audio"/>
+      <dropdown-list-setting
+        text="Profile"
+        value="breaktime_profile"
+        choices="breaktime_profiles"
+        />
+      <settings-submenu
+        text="Color">
+        <scrollable-settings-container>
+          <clickable-text
+            text="[-] Back"
+            click-event="back"/>
+          <slider-setting
+            text="R"
+            min="0"
+            max="1"
+            increment=".1"
+            value="breaktime_r"
+            integer-only="false"/>
+          <slider-setting
+            text="G"
+            min="0"
+            max="1"
+            increment=".1"
+            value="breaktime_g"
+            integer-only="false"/>
+          <slider-setting
+            text="B"
+            min="0"
+            max="1"
+            increment=".1"
+            value="breaktime_b"
+            integer-only="false"/>
+        </scrollable-settings-container>
+      </settings-submenu>
+    </scrollable-settings-container>
+  </settings-submenu>
+  <settings-submenu
     text="Clock">
     <scrollable-settings-container>
       <clickable-text
@@ -42,6 +101,13 @@
         value="clock_format"
         choices="clock_formats"
         formatter="clock_formatter"
+        on-change="clock_update"
+        apply-on-change="true"/>
+      <dropdown-list-setting
+        text="Font"
+        value="clock_font"
+        choices="clock_fonts"
+        formatter="clock_font_formatter"
         on-change="clock_update"
         apply-on-change="true"/>
       <settings-submenu
@@ -81,7 +147,7 @@
             get-event="clock_update"
             integer-only="false"/>
           <clickable-text
-            text="Reset Clock To Default"
+            text="Reset Clock Position To Default"
             on-click="clock_resetpos"/>
         </scrollable-settings-container>
       </settings-submenu>
@@ -122,8 +188,8 @@
             get-event="clock_update"
             integer-only="false"/>
           <clickable-text
-            text="Reset Clock To Default"
-            on-click="clock_resetpos"/>
+            text="Reset Clock Rotation To Default"
+            on-click="clock_resetrot"/>
         </scrollable-settings-container>
       </settings-submenu>
       <settings-submenu
@@ -163,10 +229,11 @@
             get-event="clock_update"
             integer-only="false"/>
           <clickable-text
-            text="Reset Clock To Default"
-            on-click="clock_resetpos"/>
+            text="Reset Clock Color To Default"
+            on-click="clock_resetcol"/>
         </scrollable-settings-container>
       </settings-submenu>
+      
     </scrollable-settings-container>
   </settings-submenu>
   <settings-submenu
@@ -230,32 +297,6 @@
         increment=".1"
         value="v-background"
         apply-on-change="true"/>
-    </settings-container>
-  </settings-submenu>
-  <settings-submenu
-    text="Song Skip">
-    <settings-container>
-      <clickable-text
-        text="[-] Back"
-        click-event="back"/>
-      <bool-setting
-        text="Skip Intro"
-        value="ss-intro"/>
-      <bool-setting
-        text="Skip Outro"
-        value="ss-outro"/>
-      <slider-setting
-        text="Minimum Time To Skip"
-        hover-hint="This value, in seconds, is the threshold in order to skip over the beginning of the song."
-        min="1"
-        max="30"
-        increment=".5"
-        value="ss-time"/>
-      <color-setting
-        text="Notification Color"
-        hover-hint="The color of the pop up which tells you that you can skip."
-        value="ss-color"
-        />
     </settings-container>
   </settings-submenu>
 </scrollable-settings-container>

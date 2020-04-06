@@ -2,13 +2,13 @@
 using UnityEngine;
 using System.Collections;
 using Enhancements.Utilities;
-using Message = SiaUtil.Visualizers.WorldSpaceMessage;
+using Message = Enhancements.Utilities.WorldSpaceMessage;
 
 namespace Enhancements.Clock
 {
     public class ClockObject : MonoBehaviour
     {
-        public Message text { get; set; }
+        public Message Text { get; set; }
         public bool Active { get; internal set; } = false;
         public string format = "h:mm tt";
 
@@ -23,16 +23,17 @@ namespace Enhancements.Clock
         private IEnumerator UpdateClock()
         {
             Active = true;
-            while (Active == true) //Oh yes papi chulo ping me every 1/4 seconds
+            Text.FontX = Extensions.ArcadePix;
+            while (Active) //Oh yes papi chulo ping me every 1/4 seconds
             {
-                text.Text = DateTime.Now.ToString(format);
+                Text.Text = DateTime.Now.ToString(format);
                 if (format != "yyyy MM dd THH:mm:ss.fffffffK")
                     yield return new WaitForSecondsRealtime(.25f);
                 else
                     yield return new WaitForEndOfFrame();
             }
             Active = false;
-            text.Text = "";
+            Text.Text = "";
             Destroy(this);
         }
 
@@ -40,10 +41,11 @@ namespace Enhancements.Clock
         {
             if (Active)
             {
-                text.Color = cfg.color.ToColor();
-                text.transform.localPosition = cfg.position.ToVector3();
-                text.transform.localRotation = Quaternion.Euler(cfg.rotation.ToVector3());
-                text._messagePrompt.fontSize = cfg.fontSize;
+                Text.FontX = Enhancements.Instance.fontPairs[cfg.font];
+                Text.Color = cfg.color.ToColor();
+                Text.transform.localPosition = cfg.position.ToVector3();
+                Text.transform.localRotation = Quaternion.Euler(cfg.rotation.ToVector3());
+                Text._messagePrompt.fontSize = cfg.fontSize;
                 format = cfg.format;
             }
         }
