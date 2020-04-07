@@ -126,8 +126,6 @@ namespace Enhancements.Breaktime
             bool hud360 = Resources.FindObjectsOfTypeAll<FlyingGameHUDRotation>().Any(x => x.isActiveAndEnabled);
             if (hud360)
                 screenS.transform.SetParent(Resources.FindObjectsOfTypeAll<FlyingGameHUDRotation>().FirstOrDefault().transform, true);
-            Logger.log.Info(hud360 ? "360 mode active" : "360 mode not active");
-
         }
 
 
@@ -187,10 +185,13 @@ namespace Enhancements.Breaktime
         {
             if (noteData.noteType == NoteType.Bomb)
                 return;
-
             // Self destruct if the map is corrupted
-            if (noteData.timeToNextBasicNote < 0 || noteData.timeToNextBasicNote > 999)
+            if (noteData.timeToNextBasicNote == float.MaxValue || noteData.timeToNextBasicNote < 0 || noteData.timeToNextBasicNote > 999)
+            {
+                Logger.log.Info("Self destructing Breaktime Manager");
                 Destroy(this);
+                return;
+            }
 
             if (!_activated && noteData.timeToNextBasicNote >= Plugin.config.breaktime.MinimumBreakTime)
             {
