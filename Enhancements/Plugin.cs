@@ -13,7 +13,7 @@ namespace Enhancements
     public class Plugin
     {
         internal static string Name => "Enhancements";
-        internal static Version Version => new Version("2.0.1");
+        internal static Version Version => new Version("2.0.2");
         internal static PluginConfig config;
         internal static Harmony harmony;
         [Init]

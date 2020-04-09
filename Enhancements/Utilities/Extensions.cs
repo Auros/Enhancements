@@ -47,6 +47,7 @@ namespace Enhancements.Utilities
                 {
                     AssetBundle assetBundle = AssetBundle.LoadFromStream(Assembly.GetCallingAssembly().GetManifestResourceStream("Enhancements.Utilities.Shader.asset"));
                     _customTextShader = assetBundle.LoadAsset<Shader>("Assets/TextMesh Pro/Resources/Shaders/TMP_SDF_ZeroAlphaWrite_ZWrite.shader");
+                    assetBundle.Unload(true);
                 }
                 return _customTextShader;
             }
