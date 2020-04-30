@@ -2,10 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
   "author": "Auros",
   "description": "",
-  "gameVersion": "1.8.0",
+  "gameVersion": "1.9.0",
   "id": "Enhancements",
   "name": "Enhancements",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "dependsOn": {
     "BeatSaberMarkupLanguage": "^1.2.0"
   },

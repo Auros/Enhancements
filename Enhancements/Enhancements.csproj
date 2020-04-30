@@ -109,6 +109,7 @@
     <Compile Include="Clock\ClockConfig.cs" />
     <Compile Include="Clock\ClockObject.cs" />
     <Compile Include="HarmonyPatches\AudioPitchGainEffect_StartEffect.cs" />
+    <Compile Include="HarmonyPatches\AudioTimeSyncController_Start.cs" />
     <Compile Include="HarmonyPatches\MainSettingsModelSO_Load.cs" />
     <Compile Include="HarmonyPatches\NoteCutSoundEffect_Init.cs" />
     <Compile Include="HarmonyPatches\SongPreviewPlayer_CrossfadeTo.cs" />
