@@ -1,13 +1,13 @@
 ﻿{
-  "$schema": "https://raw.githubusercontent.com/nike4613/ModSaber-MetadataFileSchema/master/Schema.json",
+  "$schema": "https://raw.githubusercontent.com/beat-saber-modding-group/BSIPA-MetadataFileSchema/master/Schema.json",
   "author": "Auros",
+  "dependsOn": {
+
+  },
   "description": "",
-  "gameVersion": "1.9.0",
+  "features": [],
+  "gameVersion": "1.10.0",
   "id": "Enhancements",
   "name": "Enhancements",
-  "version": "2.0.3",
-  "dependsOn": {
-    "BeatSaberMarkupLanguage": "^1.2.0"
-  },
-  "features": []
+  "version": "3.0.0"
 }
