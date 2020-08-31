@@ -105,7 +105,12 @@
     <None Include="BuildTargets.targets" />
     <None Include=".gitignore" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Breaktime\" />
+    <Folder Include="Clock\" />
+    <Folder Include="Installers\" />
+    <Folder Include="SongSkip\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="BuildTargets.targets" />
   <PropertyGroup>
