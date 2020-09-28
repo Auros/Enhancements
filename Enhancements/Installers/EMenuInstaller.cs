@@ -5,7 +5,6 @@ using Installer = Zenject.Installer;
 
 namespace Enhancements.Installers
 {
-    [RequiresInstaller(typeof(EInstaller.InitData))]
     public class EMenuInstaller : Installer
     {
         public override void InstallBindings()

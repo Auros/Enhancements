@@ -2,7 +2,8 @@
   "$schema": "https://raw.githubusercontent.com/beat-saber-modding-group/BSIPA-MetadataFileSchema/master/Schema.json",
   "author": "Auros",
   "dependsOn": {
-
+    "SiraUtil": "^1.1.0",
+    "BSIPA": "^4.0.0"
   },
   "description": "",
   "features": [],

@@ -44,7 +44,6 @@ namespace Enhancements
             {
                 var font = Setup(fonts[i]);
                 _fonts.Add(font.name.Split(new string[] { "SDF" }, StringSplitOptions.RemoveEmptyEntries)[0], font);
-                
             }
 
             bundle.Unload(true);
