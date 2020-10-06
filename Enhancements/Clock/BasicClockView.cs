@@ -9,7 +9,7 @@ namespace Enhancements.Clock
     [HotReload]
     public class BasicClockView : BSMLAutomaticViewController
     {
-        private ELoader _loader;
+        private XLoader _loader;
 
         [UIComponent("clock-text")]
         protected TextMeshProUGUI _clockTextObject;
@@ -27,7 +27,7 @@ namespace Enhancements.Clock
         }
 
         [Inject]
-        public void Construct(ELoader loader)
+        public void Construct(XLoader loader)
         {
             _loader = loader;
         }

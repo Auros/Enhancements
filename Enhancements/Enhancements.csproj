@@ -127,9 +127,9 @@
     <Compile Include="Clock\ITImeNotification.cs" />
     <Compile Include="Clock\ITimerController.cs" />
     <Compile Include="Config.cs" />
-    <Compile Include="ELoader.cs" />
-    <Compile Include="Installers\EMenuInstaller.cs" />
-    <Compile Include="Installers\EInstaller.cs" />
+    <Compile Include="XLoader.cs" />
+    <Compile Include="Installers\XMenuInstaller.cs" />
+    <Compile Include="Installers\XInstaller.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

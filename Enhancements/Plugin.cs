@@ -17,8 +17,8 @@ namespace Enhancements
         {
             Log = logger;
             Config config = conf.Generated<Config>();
-            zenjector.OnApp<EInstaller>().WithParameters(config);
-            zenjector.OnMenu<EMenuInstaller>();
+            zenjector.OnApp<XInstaller>().WithParameters(config);
+            zenjector.OnMenu<XMenuInstaller>();
         }
 
         [OnEnable]

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Enhancements
 {
-    public class ELoader
+    public class XLoader
     {
         private const string BUNDLE_PATH = "Enhancements.Resources.enhancements3.asset";
 

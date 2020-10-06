@@ -5,7 +5,7 @@ using Installer = Zenject.Installer;
 
 namespace Enhancements.Installers
 {
-    public class EMenuInstaller : Installer
+    public class XMenuInstaller : Installer
     {
         public override void InstallBindings()
         {
