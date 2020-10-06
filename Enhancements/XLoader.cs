@@ -9,8 +9,10 @@ namespace Enhancements
 {
     public class XLoader
     {
-        private const string BUNDLE_PATH = "Enhancements.Resources.enhancements3.asset";
+        private const string RESOURCE_PATH = "Enhancements.Resources.";
+        private const string BUNDLE_PATH = RESOURCE_PATH + "enhancements3.asset";
 
+        private readonly Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
         private readonly Dictionary<string, TMP_FontAsset> _fonts = new Dictionary<string, TMP_FontAsset>();
         private TMP_FontAsset _cachedTekoFont;
 
@@ -50,6 +52,20 @@ namespace Enhancements
             }
 
             bundle.Unload(true);
+        }
+
+        public Texture2D GetIcon(string name)
+        {
+            string source = name + ".png";
+            if (!_textures.TryGetValue(source, out Texture2D texture))
+            {
+                texture = BeatSaberMarkupLanguage.Utilities.FindTextureInAssembly(RESOURCE_PATH + source);
+                if (texture != null)
+                {
+                    _textures.Add(source, texture);
+                }
+            }
+            return texture;
         }
 
         public void GetFonts()

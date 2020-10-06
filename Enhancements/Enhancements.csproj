@@ -159,7 +159,12 @@
     <Folder Include="SongSkip\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\732426069508096091.png" />
+    <EmbeddedResource Include="Resources\breaktime.png" />
+    <EmbeddedResource Include="Resources\changelog.png" />
+    <EmbeddedResource Include="Resources\clock.png" />
+    <EmbeddedResource Include="Resources\settings.png" />
+    <EmbeddedResource Include="Resources\timer.png" />
+    <EmbeddedResource Include="Resources\volume.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="BuildTargets.targets" />

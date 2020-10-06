@@ -1,6 +1,7 @@
 ﻿using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
+using Zenject;
 
 namespace Enhancements.UI
 {
@@ -10,48 +11,55 @@ namespace Enhancements.UI
         [UIComponent("list")]
         protected CustomListTableData tableList;
 
+        private XLoader _loader;
+
+        [Inject]
+        public void Construct(XLoader loader)
+        {
+            _loader = loader;
+        }
+
         [UIAction("#post-parse")]
         protected void Parsed()
         {
-            var tex = BeatSaberMarkupLanguage.Utilities.FindTextureInAssembly("Enhancements.Resources.732426069508096091.png");
             tableList.data.AddRange(new CustomListTableData.CustomCellInfo[]
             {
                 new CustomListTableData.CustomCellInfo
                 (
                     "Changelog\n",
                     "The changelog for Enhancements",
-                    tex
+                    _loader.GetIcon("changelog")
                     
                 ),
                 new CustomListTableData.CustomCellInfo
                 (
                     "Clock\n",
                     "Modify the Clock",
-                    tex
+                    _loader.GetIcon("clock")
                 ),
                 new CustomListTableData.CustomCellInfo
                 (
                     "Timers\n",
                     "Create Reminders In Game!",
-                    tex
+                    _loader.GetIcon("timer")
                 ),
                 new CustomListTableData.CustomCellInfo
                 (
                     "Breaktime\n",
                     "Get Information During Song Breaks!",
-                    tex
+                    _loader.GetIcon("breaktime")
                 ),
                 new CustomListTableData.CustomCellInfo
                 (
                     "Volume\n",
                     "Change Specific Volume Settings",
-                    tex
+                    _loader.GetIcon("volume")
                 ),
                 new CustomListTableData.CustomCellInfo
                 (
                     "Mini Settings and Optidra\n",
                     "Miscellaneous Tweaks and Experimental Settings",
-                    tex
+                    _loader.GetIcon("settings")
                 )
             });
             tableList.tableView.ReloadData();
