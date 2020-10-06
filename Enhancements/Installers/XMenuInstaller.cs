@@ -16,6 +16,7 @@ namespace Enhancements.Installers
             Application.targetFrameRate = 90;
 
             Container.Bind<XInfoView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<XSettingNavigationView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
             Container.Bind<XSettingsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
             Container.BindInterfacesAndSelfTo<MenuButtonManager>().AsSingle();
         }

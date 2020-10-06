@@ -135,6 +135,7 @@
     <Compile Include="Config.cs" />
     <Compile Include="UI\MenuButtonManager.cs" />
     <Compile Include="UI\XInfoView.cs" />
+    <Compile Include="UI\XSettingNavigationView.cs" />
     <Compile Include="UI\XSettingsFlowCoordinator.cs" />
     <Compile Include="XLoader.cs" />
     <Compile Include="Installers\XMenuInstaller.cs" />
@@ -151,10 +152,14 @@
     <EmbeddedResource Include="Views\basic-clock.bsml" />
     <EmbeddedResource Include="Resources\enhancements3.asset" />
     <EmbeddedResource Include="Views\info-view.bsml" />
+    <EmbeddedResource Include="Views\settings-navigation-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Breaktime\" />
     <Folder Include="SongSkip\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\732426069508096091.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="BuildTargets.targets" />
