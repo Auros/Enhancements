@@ -1,5 +1,6 @@
 ﻿using SiraUtil;
 using UnityEngine;
+using Enhancements.UI;
 using Enhancements.Clock;
 using Installer = Zenject.Installer;
 
@@ -13,6 +14,10 @@ namespace Enhancements.Installers
             Container.BindInterfacesTo<BasicClock>().AsSingle();
 
             Application.targetFrameRate = 90;
+
+            Container.Bind<XInfoView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<XSettingsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
+            Container.BindInterfacesAndSelfTo<MenuButtonManager>().AsSingle();
         }
     }
 }

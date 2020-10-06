@@ -23,7 +23,7 @@ namespace Enhancements.Clock
 
         public void Initialize()
         {
-            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 50f), false, new Vector3(0f, 2.7f, 2.4f), Quaternion.identity);
+            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 50f), false, new Vector3(0f, 2.8f, 2.45f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
             _floatingScreen.GetComponent<Image>().enabled = false;
             _floatingScreen.SetRootViewController(_basicClockView, false);
 

@@ -127,6 +127,9 @@
     <Compile Include="Timers\ITImeNotification.cs" />
     <Compile Include="Timers\ITimerController.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="UI\MenuButtonManager.cs" />
+    <Compile Include="UI\XInfoView.cs" />
+    <Compile Include="UI\XSettingsFlowCoordinator.cs" />
     <Compile Include="XLoader.cs" />
     <Compile Include="Installers\XMenuInstaller.cs" />
     <Compile Include="Installers\XInstaller.cs" />
@@ -141,6 +144,7 @@
     <None Include=".gitignore" />
     <EmbeddedResource Include="Views\basic-clock.bsml" />
     <EmbeddedResource Include="Resources\enhancements3.asset" />
+    <EmbeddedResource Include="Views\info-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Breaktime\" />

@@ -10,6 +10,8 @@ namespace Enhancements.Clock
 
         public virtual string Culture { get; set; } = "";
 
+        public virtual string Font { get; set; } = "";
+
         [NonNullable]
         [UseConverter(typeof(ListConverter<string>))]
         public virtual List<string> Formats { get; set; } = new List<string>()
