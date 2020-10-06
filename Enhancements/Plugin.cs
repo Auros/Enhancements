@@ -1,4 +1,5 @@
 ﻿using IPA;
+using IPA.Loader;
 using SiraUtil.Zenject;
 using IPA.Config.Stores;
 using Enhancements.Installers;
@@ -13,11 +14,11 @@ namespace Enhancements
         internal static IPALogger Log { get; set; }
 
         [Init]
-        public Plugin(Conf conf, IPALogger logger, Zenjector zenjector)
+        public Plugin(Conf conf, IPALogger logger, Zenjector zenjector, PluginMetadata metadata)
         {
             Log = logger;
             Config config = conf.Generated<Config>();
-            zenjector.OnApp<XInstaller>().WithParameters(config);
+            zenjector.OnApp<XInstaller>().WithParameters(config, metadata.Version);
             zenjector.OnMenu<XMenuInstaller>();
         }
 

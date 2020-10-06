@@ -47,6 +47,11 @@
       <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="SemVer, Version=1.2.2.0, Culture=neutral, PublicKeyToken=a89bb7dc6f7a145c, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Libs\SemVer.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="SiraUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
@@ -124,6 +129,7 @@
     <Compile Include="Clock\ClockController.cs" />
     <Compile Include="Clock\ClockSettings.cs" />
     <Compile Include="Clock\IClockController.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Timers\ITImeNotification.cs" />
     <Compile Include="Timers\ITimerController.cs" />
     <Compile Include="Config.cs" />
