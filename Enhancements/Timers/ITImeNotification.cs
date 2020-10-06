@@ -1,4 +1,4 @@
-﻿namespace Enhancements.Clock
+﻿namespace Enhancements.Timers
 {
     public interface ITImeNotification
     {

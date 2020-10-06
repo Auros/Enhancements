@@ -124,8 +124,8 @@
     <Compile Include="Clock\ClockController.cs" />
     <Compile Include="Clock\ClockSettings.cs" />
     <Compile Include="Clock\IClockController.cs" />
-    <Compile Include="Clock\ITImeNotification.cs" />
-    <Compile Include="Clock\ITimerController.cs" />
+    <Compile Include="Timers\ITImeNotification.cs" />
+    <Compile Include="Timers\ITimerController.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="XLoader.cs" />
     <Compile Include="Installers\XMenuInstaller.cs" />
@@ -139,7 +139,7 @@
   <ItemGroup>
     <None Include="BuildTargets.targets" />
     <None Include=".gitignore" />
-    <EmbeddedResource Include="Clock\BasicClockView.bsml" />
+    <EmbeddedResource Include="Views\basic-clock.bsml" />
     <EmbeddedResource Include="Resources\enhancements3.asset" />
   </ItemGroup>
   <ItemGroup>

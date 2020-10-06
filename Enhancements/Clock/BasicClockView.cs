@@ -6,7 +6,7 @@ using BeatSaberMarkupLanguage.ViewControllers;
 
 namespace Enhancements.Clock
 {
-    [HotReload]
+    [HotReload(RelativePathToLayout = @"..\Views\basic-clock.bsml")]
     public class BasicClockView : BSMLAutomaticViewController
     {
         private XLoader _loader;

@@ -2,8 +2,8 @@
 using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
-using BeatSaberMarkupLanguage.FloatingScreen;
 using System.Globalization;
+using BeatSaberMarkupLanguage.FloatingScreen;
 
 namespace Enhancements.Clock
 {

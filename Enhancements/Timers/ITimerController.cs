@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Enhancements.Clock
+namespace Enhancements.Timers
 {
     public interface ITimerController
     {
