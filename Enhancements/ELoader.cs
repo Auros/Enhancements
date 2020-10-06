@@ -1,6 +1,5 @@
 ﻿using TMPro;
 using System;
-using Zenject;
 using UnityEngine;
 using System.Linq;
 using System.Reflection;
@@ -8,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Enhancements
 {
-    public class ELoader : IInitializable
+    public class ELoader
     {
         private const string BUNDLE_PATH = "Enhancements.Resources.enhancements3.asset";
 
@@ -30,6 +29,7 @@ namespace Enhancements
 
         public void Initialize()
         {
+            _fonts.Clear();
             // Loading the asset bundle.
             AssetBundle bundle = AssetBundle.LoadFromStream(Assembly.GetExecutingAssembly().GetManifestResourceStream(BUNDLE_PATH));
 
@@ -38,15 +38,23 @@ namespace Enhancements
             ZFixTextShader = shader;// UnityEngine.Object.Instantiate(shader);
 
             // Load Fonts
-            _cachedTekoFont = Resources.FindObjectsOfTypeAll<TMP_FontAsset>().Last(f2 => f2.name == "Teko-Medium SDF No Glow");
+            _cachedTekoFont = Resources.FindObjectsOfTypeAll<TMP_FontAsset>().LastOrDefault(f2 => f2.name == "Teko-Medium SDF No Glow");
             var fonts = bundle.LoadAllAssets<TMP_FontAsset>();
             for (int i = 0; i < fonts.Length; i++)
             {
                 var font = Setup(fonts[i]);
-                _fonts.Add(font.name.Split(new string[] { "SDF" }, StringSplitOptions.RemoveEmptyEntries)[0], font);
+                //if (font != null)
+                //{
+                    _fonts.Add(font.name.Split(new string[] { "SDF" }, StringSplitOptions.RemoveEmptyEntries)[0], font);
+                //}
             }
 
             bundle.Unload(true);
+        }
+
+        public void GetFonts()
+        {
+            Initialize();
         }
 
         private TMP_FontAsset Setup(TMP_FontAsset f)

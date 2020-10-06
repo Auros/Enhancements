@@ -3,27 +3,31 @@ using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
 using BeatSaberMarkupLanguage.FloatingScreen;
+using System.Globalization;
 
 namespace Enhancements.Clock
 {
     public class BasicClock : IInitializable, IDisposable
     {
+        private FloatingScreen _floatingScreen;
+        private readonly ClockSettings _clockSettings;
         private readonly BasicClockView _basicClockView;
-        private readonly FloatingScreen _floatingScreen;
         private readonly IClockController _clockController;
 
-        public BasicClock(BasicClockView basicClockView, IClockController clockController)
+        public BasicClock(ClockSettings clockSettings, BasicClockView basicClockView, IClockController clockController)
         {
+            _clockSettings = clockSettings;
             _basicClockView = basicClockView;
             _clockController = clockController;
-            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(100f, 50f), false, new Vector3(0f, 2.7f, 2.4f), Quaternion.identity);
-            
         }
+
         public void Initialize()
         {
+            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 50f), false, new Vector3(0f, 2.7f, 2.4f), Quaternion.identity);
             _floatingScreen.GetComponent<Image>().enabled = false;
             _floatingScreen.SetRootViewController(_basicClockView, false);
 
+            _basicClockView.ClockText = _clockController.GetCurrentTime().ToString();
             _clockController.DateUpdated += ClockController_DateUpdated;
         }
 
@@ -34,7 +38,9 @@ namespace Enhancements.Clock
 
         private void ClockController_DateUpdated(DateTime time)
         {
-            _basicClockView.ClockText = time.ToString();
+            CultureInfo culture = string.IsNullOrEmpty(_clockSettings.Culture) ? CultureInfo.InvariantCulture : new CultureInfo(_clockSettings.Culture);
+
+            _basicClockView.ClockText = time.ToString(_clockSettings.Format, culture);
         }
     }
 }

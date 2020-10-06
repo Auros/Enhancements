@@ -1,15 +1,19 @@
 ﻿using Zenject;
 using Enhancements.Clock;
-using Installer = Zenject.Installer;
 
 namespace Enhancements.Installers
 {
-    public class EInstaller : Installer
+    public class EInstaller : Installer<Config, EInstaller>
     {
+        private readonly Config _config;
+
+        public EInstaller(Config config) => _config = config;
+
         public override void InstallBindings()
         {
+            Container.BindInstance(_config.Clock).AsSingle();
             Container.Bind(typeof(IClockController), typeof(ITickable), typeof(ClockController)).To<ClockController>().AsSingle();
-            Container.Bind(typeof(IInitializable), typeof(ELoader)).To<ELoader>().AsSingle();
+            Container.Bind<ELoader>().AsSingle().Lazy();
         }
     }
 }

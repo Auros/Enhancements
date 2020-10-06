@@ -1,6 +1,6 @@
-﻿using SiraUtil.Zenject;
+﻿using SiraUtil;
+using UnityEngine;
 using Enhancements.Clock;
-using BeatSaberMarkupLanguage;
 using Installer = Zenject.Installer;
 
 namespace Enhancements.Installers
@@ -9,11 +9,10 @@ namespace Enhancements.Installers
     {
         public override void InstallBindings()
         {
-            var clockView = BeatSaberUI.CreateViewController<BasicClockView>();
-            Container.ForceBindComponent<BasicClockView>(clockView);
-
+            Container.Bind<BasicClockView>().FromNewComponentOnNewGameObject(nameof(BasicClockView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
             Container.BindInterfacesTo<BasicClock>().AsSingle();
-            
+
+            Application.targetFrameRate = 90;
         }
     }
 }
