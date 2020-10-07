@@ -9,6 +9,8 @@ namespace Enhancements.Clock
     {
         public virtual bool Enabled { get; set; } = true;
 
+        public virtual bool ShowInGame { get; set; } = true;
+
         public virtual string Format { get; set; } = "h:mm tt";
 
         public virtual string Culture { get; set; } = "";
@@ -21,6 +23,12 @@ namespace Enhancements.Clock
 
         [UseConverter(typeof(HexColorConverter))]
         public virtual Color Color { get; set; } = Color.white;
+
+        [UseConverter(typeof(VectorConverter))]
+        public virtual Vector3 Position { get; set; } = new Vector3(0f, 2.8f, 2.45f);
+
+        [UseConverter(typeof(VectorConverter))]
+        public virtual Vector3 Rotation { get; set; } = new Vector3(325f, 0f, 0f);
 
         [NonNullable]
         [UseConverter(typeof(ListConverter<string>))]

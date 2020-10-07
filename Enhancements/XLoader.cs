@@ -37,7 +37,7 @@ namespace Enhancements
                 for (int i = 0; i < fonts.Length; i++)
                 {
                     var font = Setup(fonts[i]);
-                    _fonts.Add(font.name.Split(new string[] { "SDF" }, StringSplitOptions.RemoveEmptyEntries)[0], font);
+                    _fonts.Add(font.name.Split(new string[] { "SDF" }, StringSplitOptions.RemoveEmptyEntries)[0].Trim(' '), font);
                 }
                 _didLoad = true;
             }

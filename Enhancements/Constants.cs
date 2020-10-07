@@ -20,7 +20,6 @@
         -    Breaktime: Can now  randomize the effects
         -    Breaktime: Can now select the appear and disappear type.
         -    Mini Tweaks: Can now isable 360 Mode for maps without 360 events
-        -    Returning Mode: SongSkip
         -    Clock: More Fonts
         -    Clock: Opacity Option
         -    Clock: Improved Performance

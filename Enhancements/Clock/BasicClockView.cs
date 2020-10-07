@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using Zenject;
 using UnityEngine;
+using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
 
@@ -12,7 +13,7 @@ namespace Enhancements.Clock
         private XLoader _loader;
 
         [UIComponent("clock-text")]
-        protected TextMeshProUGUI _clockTextObject;
+        protected ClickableText _clockTextObject;
 
         private string _clockText;
         [UIValue("clock-text")]
@@ -26,11 +27,6 @@ namespace Enhancements.Clock
             }
         }
 
-        public Color ClockColor
-        {
-            set => _clockTextObject.color = value;
-        }
-
         private float _clockSize = 10f;
         [UIValue("clock-size")]
         public float ClockSize
@@ -40,6 +36,15 @@ namespace Enhancements.Clock
             {
                 _clockSize = value;
                 NotifyPropertyChanged();
+            }
+        }
+
+        public Color ClockColor
+        {
+            set
+            {
+                _clockTextObject.DefaultColor = value;
+                _clockTextObject.color = value;
             }
         }
 

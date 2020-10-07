@@ -26,7 +26,7 @@ namespace Enhancements.Clock
 
         public void Initialize()
         {
-            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 50f), false, new Vector3(0f, 2.8f, 2.45f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
+            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 50f), false, _clockSettings.Position, Quaternion.Euler(_clockSettings.Rotation));
             _floatingScreen.GetComponent<Image>().enabled = false;
             _floatingScreen.SetRootViewController(_basicClockView, false);
 
@@ -61,6 +61,8 @@ namespace Enhancements.Clock
                     _basicClockView.ClockSize = _clockSettings.Size;
                     _basicClockView.Font = _loader.GetFont(_clockSettings.Font);
                     _basicClockView.ClockColor = _clockSettings.Color.ColorWithAlpha(_clockSettings.Opacity);
+                    _floatingScreen.ScreenPosition = _clockSettings.Position;
+                    _floatingScreen.ScreenRotation = Quaternion.Euler(_clockSettings.Rotation);
                     _clockSettings.IsDirty = false;
                 }
             }
