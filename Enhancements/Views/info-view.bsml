@@ -2,7 +2,7 @@
 	<horizontal bg="panel-top" pref-width="130" horizontal-fit="PreferredSize">
 		<text text="Changelog" align="Center" font-size="10" />
 	</horizontal>
-  <text-page size-delta-y="45" text="INSERT CHANGELOG HERE" />
+  <text-page size-delta-y="45" text="~changelog-text" rich-text="true"  />
   <horizontal bg="panel-bottom" pad="2" pref-width="50" ignore-layout="true" anchor-pos-y="-35" anchor-pos-x="15">
     <text id="version-text" text="~version" align="Center" />
     <clickable-text id="secondary-text" text="~secondary" on-click="secondary-clicked" align="Center" hover-hint="Opens Link In Browser" />

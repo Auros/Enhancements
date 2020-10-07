@@ -59,6 +59,9 @@ namespace Enhancements.UI
 			}
 		}
 
+		[UIValue("changelog-text")]
+		protected string Changelog => Constants.CHANGELOG;
+
 		[Inject]
 		public void Construct([Inject(Id = "Enhancements.Version")] Version version)
 		{

@@ -1,7 +1,8 @@
-﻿using BeatSaberMarkupLanguage.Attributes;
+﻿using HMUI;
+using Zenject;
+using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
-using Zenject;
 
 namespace Enhancements.UI
 {
@@ -17,6 +18,12 @@ namespace Enhancements.UI
         public void Construct(XLoader loader)
         {
             _loader = loader;
+        }
+
+        [UIAction("option-selected")]
+        protected void OptionSelected(TableView _, int id)
+        {
+            Plugin.Log.Info(id.ToString());
         }
 
         [UIAction("#post-parse")]
@@ -63,6 +70,7 @@ namespace Enhancements.UI
                 )
             });
             tableList.tableView.ReloadData();
+            tableList.tableView.SelectCellWithIdx(0);
         }
     }
 }
