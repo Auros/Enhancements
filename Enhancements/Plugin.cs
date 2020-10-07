@@ -20,6 +20,7 @@ namespace Enhancements
             Config config = conf.Generated<Config>();
             zenjector.OnApp<XInstaller>().WithParameters(config, metadata.Version);
             zenjector.OnMenu<XMenuInstaller>();
+            zenjector.OnGame<XGameInstaller>();
         }
 
         [OnEnable, OnDisable]

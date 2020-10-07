@@ -130,6 +130,7 @@
     <Compile Include="Clock\ClockSettings.cs" />
     <Compile Include="Clock\IClockController.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Installers\XGameInstaller.cs" />
     <Compile Include="Timers\ITImeNotification.cs" />
     <Compile Include="Timers\ITimerController.cs" />
     <Compile Include="Config.cs" />
