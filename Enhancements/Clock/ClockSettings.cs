@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using UnityEngine;
+using System.Collections.Generic;
 using IPA.Config.Stores.Attributes;
 using IPA.Config.Stores.Converters;
 
@@ -6,11 +7,20 @@ namespace Enhancements.Clock
 {
     public class ClockSettings
     {
+        public virtual bool Enabled { get; set; } = true;
+
         public virtual string Format { get; set; } = "h:mm tt";
 
         public virtual string Culture { get; set; } = "";
 
         public virtual string Font { get; set; } = "";
+
+        public virtual float Size { get; set; } = 10f;
+
+        public virtual float Opacity { get; set; } = 1f;
+
+        [UseConverter(typeof(HexColorConverter))]
+        public virtual Color Color { get; set; } = Color.white;
 
         [NonNullable]
         [UseConverter(typeof(ListConverter<string>))]
@@ -23,5 +33,13 @@ namespace Enhancements.Clock
             "dddd",
             "MMMM dd, yyyy | h:mm tt",
         };
+
+        [Ignore]
+        internal bool IsDirty { get; set; } = true;
+
+        public void MarkDirty()
+        {
+            IsDirty = true;
+        }
     }
 }

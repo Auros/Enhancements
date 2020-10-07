@@ -133,6 +133,9 @@
     <Compile Include="Timers\ITImeNotification.cs" />
     <Compile Include="Timers\ITimerController.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="UI\Clock\ClockSettingsFormatView.cs" />
+    <Compile Include="UI\Clock\ClockSettingsInfoView.cs" />
+    <Compile Include="UI\Clock\ClockSettingsPosColView.cs" />
     <Compile Include="UI\MenuButtonManager.cs" />
     <Compile Include="UI\XInfoView.cs" />
     <Compile Include="UI\XSettingNavigationView.cs" />
@@ -149,10 +152,13 @@
   <ItemGroup>
     <None Include="BuildTargets.targets" />
     <None Include=".gitignore" />
-    <EmbeddedResource Include="Views\basic-clock.bsml" />
+    <EmbeddedResource Include="Views\Clock\basic-clock.bsml" />
     <EmbeddedResource Include="Resources\enhancements3.asset" />
     <EmbeddedResource Include="Views\info-view.bsml" />
     <EmbeddedResource Include="Views\settings-navigation-view.bsml" />
+    <EmbeddedResource Include="Views\Clock\clock-settings-info-view.bsml" />
+    <EmbeddedResource Include="Views\Clock\clock-settings-pos-col-view.bsml" />
+    <EmbeddedResource Include="Views\Clock\clock-settings-format-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Breaktime\" />

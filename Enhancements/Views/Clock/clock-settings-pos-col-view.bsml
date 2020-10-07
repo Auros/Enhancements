@@ -1,0 +1,29 @@
+﻿<vertical child-control-height="false" spacing="0" child-align="UpperCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+    <text text="Location and Color" align="Center" font-size="7" />
+  </horizontal>
+  <horizontal bg="round-rect-panel" pad="2">
+    <vertical>
+      <text text="Position" align="Center" font-size="6" underlined="true" />
+      <settings-container pref-width="50">
+        <increment-setting text="X" min="-10" max="10" increment="0.05" />
+        <increment-setting text="Y" min="-2" max="5" increment="0.05" />
+        <increment-setting text="Z" min="-10" max="10" increment="0.05" />
+      </settings-container>
+    </vertical>
+    <vertical>
+      <text text="Rotation" align="Center" font-size="6" underlined="true" />
+      <settings-container pref-width="50">
+        <increment-setting text="X" min="0" max="360" increment="15" />
+        <increment-setting text="Y" min="0" max="360" increment="15" />
+        <increment-setting text="Z" min="0" max="360" increment="15" />
+      </settings-container>
+    </vertical>
+  </horizontal>
+  <horizontal bg="round-rect-panel" pad="2">
+    <vertical>
+      <color-setting text="Color" />
+      <slider-setting text="Opacity" increment="0.1" min="0" max="1" />
+    </vertical>
+  </horizontal>
+</vertical>

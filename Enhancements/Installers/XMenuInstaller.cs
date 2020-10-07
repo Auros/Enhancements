@@ -2,6 +2,7 @@
 using UnityEngine;
 using Enhancements.UI;
 using Enhancements.Clock;
+using Enhancements.UI.Clock;
 using Installer = Zenject.Installer;
 
 namespace Enhancements.Installers
@@ -16,8 +17,13 @@ namespace Enhancements.Installers
             Application.targetFrameRate = 90;
 
             Container.Bind<XInfoView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<ClockSettingsInfoView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
             Container.Bind<XSettingNavigationView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<ClockSettingsPosColView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<ClockSettingsFormatView>().FromNewComponentOnNewGameObject().AsSingle().OnInstantiated(Utilities.SetupViewController);
             Container.Bind<XSettingsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
+
+
             Container.BindInterfacesAndSelfTo<MenuButtonManager>().AsSingle();
         }
     }

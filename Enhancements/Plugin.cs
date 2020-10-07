@@ -22,16 +22,7 @@ namespace Enhancements
             zenjector.OnMenu<XMenuInstaller>();
         }
 
-        [OnEnable]
-        public void OnEnable()
-        {
-            
-        }
-
-        [OnDisable]
-        public void OnDisable()
-        {
-
-        }
+        [OnEnable, OnDisable]
+        public void OnStateChange() { }
     }
 }

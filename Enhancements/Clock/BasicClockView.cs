@@ -6,7 +6,7 @@ using BeatSaberMarkupLanguage.ViewControllers;
 
 namespace Enhancements.Clock
 {
-    [HotReload(RelativePathToLayout = @"..\Views\basic-clock.bsml")]
+    [HotReload(RelativePathToLayout = @"..\Views\Clock\basic-clock.bsml")]
     public class BasicClockView : BSMLAutomaticViewController
     {
         private XLoader _loader;
@@ -24,6 +24,28 @@ namespace Enhancements.Clock
                 _clockText = value;
                 NotifyPropertyChanged();
             }
+        }
+
+        public Color ClockColor
+        {
+            set => _clockTextObject.color = value;
+        }
+
+        private float _clockSize = 10f;
+        [UIValue("clock-size")]
+        public float ClockSize
+        {
+            get => _clockSize;
+            set
+            {
+                _clockSize = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public TMP_FontAsset Font
+        {
+            set => _clockTextObject.font = value;
         }
 
         [Inject]

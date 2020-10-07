@@ -3,12 +3,15 @@ using Zenject;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
+using System;
 
 namespace Enhancements.UI
 {
     [HotReload(RelativePathToLayout = @"..\Views\settings-navigation-view.bsml")]
     public class XSettingNavigationView : BSMLAutomaticViewController
     {
+        public event Action<string, int> DidSelectSettingOption;
+
         [UIComponent("list")]
         protected CustomListTableData tableList;
 
@@ -23,7 +26,7 @@ namespace Enhancements.UI
         [UIAction("option-selected")]
         protected void OptionSelected(TableView _, int id)
         {
-            Plugin.Log.Info(id.ToString());
+            DidSelectSettingOption?.Invoke(tableList.data[id].text.Split('\n')[0], id);
         }
 
         [UIAction("#post-parse")]
@@ -70,7 +73,12 @@ namespace Enhancements.UI
                 )
             });
             tableList.tableView.ReloadData();
-            tableList.tableView.SelectCellWithIdx(0);
+            SelectFirstCell();
+        }
+
+        public void SelectFirstCell()
+        {
+            tableList?.tableView.SelectCellWithIdx(0);
         }
     }
 }

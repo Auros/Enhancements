@@ -13,45 +13,36 @@ namespace Enhancements
         private const string BUNDLE_PATH = RESOURCE_PATH + "enhancements3.asset";
 
         private readonly Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
-        private readonly Dictionary<string, TMP_FontAsset> _fonts = new Dictionary<string, TMP_FontAsset>();
-        private TMP_FontAsset _cachedTekoFont;
+        private static readonly Dictionary<string, TMP_FontAsset> _fonts = new Dictionary<string, TMP_FontAsset>();
+        private static TMP_FontAsset _cachedTekoFont;
 
         public Shader ZFixTextShader { get; private set; }
-
-        public static string GetGameObjectPath(GameObject obj)
-        {
-            string path = "/" + obj.name;
-            while (obj.transform.parent != null)
-            {
-                obj = obj.transform.parent.gameObject;
-                path = "/" + obj.name + path;
-            }
-            return path;
-        }
+        private bool _didLoad = false;
 
         public void Initialize()
         {
-            _fonts.Clear();
-            // Loading the asset bundle.
-            AssetBundle bundle = AssetBundle.LoadFromStream(Assembly.GetExecutingAssembly().GetManifestResourceStream(BUNDLE_PATH));
-
-            // Load Custom Text Shader
-            var shader = bundle.LoadAsset<Shader>("Assets/TextMesh Pro/Resources/Shaders/TMP_SDF ZFix.shader");
-            ZFixTextShader = shader;// UnityEngine.Object.Instantiate(shader);
-
-            // Load Fonts
-            _cachedTekoFont = Resources.FindObjectsOfTypeAll<TMP_FontAsset>().LastOrDefault(f2 => f2.name == "Teko-Medium SDF No Glow");
-            var fonts = bundle.LoadAllAssets<TMP_FontAsset>();
-            for (int i = 0; i < fonts.Length; i++)
+            if (_fonts.Count > 0)
             {
-                var font = Setup(fonts[i]);
-                //if (font != null)
-                //{
-                    _fonts.Add(font.name.Split(new string[] { "SDF" }, StringSplitOptions.RemoveEmptyEntries)[0], font);
-                //}
+                return;
             }
 
-            bundle.Unload(true);
+            if (!_didLoad)
+            {
+                // Loading the asset bundle.
+                AssetBundle bundle = AssetBundle.LoadFromStream(Assembly.GetExecutingAssembly().GetManifestResourceStream(BUNDLE_PATH));
+
+                // Load Fonts
+                _cachedTekoFont = Resources.FindObjectsOfTypeAll<TMP_FontAsset>().LastOrDefault(f2 => f2.name == "Teko-Medium SDF No Glow");
+                var fonts = bundle.LoadAllAssets<TMP_FontAsset>();
+                for (int i = 0; i < fonts.Length; i++)
+                {
+                    var font = Setup(fonts[i]);
+                    _fonts.Add(font.name.Split(new string[] { "SDF" }, StringSplitOptions.RemoveEmptyEntries)[0], font);
+                }
+                _didLoad = true;
+            }
+
+
         }
 
         public Texture2D GetIcon(string name)
@@ -68,9 +59,17 @@ namespace Enhancements
             return texture;
         }
 
-        public void GetFonts()
+        public TMP_FontAsset GetFont(string name)
         {
             Initialize();
+            _ = _fonts.TryGetValue(name, out TMP_FontAsset font);
+            return font;
+        }
+
+        public string[] GetFontNames()
+        {
+            Initialize();
+            return _fonts.Keys.ToArray();
         }
 
         private TMP_FontAsset Setup(TMP_FontAsset f)

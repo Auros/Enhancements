@@ -7,5 +7,10 @@ namespace Enhancements
     {
         [NonNullable]
         public virtual ClockSettings Clock { get; set; } = new ClockSettings();
+
+        public virtual void Changed()
+        {
+            Clock.MarkDirty();
+        }
     }
 }

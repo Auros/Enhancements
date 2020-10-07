@@ -1,9 +1,9 @@
-﻿using BeatSaberMarkupLanguage.Attributes;
-using BeatSaberMarkupLanguage.ViewControllers;
+﻿using TMPro;
 using SemVer;
-using TMPro;
-using UnityEngine;
 using Zenject;
+using UnityEngine;
+using BeatSaberMarkupLanguage.Attributes;
+using BeatSaberMarkupLanguage.ViewControllers;
 
 namespace Enhancements.UI
 {
