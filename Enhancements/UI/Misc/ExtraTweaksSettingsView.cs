@@ -1,7 +1,7 @@
-﻿using BeatSaberMarkupLanguage.Attributes;
-using BeatSaberMarkupLanguage.ViewControllers;
+﻿using Zenject;
 using Enhancements.Misc;
-using Zenject;
+using BeatSaberMarkupLanguage.Attributes;
+using BeatSaberMarkupLanguage.ViewControllers;
 
 namespace Enhancements.UI.Misc
 {

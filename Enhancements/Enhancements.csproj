@@ -42,6 +42,11 @@
     <DisableZipRelease>True</DisableZipRelease>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="0Harmony, Version=2.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="BSML, Version=1.3.4.0, Culture=neutral, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
@@ -130,6 +135,7 @@
     <Compile Include="Clock\ClockSettings.cs" />
     <Compile Include="Clock\IClockController.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="HarmonyPatches\BPM360Verifier.cs" />
     <Compile Include="Installers\XGameInstaller.cs" />
     <Compile Include="Misc\MiscSettings.cs" />
     <Compile Include="Timers\GenericNotification.cs" />

@@ -18,6 +18,7 @@ namespace Enhancements.Installers
 
         public override void InstallBindings()
         {
+            Container.BindInstance(_config.Misc).AsSingle();
             Container.BindInstance(_config.Clock).AsSingle();
             Container.BindInstance(_config.Timer).AsSingle();
             Container.Bind(typeof(ITickable), typeof(ITimerController)).To<TimerController>().AsSingle();
