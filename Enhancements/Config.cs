@@ -1,10 +1,11 @@
-﻿using Enhancements.Clock;
-using Enhancements.Timers;
+﻿using System;
+using UnityEngine;
 using IPA.Config.Data;
 using IPA.Config.Stores;
+using Enhancements.Misc;
+using Enhancements.Clock;
+using Enhancements.Timers;
 using IPA.Config.Stores.Attributes;
-using System;
-using UnityEngine;
 
 namespace Enhancements
 {
@@ -12,7 +13,10 @@ namespace Enhancements
     {
         [NonNullable]
         public virtual ClockSettings Clock { get; set; } = new ClockSettings();
+        [NonNullable]
         public virtual TimerSettings Timer { get; set; } = new TimerSettings();
+        [NonNullable]
+        public virtual MiscSettings Misc { get; set; } = new MiscSettings();
 
         public virtual void Changed()
         {

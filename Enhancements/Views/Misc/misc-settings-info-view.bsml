@@ -1,0 +1,12 @@
+﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="130" horizontal-fit="PreferredSize">
+    <text text="Extras" align="Center" font-size="10" />
+  </horizontal>
+  <horizontal pref-width="70" spacing="10" bg="round-rect-panel" pad="2">
+    <text text="This section is for any miscellanious features that aren't big enough to have their own category.&lt;br&gt;
+          Features:&lt;br&gt;
+          - Button Lock&lt;br&gt;
+          - Legacy VBPM 360 Map Fix&lt;br&gt;
+          - Optidra [Experimental Settings]" />
+  </horizontal>
+</vertical>

@@ -1,8 +1,9 @@
 ﻿using HMUI;
 using Zenject;
-using BeatSaberMarkupLanguage;
+using Enhancements.UI.Misc;
 using Enhancements.UI.Clock;
 using Enhancements.UI.Timers;
+using BeatSaberMarkupLanguage;
 
 namespace Enhancements.UI
 {
@@ -19,10 +20,14 @@ namespace Enhancements.UI
 
         private TimersSettingsInfoView _timersSettingsInfoView;
 
+        private MiscSettingsInfoView _miscSettingsInfoView;
+        private ExtraTweaksSettingsView _extraTweaksSettingsView;
+
         [Inject]
         public void Construct(XInfoView infoView, MainFlowCoordinator mainFlowCoordinator, XSettingsNavigationController settingsNavigationView,
                               ClockSettingsInfoView clockSettingsInfoView, ClockSettingsPosColView clockSettingsPosColView, ClockSettingsFormatView clockSettingsFormatView,
-                              TimersSettingsInfoView timersSettingsInfoView)
+                              TimersSettingsInfoView timersSettingsInfoView,
+                              MiscSettingsInfoView miscSettingsInfoView, ExtraTweaksSettingsView extraTweaksSettingsView)
         {
             _infoView = infoView;
             _mainFlowCoordinator = mainFlowCoordinator;
@@ -33,6 +38,9 @@ namespace Enhancements.UI
             _clockSettingsFormatView = clockSettingsFormatView;
 
             _timersSettingsInfoView = timersSettingsInfoView;
+
+            _miscSettingsInfoView = miscSettingsInfoView;
+            _extraTweaksSettingsView = extraTweaksSettingsView;
         }
 
         protected override void DidActivate(bool firstActivation, ActivationType activationType)
@@ -69,6 +77,12 @@ namespace Enhancements.UI
                 case "Timers":
                     match = _timersSettingsInfoView;
                     leftMatch = null;
+                    rightMatch = null;
+                    break;
+
+                case "Mini Settings and Optidra":
+                    match = _miscSettingsInfoView;
+                    leftMatch = _extraTweaksSettingsView;
                     rightMatch = null;
                     break;
             }

@@ -131,6 +131,7 @@
     <Compile Include="Clock\IClockController.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Installers\XGameInstaller.cs" />
+    <Compile Include="Misc\MiscSettings.cs" />
     <Compile Include="Timers\GenericNotification.cs" />
     <Compile Include="Timers\ITimeNotification.cs" />
     <Compile Include="Timers\ITimerController.cs" />
@@ -145,6 +146,8 @@
     <Compile Include="UI\Clock\ClockSettingsInfoView.cs" />
     <Compile Include="UI\Clock\ClockSettingsPosColView.cs" />
     <Compile Include="UI\MenuButtonManager.cs" />
+    <Compile Include="UI\Misc\ExtraTweaksSettingsView.cs" />
+    <Compile Include="UI\Misc\MiscSettingsInfoView.cs" />
     <Compile Include="UI\Timers\TimersSettingsInfoView.cs" />
     <Compile Include="UI\XInfoView.cs" />
     <Compile Include="UI\XSettingsNavigationController.cs" />
@@ -171,6 +174,8 @@
     <EmbeddedResource Include="Views\Timers\new-reminder-view.bsml" />
     <EmbeddedResource Include="Views\Timers\notification-view.bsml" />
     <EmbeddedResource Include="Views\Timers\timers-settings-info-view.bsml" />
+    <EmbeddedResource Include="Views\Misc\misc-settings-info-view.bsml" />
+    <EmbeddedResource Include="Views\Misc\extra-tweaks-settings-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Breaktime\" />
@@ -182,9 +187,6 @@
     <EmbeddedResource Include="Resources\settings.png" />
     <EmbeddedResource Include="Resources\timer.png" />
     <EmbeddedResource Include="Resources\volume.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\timers-example.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="BuildTargets.targets" />

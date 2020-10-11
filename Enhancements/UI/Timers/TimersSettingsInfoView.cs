@@ -1,9 +1,9 @@
-﻿using BeatSaberMarkupLanguage;
+﻿using Zenject;
+using UnityEngine.UI;
+using Enhancements.Timers;
+using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
-using Enhancements.Timers;
-using UnityEngine.UI;
-using Zenject;
 
 namespace Enhancements.UI.Timers
 {
@@ -41,7 +41,7 @@ namespace Enhancements.UI.Timers
             base.DidActivate(firstActivation, type);
             if (firstActivation)
             {
-                exampleImage.SetImage("Enhancements.Resources.timers-example.gif");
+                exampleImage.SetImage("http://cdn.auros.dev/sira/enhancements/timers.gif");
             }
         }
     }
