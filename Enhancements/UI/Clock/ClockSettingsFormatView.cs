@@ -1,15 +1,16 @@
 ﻿using System;
 using Zenject;
+using System.Linq;
 using Enhancements.Clock;
 using System.Collections.Generic;
+using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
-using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Components.Settings;
-using System.Linq;
 
 namespace Enhancements.UI.Clock
 {
+    [ViewDefinition("Enhancements.Views.Clock.clock-settings-format-view.bsml")]
     [HotReload(RelativePathToLayout = @"..\..\Views\Clock\clock-settings-format-view.bsml")]
     public class ClockSettingsFormatView : BSMLAutomaticViewController
     {

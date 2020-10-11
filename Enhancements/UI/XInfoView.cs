@@ -7,7 +7,8 @@ using BeatSaberMarkupLanguage.ViewControllers;
 
 namespace Enhancements.UI
 {
-    [HotReload(RelativePathToLayout = @"..\Views\info-view.bsml")]
+	[ViewDefinition("Enhancements.Views.info-view.bsml")]
+	[HotReload(RelativePathToLayout = @"..\Views\info-view.bsml")]
     public class XInfoView : BSMLAutomaticViewController
     {
         [UIComponent("version-text")]

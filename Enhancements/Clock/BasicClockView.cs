@@ -1,16 +1,20 @@
 ﻿using TMPro;
 using Zenject;
 using UnityEngine;
+using Enhancements.Timers;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
 
 namespace Enhancements.Clock
 {
+    [ViewDefinition("Enhancements.Views.Clock.basic-clock.bsml")]
     [HotReload(RelativePathToLayout = @"..\Views\Clock\basic-clock.bsml")]
     public class BasicClockView : BSMLAutomaticViewController
     {
         private XLoader _loader;
+        private TimerSettings _timerSettings;
+        private NewReminderView _newReminderView;
 
         [UIComponent("clock-text")]
         protected ClickableText _clockTextObject;
@@ -54,9 +58,11 @@ namespace Enhancements.Clock
         }
 
         [Inject]
-        public void Construct(XLoader loader)
+        public void Construct(XLoader loader, TimerSettings timerSettings, NewReminderView newReminderView)
         {
             _loader = loader;
+            _timerSettings = timerSettings;
+            _newReminderView = newReminderView;
         }
 
         [UIAction("#post-parse")]
@@ -64,6 +70,15 @@ namespace Enhancements.Clock
         {
             var mat = new Material(_clockTextObject.material) { shader = _loader.ZFixTextShader };
             _clockTextObject.material = mat;
+        }
+
+        [UIAction("clicked")]
+        protected void ClickedClock()
+        {
+            if (_timerSettings.Enabled)
+            {
+                _newReminderView.Visible = true;
+            }
         }
     }
 }

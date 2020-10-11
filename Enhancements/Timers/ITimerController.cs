@@ -4,8 +4,8 @@ namespace Enhancements.Timers
 {
     public interface ITimerController
     {
-        event Action<ITImeNotification> NotificationPing;
-        void RegisterNotification(ITImeNotification notification);
-        void UnregisterNotification(ITImeNotification notification);
+        event Action<ITimeNotification> NotificationPing;
+        void RegisterNotification(ITimeNotification notification);
+        void UnregisterNotification(ITimeNotification notification);
     }
 }

@@ -5,6 +5,7 @@ using BeatSaberMarkupLanguage.ViewControllers;
 
 namespace Enhancements.UI.Clock
 {
+    [ViewDefinition("Enhancements.Views.Clock.clock-settings-info-view.bsml")]
     [HotReload(RelativePathToLayout = @"..\..\Views\Clock\clock-settings-info-view.bsml")]
     public class ClockSettingsInfoView : BSMLAutomaticViewController
     {

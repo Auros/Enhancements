@@ -1,4 +1,5 @@
 ﻿using Enhancements.Clock;
+using Enhancements.Timers;
 using IPA.Config.Data;
 using IPA.Config.Stores;
 using IPA.Config.Stores.Attributes;
@@ -11,6 +12,7 @@ namespace Enhancements
     {
         [NonNullable]
         public virtual ClockSettings Clock { get; set; } = new ClockSettings();
+        public virtual TimerSettings Timer { get; set; } = new TimerSettings();
 
         public virtual void Changed()
         {

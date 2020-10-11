@@ -131,15 +131,23 @@
     <Compile Include="Clock\IClockController.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Installers\XGameInstaller.cs" />
-    <Compile Include="Timers\ITImeNotification.cs" />
+    <Compile Include="Timers\GenericNotification.cs" />
+    <Compile Include="Timers\ITimeNotification.cs" />
     <Compile Include="Timers\ITimerController.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="Timers\NewReminderView.cs" />
+    <Compile Include="Timers\NotificationView.cs" />
+    <Compile Include="Timers\Notifier.cs" />
+    <Compile Include="Timers\TimerController.cs" />
+    <Compile Include="Timers\TimerSettings.cs" />
+    <Compile Include="Timers\TimeType.cs" />
     <Compile Include="UI\Clock\ClockSettingsFormatView.cs" />
     <Compile Include="UI\Clock\ClockSettingsInfoView.cs" />
     <Compile Include="UI\Clock\ClockSettingsPosColView.cs" />
     <Compile Include="UI\MenuButtonManager.cs" />
+    <Compile Include="UI\Timers\TimersSettingsInfoView.cs" />
     <Compile Include="UI\XInfoView.cs" />
-    <Compile Include="UI\XSettingNavigationView.cs" />
+    <Compile Include="UI\XSettingsNavigationController.cs" />
     <Compile Include="UI\XSettingsFlowCoordinator.cs" />
     <Compile Include="XLoader.cs" />
     <Compile Include="Installers\XMenuInstaller.cs" />
@@ -160,10 +168,12 @@
     <EmbeddedResource Include="Views\Clock\clock-settings-info-view.bsml" />
     <EmbeddedResource Include="Views\Clock\clock-settings-pos-col-view.bsml" />
     <EmbeddedResource Include="Views\Clock\clock-settings-format-view.bsml" />
+    <EmbeddedResource Include="Views\Timers\new-reminder-view.bsml" />
+    <EmbeddedResource Include="Views\Timers\notification-view.bsml" />
+    <EmbeddedResource Include="Views\Timers\timers-settings-info-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Breaktime\" />
-    <Folder Include="SongSkip\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\breaktime.png" />
@@ -172,6 +182,9 @@
     <EmbeddedResource Include="Resources\settings.png" />
     <EmbeddedResource Include="Resources\timer.png" />
     <EmbeddedResource Include="Resources\volume.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\timers-example.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="BuildTargets.targets" />

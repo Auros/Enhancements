@@ -2,6 +2,7 @@
 using Zenject;
 using BeatSaberMarkupLanguage;
 using Enhancements.UI.Clock;
+using Enhancements.UI.Timers;
 
 namespace Enhancements.UI
 {
@@ -10,22 +11,28 @@ namespace Enhancements.UI
         private int _lastId = 0;
         private XInfoView _infoView;
         private MainFlowCoordinator _mainFlowCoordinator;
-        private XSettingNavigationView _settingsNavigationView;
+        private XSettingsNavigationController _settingsNavigationView;
 
         private ClockSettingsInfoView _clockSettingsInfoView;
         private ClockSettingsPosColView _clockSettingsPosColView;
         private ClockSettingsFormatView _clockSettingsFormatView;
 
+        private TimersSettingsInfoView _timersSettingsInfoView;
+
         [Inject]
-        public void Construct(XInfoView infoView, MainFlowCoordinator mainFlowCoordinator, XSettingNavigationView settingsNavigationView,
-                              ClockSettingsInfoView clockSettingsInfoView, ClockSettingsPosColView clockSettingsPosColView, ClockSettingsFormatView clockSettingsFormatView)
+        public void Construct(XInfoView infoView, MainFlowCoordinator mainFlowCoordinator, XSettingsNavigationController settingsNavigationView,
+                              ClockSettingsInfoView clockSettingsInfoView, ClockSettingsPosColView clockSettingsPosColView, ClockSettingsFormatView clockSettingsFormatView,
+                              TimersSettingsInfoView timersSettingsInfoView)
         {
             _infoView = infoView;
             _mainFlowCoordinator = mainFlowCoordinator;
-            _clockSettingsInfoView = clockSettingsInfoView;
             _settingsNavigationView = settingsNavigationView;
+
+            _clockSettingsInfoView = clockSettingsInfoView;
             _clockSettingsPosColView = clockSettingsPosColView;
             _clockSettingsFormatView = clockSettingsFormatView;
+
+            _timersSettingsInfoView = timersSettingsInfoView;
         }
 
         protected override void DidActivate(bool firstActivation, ActivationType activationType)
@@ -58,6 +65,11 @@ namespace Enhancements.UI
                     match = _clockSettingsInfoView;
                     leftMatch = _clockSettingsPosColView;
                     rightMatch = _clockSettingsFormatView;
+                    break;
+                case "Timers":
+                    match = _timersSettingsInfoView;
+                    leftMatch = null;
+                    rightMatch = null;
                     break;
             }
             if (match != null && match != topViewController)
