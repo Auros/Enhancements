@@ -17,9 +17,9 @@
         -    Breaktime: Improved Performance
         -    Breaktime: New asset loading system
         -    Breaktime: New profile system
-        -    Breaktime: Can now  randomize the effects
+        -    Breaktime: Can now randomize the effects
         -    Breaktime: Can now select the appear and disappear type.
-        -    Mini Tweaks: Can now isable 360 Mode for maps without 360 events
+        -    Mini Tweaks: Can now disable 360 Mode for maps without 360 events
         -    Clock: More Fonts
         -    Clock: Opacity Option
         -    Clock: Improved Performance

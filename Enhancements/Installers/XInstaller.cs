@@ -21,11 +21,14 @@ namespace Enhancements.Installers
             Container.BindInstance(_config.Misc).AsSingle();
             Container.BindInstance(_config.Clock).AsSingle();
             Container.BindInstance(_config.Timer).AsSingle();
+            Container.BindInstance(_config.Volume).AsSingle();
+            Container.BindInstance(_config.Optidra).AsSingle();
             Container.Bind(typeof(ITickable), typeof(ITimerController)).To<TimerController>().AsSingle();
             Container.Bind(typeof(IInitializable), typeof(System.IDisposable), typeof(Notifier)).To<Notifier>().AsSingle();
             Container.Bind(typeof(IClockController), typeof(ITickable), typeof(ClockController)).To<ClockController>().AsSingle();
             Container.Bind<XLoader>().AsSingle().Lazy();
             Container.Bind<Version>().WithId("Enhancements.Version").FromInstance(_version).AsCached();
+
         }
     }
 }

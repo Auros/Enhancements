@@ -97,6 +97,11 @@
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
@@ -135,9 +140,12 @@
     <Compile Include="Clock\ClockSettings.cs" />
     <Compile Include="Clock\IClockController.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="HarmonyPatches\BPM360Verifier.cs" />
+    <Compile Include="Misc\BPM360Verifier.cs" />
+    <Compile Include="Misc\ButtonLock.cs" />
+    <Compile Include="Misc\OptidraBeatmapObjectSwap.cs" />
     <Compile Include="Installers\XGameInstaller.cs" />
     <Compile Include="Misc\MiscSettings.cs" />
+    <Compile Include="Misc\OptidraSettings.cs" />
     <Compile Include="Timers\GenericNotification.cs" />
     <Compile Include="Timers\ITimeNotification.cs" />
     <Compile Include="Timers\ITimerController.cs" />
@@ -154,10 +162,17 @@
     <Compile Include="UI\MenuButtonManager.cs" />
     <Compile Include="UI\Misc\ExtraTweaksSettingsView.cs" />
     <Compile Include="UI\Misc\MiscSettingsInfoView.cs" />
+    <Compile Include="UI\Misc\OptidraSettingsView.cs" />
     <Compile Include="UI\Timers\TimersSettingsInfoView.cs" />
+    <Compile Include="UI\Volume\VolumeSettingsInfoView.cs" />
     <Compile Include="UI\XInfoView.cs" />
     <Compile Include="UI\XSettingsNavigationController.cs" />
     <Compile Include="UI\XSettingsFlowCoordinator.cs" />
+    <Compile Include="Volume\FireworkSoundEffectSwapper.cs" />
+    <Compile Include="Volume\GameVolumeModifier.cs" />
+    <Compile Include="Volume\MenuVolumeManager.cs" />
+    <Compile Include="Volume\ObjectSoundEffectSwapper.cs" />
+    <Compile Include="Volume\VolumeSettings.cs" />
     <Compile Include="XLoader.cs" />
     <Compile Include="Installers\XMenuInstaller.cs" />
     <Compile Include="Installers\XInstaller.cs" />
@@ -182,6 +197,8 @@
     <EmbeddedResource Include="Views\Timers\timers-settings-info-view.bsml" />
     <EmbeddedResource Include="Views\Misc\misc-settings-info-view.bsml" />
     <EmbeddedResource Include="Views\Misc\extra-tweaks-settings-view.bsml" />
+    <EmbeddedResource Include="Views\Misc\optidra-settings-view.bsml" />
+    <EmbeddedResource Include="Views\Volume\volume-settings-info-view.bsml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Breaktime\" />

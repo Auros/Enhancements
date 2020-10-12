@@ -3,7 +3,7 @@ using HarmonyLib;
 using IPA.Utilities;
 using Enhancements.Misc;
 
-namespace Enhancements.HarmonyPatches
+namespace Enhancements.Misc
 {
     [HarmonyPatch(typeof(GameplayCoreSceneSetup), "InstallBindings")]
     internal class BPM360Verifier

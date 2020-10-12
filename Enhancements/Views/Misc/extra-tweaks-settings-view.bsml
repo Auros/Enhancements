@@ -23,7 +23,7 @@
       </settings-container>
     </vertical>
     <vertical pref-width="40" pad="2" child-align="MiddleCenter">
-      <text text="Makes the pause menu buttons inactive for 0.5 seconds in order to prevent accidentally pressing pause and immediately pressing them." />
+      <text text="Makes the pause menu buttons inactive for 0.75 seconds in order to prevent accidentally pressing pause and immediately pressing them." />
     </vertical>
   </horizontal>
 </vertical>

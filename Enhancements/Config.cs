@@ -5,6 +5,7 @@ using IPA.Config.Stores;
 using Enhancements.Misc;
 using Enhancements.Clock;
 using Enhancements.Timers;
+using Enhancements.Volume;
 using IPA.Config.Stores.Attributes;
 
 namespace Enhancements
@@ -16,7 +17,11 @@ namespace Enhancements
         [NonNullable]
         public virtual TimerSettings Timer { get; set; } = new TimerSettings();
         [NonNullable]
+        public virtual VolumeSettings Volume { get; set; } = new VolumeSettings();
+        [NonNullable]
         public virtual MiscSettings Misc { get; set; } = new MiscSettings();
+        [NonNullable]
+        public virtual OptidraSettings Optidra { get; set; } = new OptidraSettings();
 
         public virtual void Changed()
         {

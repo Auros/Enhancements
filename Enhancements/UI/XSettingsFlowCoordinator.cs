@@ -4,6 +4,7 @@ using Enhancements.UI.Misc;
 using Enhancements.UI.Clock;
 using Enhancements.UI.Timers;
 using BeatSaberMarkupLanguage;
+using Enhancements.UI.Volume;
 
 namespace Enhancements.UI
 {
@@ -20,6 +21,8 @@ namespace Enhancements.UI
 
         private TimersSettingsInfoView _timersSettingsInfoView;
 
+        private VolumeSettingsInfoView _volumeSettingsInfoView;
+
         private MiscSettingsInfoView _miscSettingsInfoView;
         private ExtraTweaksSettingsView _extraTweaksSettingsView;
 
@@ -27,6 +30,7 @@ namespace Enhancements.UI
         public void Construct(XInfoView infoView, MainFlowCoordinator mainFlowCoordinator, XSettingsNavigationController settingsNavigationView,
                               ClockSettingsInfoView clockSettingsInfoView, ClockSettingsPosColView clockSettingsPosColView, ClockSettingsFormatView clockSettingsFormatView,
                               TimersSettingsInfoView timersSettingsInfoView,
+                              VolumeSettingsInfoView volumeSettingsInfoView,
                               MiscSettingsInfoView miscSettingsInfoView, ExtraTweaksSettingsView extraTweaksSettingsView)
         {
             _infoView = infoView;
@@ -38,6 +42,8 @@ namespace Enhancements.UI
             _clockSettingsFormatView = clockSettingsFormatView;
 
             _timersSettingsInfoView = timersSettingsInfoView;
+
+            _volumeSettingsInfoView = volumeSettingsInfoView;
 
             _miscSettingsInfoView = miscSettingsInfoView;
             _extraTweaksSettingsView = extraTweaksSettingsView;
@@ -80,6 +86,11 @@ namespace Enhancements.UI
                     rightMatch = null;
                     break;
 
+                case "Volume":
+                    match = _volumeSettingsInfoView;
+                    leftMatch = null;
+                    rightMatch = null;
+                    break;
                 case "Mini Settings and Optidra":
                     match = _miscSettingsInfoView;
                     leftMatch = _extraTweaksSettingsView;
