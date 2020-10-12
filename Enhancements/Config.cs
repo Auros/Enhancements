@@ -7,6 +7,7 @@ using Enhancements.Clock;
 using Enhancements.Timers;
 using Enhancements.Volume;
 using IPA.Config.Stores.Attributes;
+using Enhancements.Breaktime;
 
 namespace Enhancements
 {
@@ -16,6 +17,8 @@ namespace Enhancements
         public virtual ClockSettings Clock { get; set; } = new ClockSettings();
         [NonNullable]
         public virtual TimerSettings Timer { get; set; } = new TimerSettings();
+        [NonNullable]
+        public virtual BreaktimeSettings Breaktime { get; set; } = new BreaktimeSettings();
         [NonNullable]
         public virtual VolumeSettings Volume { get; set; } = new VolumeSettings();
         [NonNullable]

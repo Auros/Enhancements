@@ -4,6 +4,8 @@ using Enhancements.Clock;
 using Enhancements.Timers;
 using Enhancements.Volume;
 using Enhancements.Misc;
+using Enhancements.Breaktime;
+using Enhancements.UI.Breaktime;
 
 namespace Enhancements.Installers
 {
@@ -12,12 +14,14 @@ namespace Enhancements.Installers
         private MiscSettings _miscSettings;
         private ClockSettings _clockSettings;
         private TimerSettings _timerSettings;
+        private BreaktimeSettings _breaktimeSettings;
 
-        public XGameInstaller(MiscSettings miscSettings, ClockSettings clockSettings, TimerSettings timerSettings)
+        public XGameInstaller(MiscSettings miscSettings, ClockSettings clockSettings, TimerSettings timerSettings, BreaktimeSettings breaktimeSettings)
         {
             _miscSettings = miscSettings;
             _clockSettings = clockSettings;
             _timerSettings = timerSettings;
+            _breaktimeSettings = breaktimeSettings;
         }
 
         public override void InstallBindings()
@@ -36,6 +40,11 @@ namespace Enhancements.Installers
             if (_miscSettings.ButtonLockMenu || _miscSettings.ButtonLockRestart || _miscSettings.ButtonLockContinue)
             {
                 Container.Bind<ButtonLock>().FromNewComponentOnRoot().AsSingle().NonLazy();
+            }
+            if (_breaktimeSettings.Enabled)
+            {
+                Container.Bind<BreaktimeManager>().FromNewComponentOnRoot().AsSingle();
+                Container.Bind<BreaktimeModule>().FromNewComponentOnNewGameObject(nameof(BreaktimeModule)).AsSingle().NonLazy();
             }
         }
     }

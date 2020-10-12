@@ -3,8 +3,9 @@ using Zenject;
 using Enhancements.UI.Misc;
 using Enhancements.UI.Clock;
 using Enhancements.UI.Timers;
-using BeatSaberMarkupLanguage;
 using Enhancements.UI.Volume;
+using BeatSaberMarkupLanguage;
+using Enhancements.UI.Breaktime;
 
 namespace Enhancements.UI
 {
@@ -21,6 +22,10 @@ namespace Enhancements.UI
 
         private TimersSettingsInfoView _timersSettingsInfoView;
 
+        private BreaktimeSettingsInfoView _breaktimeSettingsInfoView;
+        private BreaktimeSettingsGlobalView _breaktimeSettingsGlobalView;
+        private BreaktimeSettingsProfileView _breaktimeSettingsProfileView;
+
         private VolumeSettingsInfoView _volumeSettingsInfoView;
 
         private MiscSettingsInfoView _miscSettingsInfoView;
@@ -30,6 +35,7 @@ namespace Enhancements.UI
         public void Construct(XInfoView infoView, MainFlowCoordinator mainFlowCoordinator, XSettingsNavigationController settingsNavigationView,
                               ClockSettingsInfoView clockSettingsInfoView, ClockSettingsPosColView clockSettingsPosColView, ClockSettingsFormatView clockSettingsFormatView,
                               TimersSettingsInfoView timersSettingsInfoView,
+                              BreaktimeSettingsInfoView breaktimeSettingsInfoView, BreaktimeSettingsGlobalView breaktimeSettingsGlobalView, BreaktimeSettingsProfileView breaktimeSettingsProfileView,
                               VolumeSettingsInfoView volumeSettingsInfoView,
                               MiscSettingsInfoView miscSettingsInfoView, ExtraTweaksSettingsView extraTweaksSettingsView)
         {
@@ -42,6 +48,10 @@ namespace Enhancements.UI
             _clockSettingsFormatView = clockSettingsFormatView;
 
             _timersSettingsInfoView = timersSettingsInfoView;
+
+            _breaktimeSettingsInfoView = breaktimeSettingsInfoView;
+            _breaktimeSettingsGlobalView = breaktimeSettingsGlobalView;
+            _breaktimeSettingsProfileView = breaktimeSettingsProfileView;
 
             _volumeSettingsInfoView = volumeSettingsInfoView;
 
@@ -58,8 +68,14 @@ namespace Enhancements.UI
             }
             ProvideInitialViewControllers(_infoView, bottomScreenViewController: _settingsNavigationView);
             _settingsNavigationView.DidSelectSettingOption += ShowSettingsPage;
+            _breaktimeSettingsProfileView.ProfilesUpdated += ProfilesUpdated;
             _settingsNavigationView?.SelectFirstCell();
             _lastId = 0;
+        }
+
+        private void ProfilesUpdated()
+        {
+            _breaktimeSettingsGlobalView.LoadProfiles();
         }
 
         protected void ShowSettingsPage(string name, int id)
@@ -85,7 +101,11 @@ namespace Enhancements.UI
                     leftMatch = null;
                     rightMatch = null;
                     break;
-
+                case "Breaktime":
+                    match = _breaktimeSettingsInfoView;
+                    leftMatch = _breaktimeSettingsGlobalView;
+                    rightMatch = _breaktimeSettingsProfileView;
+                    break;
                 case "Volume":
                     match = _volumeSettingsInfoView;
                     leftMatch = null;
@@ -110,7 +130,7 @@ namespace Enhancements.UI
         protected override void BackButtonWasPressed(ViewController topViewController)
         {
             _settingsNavigationView.DidSelectSettingOption -= ShowSettingsPage;
-
+            _breaktimeSettingsProfileView.ProfilesUpdated -= ProfilesUpdated;
             base.BackButtonWasPressed(topViewController);
             _mainFlowCoordinator.DismissFlowCoordinator(this);
         }

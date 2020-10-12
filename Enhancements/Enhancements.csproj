@@ -52,6 +52,11 @@
       <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="MediaLoader, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <Private>False</Private>
+      <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\MediaLoader.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="SemVer, Version=1.2.2.0, Culture=neutral, PublicKeyToken=a89bb7dc6f7a145c, processorArchitecture=MSIL">
       <Private>False</Private>
       <HintPath>$(BeatSaberDir)\Libs\SemVer.dll</HintPath>
@@ -134,6 +139,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Breaktime\Animation.cs" />
+    <Compile Include="Breaktime\BreaktimeLoader.cs" />
+    <Compile Include="Breaktime\BreaktimeManager.cs" />
+    <Compile Include="Breaktime\BreaktimeSettings.cs" />
+    <Compile Include="Breaktime\Profile.cs" />
+    <Compile Include="Breaktime\RandomizeMode.cs" />
     <Compile Include="Clock\BasicClock.cs" />
     <Compile Include="Clock\BasicClockView.cs" />
     <Compile Include="Clock\ClockController.cs" />
@@ -156,6 +167,10 @@
     <Compile Include="Timers\TimerController.cs" />
     <Compile Include="Timers\TimerSettings.cs" />
     <Compile Include="Timers\TimeType.cs" />
+    <Compile Include="Breaktime\BreaktimeModule.cs" />
+    <Compile Include="UI\Breaktime\BreaktimeSettingsGlobalView.cs" />
+    <Compile Include="UI\Breaktime\BreaktimeSettingsInfoView.cs" />
+    <Compile Include="UI\Breaktime\BreaktimeSettingsProfileView.cs" />
     <Compile Include="UI\Clock\ClockSettingsFormatView.cs" />
     <Compile Include="UI\Clock\ClockSettingsInfoView.cs" />
     <Compile Include="UI\Clock\ClockSettingsPosColView.cs" />
@@ -199,9 +214,18 @@
     <EmbeddedResource Include="Views\Misc\extra-tweaks-settings-view.bsml" />
     <EmbeddedResource Include="Views\Misc\optidra-settings-view.bsml" />
     <EmbeddedResource Include="Views\Volume\volume-settings-info-view.bsml" />
+    <EmbeddedResource Include="Views\Breaktime\breaktime-settings-info-view.bsml" />
+    <EmbeddedResource Include="Views\Breaktime\breaktime-settings-global-view.bsml" />
+    <EmbeddedResource Include="Views\Breaktime\breaktime-settings-profile-view.bsml" />
+    <EmbeddedResource Include="Views\Breaktime\breaktime-module.bsml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Breaktime\" />
+    <EmbeddedResource Include="Resources\Bobbie.png" />
+    <EmbeddedResource Include="Resources\Bobbie.wav" />
+    <EmbeddedResource Include="Resources\Default.png" />
+    <EmbeddedResource Include="Resources\Default.wav" />
+    <EmbeddedResource Include="Resources\osu!.png" />
+    <EmbeddedResource Include="Resources\osu!.wav" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\breaktime.png" />

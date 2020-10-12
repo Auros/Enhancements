@@ -25,7 +25,6 @@ namespace Enhancements
             {
                 return;
             }
-
             if (!_didLoad)
             {
                 // Loading the asset bundle.
@@ -41,8 +40,6 @@ namespace Enhancements
                 }
                 _didLoad = true;
             }
-
-
         }
 
         public Texture2D GetIcon(string name)

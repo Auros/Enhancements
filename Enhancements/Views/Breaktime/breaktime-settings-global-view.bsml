@@ -1,0 +1,13 @@
+﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+    <text text="Global Settings" align="Center" font-size="7" />
+  </horizontal>
+  <horizontal>
+    <settings-container>
+      <bool-setting text="Enabled" value="enabled" apply-on-change="true" />
+      <dropdown-list-setting id="dropdown" get-event="get" text="Selected Profile" value="selected-profile" options="profiles" apply-on-change="true" />
+      <dropdown-list-setting text="Randomize Mode" value="randomize-mode" options="randomize-modes" formatter="format-random" apply-on-change="true" />
+      <increment-setting text='Minimum "Break" Time' value="minimum-break-time" apply-on-change="true" min="1" increment="0.5"  />
+    </settings-container>
+  </horizontal>
+</vertical>

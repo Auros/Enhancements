@@ -10,6 +10,7 @@ using Enhancements.UI.Timers;
 using Installer = Zenject.Installer;
 using Enhancements.UI.Volume;
 using Enhancements.Volume;
+using Enhancements.UI.Breaktime;
 
 namespace Enhancements.Installers
 {
@@ -34,17 +35,14 @@ namespace Enhancements.Installers
             Container.Bind<ClockSettingsPosColView>().FromNewComponentOnNewGameObject(nameof(ClockSettingsPosColView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
             Container.Bind<ClockSettingsFormatView>().FromNewComponentOnNewGameObject(nameof(ClockSettingsFormatView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
             Container.Bind<ExtraTweaksSettingsView>().FromNewComponentOnNewGameObject(nameof(ExtraTweaksSettingsView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<BreaktimeSettingsInfoView>().FromNewComponentOnNewGameObject(nameof(BreaktimeSettingsInfoView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<BreaktimeSettingsGlobalView>().FromNewComponentOnNewGameObject(nameof(BreaktimeSettingsGlobalView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.Bind<BreaktimeSettingsProfileView>().FromNewComponentOnNewGameObject(nameof(BreaktimeSettingsProfileView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
             Container.Bind<XSettingsNavigationController>().FromNewComponentOnNewGameObject(nameof(XSettingsNavigationController)).AsSingle().OnInstantiated(Utilities.SetupViewController);
 
             Container.Bind<XSettingsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(XSettingsFlowCoordinator)).AsSingle();
 
             Container.BindInterfacesAndSelfTo<MenuButtonManager>().AsSingle();
-        }
-
-        private static int GetSetting(MonoInstaller monoInstaller)
-        {
-            Plugin.Log.Info("HELLO");
-            return 25;
         }
     }
 }
