@@ -1,0 +1,16 @@
+﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+    <text text="Optidra" align="Center" font-size="7" />
+  </horizontal>
+  <horizontal bg="round-rect-panel" pref-width="40" pad="2">
+    <text text="Experimental, advanced settings with a very specific use case. Do not modify if you don't know what you're doing." />
+  </horizontal>
+  <horizontal>
+    <settings-container>
+      <bool-setting text="Enabled" value="enabled" apply-on-change="true" />
+      <increment-setting text="Initial Note Pool Size" value="init-note-size" apply-on-change="true" min="0" max="1000" increment="25" integer-only="true" />
+      <increment-setting text="Initial Bomb Pool Size" value="init-bomb-size" apply-on-change="true" min="0" max="1000" increment="25" integer-only="true" />
+      <increment-setting text="Initial Wall Pool Size" value="init-wall-size" apply-on-change="true" min="0" max="1000" increment="25" integer-only="true" />
+    </settings-container>
+  </horizontal>
+</vertical>

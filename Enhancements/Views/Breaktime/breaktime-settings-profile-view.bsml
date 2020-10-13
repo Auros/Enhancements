@@ -1,0 +1,26 @@
+﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+    <text text="Profiles" align="Center" font-size="7" />
+  </horizontal>
+  <horizontal bg="round-rect-panel" pad="2">
+    <vertical>
+      <horizontal>
+        <text text="~mode-text" align="Center" font-size="5" underlined="true" />
+        <button text="Switch Mode" on-click="switch" />
+      </horizontal>
+      <scrollable-settings-container pref-width="90" pref-height="55">
+        <string-setting get-event="upd" value="name" apply-on-change="true" text="Name" />
+        <color-setting get-event="upd" value="color" apply-on-change="true" text="Color" />
+        <bool-setting get-event="upd" value="show-text" apply-on-change="true" text="Show Text" />
+        <increment-setting get-event="upd" value="opacity" apply-on-change="true" text="Opacity" increment="0.05" min="0" max="1" formatter="percent"  />
+        <dropdown-list-setting id="image-list" get-event="update-lists" value="image" options="image-options" apply-on-change="true" text="Image" />
+        <dropdown-list-setting id="audio-list" get-event="update-lists" value="audio" options="audio-options" apply-on-change="true" text="Audio" />
+        <dropdown-list-setting get-event="upd" apply-on-change="true" value="animation" options="animation-options" formatter="format-animation" text="Animation" />
+        <horizontal>
+          <button text="Reset" on-click="reset" interactable="~create-mode" />
+          <button text="~cod" on-click="create-or-destroy" />
+        </horizontal>
+      </scrollable-settings-container>
+    </vertical>
+  </horizontal>
+</vertical>

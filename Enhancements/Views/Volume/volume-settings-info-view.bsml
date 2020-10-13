@@ -1,0 +1,18 @@
+﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="120">
+    <text font-size="10" text="Volume Assistant" align="Center" />
+  </horizontal>
+  <horizontal pad="2" bg="round-rect-panel">
+    <text text="Adjust specific sounds in the game." align="Center" />
+  </horizontal>
+  <horizontal>
+    <settings-container>
+      <increment-setting text="Good Cut" value="good-cut" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
+      <increment-setting text="Bad Cut" value="bad-cut" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
+      <increment-setting text="Music" value="music" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
+      <increment-setting text="Song Preview" value="song-preview" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
+      <increment-setting text="Menu Background" value="background" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
+      <increment-setting text="Fireworks" value="fireworks" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
+    </settings-container>
+  </horizontal>
+</vertical>

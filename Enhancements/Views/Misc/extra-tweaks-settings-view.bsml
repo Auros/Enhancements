@@ -1,0 +1,29 @@
+﻿<vertical child-control-height="false" spacing="0" child-align="UpperCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+    <text text="Tweaks" align="Center" font-size="7" />
+  </horizontal>
+  <horizontal bg="round-rect-panel" pad="2" child-align="MiddleCenter">
+    <vertical>
+      <text text="V-BPM 360 Fix" align="Center" font-size="6" underlined="true" />
+      <settings-container pref-width="60">
+        <bool-setting value="bpm-fix" text="Enabled" apply-on-change="true"/>
+      </settings-container>
+    </vertical>
+    <vertical pref-width="40" pad="2">
+      <text text="Prevents old maps with BPM changes from being detected as 360 maps." />
+    </vertical>
+  </horizontal>
+  <horizontal bg="round-rect-panel" pad="2">
+    <vertical>
+      <text text="Button Lock" align="Center" font-size="6" underlined="true" />
+      <settings-container pref-width="60">
+        <bool-setting value="bl-menu" text="Menu" apply-on-change="true"/>
+        <bool-setting value="bl-restart" text="Restart" apply-on-change="true"  />
+        <bool-setting value="bl-continue" text="Continue" apply-on-change="true" />
+      </settings-container>
+    </vertical>
+    <vertical pref-width="40" pad="2" child-align="MiddleCenter">
+      <text text="Makes the pause menu buttons inactive for 0.75 seconds in order to prevent accidentally pressing pause and immediately pressing them." />
+    </vertical>
+  </horizontal>
+</vertical>

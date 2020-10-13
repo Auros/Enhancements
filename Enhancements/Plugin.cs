@@ -1,66 +1,42 @@
 ﻿using IPA;
-using HarmonyLib;
-using IPA.Config;
-using UnityEngine;
+using IPA.Loader;
+using SiraUtil.Zenject;
 using IPA.Config.Stores;
-using Version = SemVer.Version;
-using UnityEngine.SceneManagement;
+using Enhancements.Installers;
+using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
+using HarmonyLib;
+using System.Reflection;
 
 namespace Enhancements
 {
     [Plugin(RuntimeOptions.DynamicInit)]
     public class Plugin
     {
-        internal static string Name => "Enhancements";
-        internal static Version Version => new Version("2.0.3");
-        internal static PluginConfig config;
-        internal static Harmony harmony;
+        internal static IPALogger Log { get; set; }
+        private readonly Harmony _harmony;
+
         [Init]
-        public void Init(IPALogger logger, Config conf)
+        public Plugin(Conf conf, IPALogger logger, Zenjector zenjector, PluginMetadata metadata)
         {
-            Logger.log = logger;
-            config = conf.Generated<PluginConfig>();
+            Log = logger;
+            Config config = conf.Generated<Config>();
+            _harmony = new Harmony("dev.auros.enhancements");
+            zenjector.OnApp<XInstaller>().WithParameters(config, metadata.Version);
+            zenjector.OnMenu<XMenuInstaller>();
+            zenjector.OnGame<XGameInstaller>();
         }
 
         [OnEnable]
-        public void Enable()
+        public void OnEnable()
         {
-            SceneManager.activeSceneChanged += OnActiveSceneChanged;
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            harmony = new Harmony($"com.auros.BeatSaber.{Name}");
-            harmony.PatchAll(System.Reflection.Assembly.GetExecutingAssembly());
+            _harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         [OnDisable]
-        public void Disable()
+        public void OnDisable()
         {
-            SceneManager.activeSceneChanged -= OnActiveSceneChanged;
-            SceneManager.sceneLoaded -= OnSceneLoaded;
-            harmony?.UnpatchAll();
-
-            Enhancements.WrapItUpBoysItsTimeToGo();
-        }
-
-        public void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
-        {
-            if (nextScene.name == "MenuViewControllers")
-                Enhancements.Instance.OnMenu();
-            if (nextScene.name == "GameCore")
-                Enhancements.Instance.OnGame();
-        }
-
-        public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
-        {
-            if (scene.name == "MenuViewControllers")
-            {
-                if (Enhancements.Instance == null)
-                {
-                    var e = new GameObject("[E2] - Instance").AddComponent<Enhancements>();
-                    Object.DontDestroyOnLoad(e.gameObject);
-                    e.SetupAll();
-                }
-            }
+            _harmony.UnpatchAll("dev.auros.enhancements");
         }
     }
 }

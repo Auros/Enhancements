@@ -1,240 +1,77 @@
-﻿using BeatSaberMarkupLanguage;
-using BeatSaberMarkupLanguage.Attributes;
-using BeatSaberMarkupLanguage.FloatingScreen;
-using BeatSaberMarkupLanguage.ViewControllers;
-using Enhancements.Utilities;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System;
+using Zenject;
 using System.Linq;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace Enhancements.Breaktime
 {
-    public class BreaktimeManager : HotReloadableViewController
+    public class BreaktimeManager : IInitializable, IDisposable
     {
-        public override string ResourceName => "Enhancements.Views.breaktime.bsml";
+        private BreaktimeLoader _loader;
+        private BreaktimeSettings _settings;
+        private IDifficultyBeatmap _difficultyBeatmap;
+        private BeatmapObjectManager _beatmapObjectManager;
+        private readonly Dictionary<int, BeatmapObjectData> breaks = new Dictionary<int, BeatmapObjectData>();
 
-        public override string ContentFilePath => IPA.Utilities.UnityGame.InstallPath + "\\breaktime.bsml";
+        public event Action<float> BreakDetected;
 
-        private string _image = "Enhancements.Resources.Default.png";
-        [UIValue("image")]
-        public string Image
+        public BreaktimeManager(BreaktimeLoader loader, BreaktimeSettings settings, IDifficultyBeatmap difficultyBeatmap, BeatmapObjectManager beatmapObjectManager)
         {
-            get => _image;
-            set
-            {
-                _image = value;
-                NotifyPropertyChanged();
-            }
+            _loader = loader;
+            _settings = settings;
+            _difficultyBeatmap = difficultyBeatmap;
+            _beatmapObjectManager = beatmapObjectManager;
         }
 
-        private string _time = "0.00";
-        [UIValue("time")]
-        public string Timer
+        public void Initialize()
         {
-            get => _time;
-            set
+            List<BeatmapObjectData> objects = new List<BeatmapObjectData>();
+            var lines = _difficultyBeatmap.beatmapData.beatmapLinesData;
+            for (int i = 0; i < lines.Length; i++)
             {
-                _time = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        [UIComponent("tmp")]
-        public TextMeshProUGUI text;
-
-        [UIComponent("img")]
-        public Image img;
-
-        [UIObject("everything")]
-        public GameObject tform;
-        
-        private AudioClip _currentClip;
-        internal FloatingScreen screenS;
-        private ScoreController _scoreController;
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.J))
-            {
-                screenS.transform.localPosition = new Vector3(0f, -5.5f, 3f);
-                StartCoroutine(ActivateBreaktimeCoroutine(9f));
-            }
-        }
-
-        private void Load()
-        {
-            
-            text.color = Plugin.config.breaktime.Color.ToColor();
-            text.font = Extensions.ArcadePix;
-            _scoreController = Resources.FindObjectsOfTypeAll<ScoreController>().FirstOrDefault();
-            _scoreController.noteWasCutEvent += ScoreController_noteWasCutEvent;
-            _scoreController.noteWasMissedEvent += ScoreController_noteWasMissedEvent;
-
-            var selProf = Plugin.config.breaktime.SelectedProfile;
-            if (selProf.Equals("Default") || selProf.Equals("osu!") || selProf.Equals("Bobbie"))
-            {
-                if (Plugin.config.breaktime.ShowImage) Image = $"Enhancements.Resources.{selProf}.png";
-                else img.enabled = false;
-                if (Plugin.config.breaktime.PlayAudio)
+                var line = lines[i];
+                for (int n = 0; n < line.beatmapObjectsData.Length; n++)
                 {
-                    byte[] clipData = BeatSaberMarkupLanguage.Utilities.GetResource(System.Reflection.Assembly.GetExecutingAssembly(), $"Enhancements.Resources.{selProf}.wav");
-                    _currentClip = WavUtility.ToAudioClip(clipData);
+                    var objectData = line.beatmapObjectsData[n];
+                    if (objectData.beatmapObjectType != BeatmapObjectType.Obstacle)
+                    {
+                        objects.Add(objectData);
+                    }
                 }
-
-                if (selProf == "osu!") img.color = Plugin.config.breaktime.Color.ToColor();
             }
-            else 
+            objects = objects.OrderBy(x => x.time).ToList();
+            for (int i = 0; i < objects.Count() - 1; i++)
             {
-                var profile = GetValidBreaktimePaths().Where(x => x.Name == selProf).FirstOrDefault();
-                if (profile != null)
+                var first = objects[i];
+                var second = objects[i + 1];
+
+                if (second.time - first.time > _settings.MinimumBreakTime)
                 {
-                    var files = profile.GetFiles();
-                    bool imageExists = files.Any(x => x.Name.ToLower().Contains("image"));
-                    bool audioExists = files.Any(x => x.Name.ToLower().Contains("audio.wav"));
-                    if (imageExists && Plugin.config.breaktime.ShowImage)
-                    {
-                        var file = files.Where(x => x.Name.ToLower().Contains("image")).FirstOrDefault();
-                        Image = file.FullName;
-                    }
-                    else img.enabled = false;
-                    if (audioExists && Plugin.config.breaktime.PlayAudio)
-                    {
-                        try
-                        {
-                            var file = files.Where(x => x.Name.ToLower().Contains("audio.wav")).FirstOrDefault();
-                            var bytes = File.ReadAllBytes(file.FullName);
-                            _currentClip = WavUtility.ToAudioClip(bytes);
-                        }
-                        catch
-                        {
-                            Logger.log.Info("Audio DID NOT LOAD!");
-                        }
-                    }
-                } 
+                    breaks.Add(first.id, second);
+                }
             }
-            StartCoroutine(WaitABit());
+
+            _beatmapObjectManager.noteWasCutEvent += NoteCut;
+            _beatmapObjectManager.noteWasMissedEvent += NoteEnded;
         }
 
-        private IEnumerator WaitABit()
+        private void NoteCut(INoteController noteController, NoteCutInfo _)
         {
-            yield return new WaitForSecondsRealtime(0.5f);
-            bool hud360 = Resources.FindObjectsOfTypeAll<FlyingGameHUDRotation>().Any(x => x.isActiveAndEnabled);
-            if (hud360)
-                screenS.transform.SetParent(Resources.FindObjectsOfTypeAll<FlyingGameHUDRotation>().FirstOrDefault().transform, true);
+            NoteEnded(noteController);
         }
 
-
-        internal IEnumerator ActivateBreaktimeCoroutine(float length)
+        private void NoteEnded(INoteController noteController)
         {
-            if (_currentClip != null)
+            if (breaks.TryGetValue(noteController.noteData.id, out BeatmapObjectData data))
             {
-                AudioUtil.Instance.PlayAudioClip(_currentClip);
+                BreakDetected?.Invoke(data.time);
             }
-            AnimationCurve curve = AnimationCurve.EaseInOut(0f, 0f, .4f, 6f);
-            float pos = 0f;
-            float startTime = Time.time;
-
-            float timeElapsed() => Time.time - startTime;
-            float timeUntil() => length - timeElapsed();
-
-            while (pos <= 1.48f)
-            {
-                yield return new WaitForSeconds(.015f);
-                pos = curve.Evaluate(Mathf.Abs(timeElapsed())) - 4.5f;
-                screenS.transform.localPosition = new Vector3(0f, pos, 3f);
-                Timer = Math.Round(timeUntil(), 1).ToString();
-            }
-            screenS.transform.localPosition = new Vector3(0f, pos, 3f);
-            pos = 1.5f;
-            while (timeUntil() > 1.5f)
-            {
-                yield return new WaitForSeconds(.015f);
-                Timer = Math.Round(timeUntil(), 1).ToString();
-            }
-                
-            AnimationCurve curve2 = AnimationCurve.EaseInOut(1.5f, 1.5f, 0f, -4.5f);
-            while (pos > -4.48f)
-            {
-                yield return new WaitForSeconds(.015f);
-                pos = curve2.Evaluate(timeUntil());
-                screenS.transform.localPosition = new Vector3(0f, pos, 3f);
-                Timer = Math.Round(timeUntil(), 1).ToString();
-            }
-            screenS.transform.localPosition = new Vector3(0f, -100f, 3f);
-            _activated = false;
         }
 
-        protected override void OnDestroy()
+        public void Dispose()
         {
-            base.OnDestroy();
-            _scoreController.noteWasCutEvent -= ScoreController_noteWasCutEvent;
-            _scoreController.noteWasMissedEvent -= ScoreController_noteWasMissedEvent;
+            _beatmapObjectManager.noteWasMissedEvent -= NoteEnded;
+            _beatmapObjectManager.noteWasCutEvent -= NoteCut;
         }
-
-        private void ScoreController_noteWasMissedEvent(NoteData arg1, int _) => NoteEvent(arg1);
-        private void ScoreController_noteWasCutEvent(NoteData arg1, NoteCutInfo _, int __) => NoteEvent(arg1);
-
-        private bool _activated;
-
-        private void NoteEvent(NoteData noteData)
-        {
-            if (noteData.noteType == NoteType.Bomb)
-                return;
-            // Self destruct if the map is corrupted
-            if (noteData.timeToNextBasicNote == float.MaxValue || noteData.timeToNextBasicNote < 0 || noteData.timeToNextBasicNote > 999)
-            {
-                Logger.log.Info("Self destructing Breaktime Manager");
-                Destroy(this);
-                return;
-            }
-
-            if (!_activated && noteData.timeToNextBasicNote >= Plugin.config.breaktime.MinimumBreakTime)
-            {
-                _activated = true;
-                StartCoroutine(ActivateBreaktimeCoroutine(noteData.timeToNextBasicNote));
-            }
-
-        }
-
-        internal static BreaktimeManager CreateBreaktimeScreen() //new Vector3(0f, 1.5f, 3f)
-        {
-            BreaktimeManager manager = BeatSaberUI.CreateViewController<BreaktimeManager>();
-            manager.screenS = FloatingScreen.CreateFloatingScreen(new Vector2(50f, 50f), false, new Vector3(0f, 0f, 3f), Quaternion.Euler(Vector3.zero));
-            manager.screenS.SetRootViewController(manager, true);
-            manager.screenS.GetComponent<Image>().enabled = false;
-            manager.screenS.ScreenPosition = new Vector3(0f, -100f, 3f);
-            manager.Load();
-            return manager;
-        }
-
-        public static DirectoryInfo[] GetValidBreaktimePaths()
-        {
-            List<DirectoryInfo> directories = new List<DirectoryInfo>();
-            var path = IPA.Utilities.UnityGame.UserDataPath + "\\Breaktime";
-            if (!Directory.Exists(path))
-            {
-                Directory.CreateDirectory(path);
-                return directories.ToArray();
-            }
-            DirectoryInfo mainDir = new DirectoryInfo(path);
-            DirectoryInfo[] subDirs = mainDir.GetDirectories();
-            for (int i = 0; i < subDirs.Length; i++)
-            {
-                DirectoryInfo workingDir = subDirs[i];
-                FileInfo[] files = workingDir.GetFiles();
-                bool imageExists = files.Any(x => x.Name.ToLower().Contains("image"));
-                bool audioExists = files.Any(x => x.Name.ToLower().Contains("audio.wav"));
-                if (imageExists || audioExists)
-                    directories.Add(workingDir);
-            }
-            return directories.ToArray();
-        }
-
-        
     }
 }
