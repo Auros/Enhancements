@@ -223,9 +223,6 @@ namespace Enhancements.UI.Breaktime
         {
             if (CreateMode)
             {
-                Plugin.Log.NullCheck(_currentProfile);
-                Plugin.Log.NullCheck(_settings);
-                Plugin.Log.NullCheck(_settings.Profiles);
                 _settings.Profiles.Add(_currentProfile);
                 _settings.SelectedProfile = _settings.Profiles.Last().Name;
                 NewProfileMode();

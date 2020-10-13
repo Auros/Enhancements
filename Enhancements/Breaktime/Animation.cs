@@ -4,7 +4,6 @@
     {
         None,
         FadeIn,
-        SlideUp,
-        ScaleIn
+        SlideUp
     }
 }

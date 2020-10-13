@@ -143,6 +143,7 @@
     <Compile Include="Breaktime\BreaktimeLoader.cs" />
     <Compile Include="Breaktime\BreaktimeManager.cs" />
     <Compile Include="Breaktime\BreaktimeSettings.cs" />
+    <Compile Include="Breaktime\Easing.cs" />
     <Compile Include="Breaktime\Profile.cs" />
     <Compile Include="Breaktime\RandomizeMode.cs" />
     <Compile Include="Clock\BasicClock.cs" />
@@ -183,6 +184,7 @@
     <Compile Include="UI\XInfoView.cs" />
     <Compile Include="UI\XSettingsNavigationController.cs" />
     <Compile Include="UI\XSettingsFlowCoordinator.cs" />
+    <Compile Include="Volume\BeatSaber.cs" />
     <Compile Include="Volume\FireworkSoundEffectSwapper.cs" />
     <Compile Include="Volume\GameVolumeModifier.cs" />
     <Compile Include="Volume\MenuVolumeManager.cs" />

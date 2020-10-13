@@ -1,12 +1,11 @@
-﻿using Zenject;
-using UnityEngine;
-using System.Collections.Generic;
+﻿using System;
+using Zenject;
 using System.Linq;
-using System;
+using System.Collections.Generic;
 
 namespace Enhancements.Breaktime
 {
-    public class BreaktimeManager : MonoBehaviour
+    public class BreaktimeManager : IInitializable, IDisposable
     {
         private BreaktimeLoader _loader;
         private BreaktimeSettings _settings;
@@ -16,8 +15,7 @@ namespace Enhancements.Breaktime
 
         public event Action<float> BreakDetected;
 
-        [Inject]
-        public void Construct(BreaktimeLoader loader, BreaktimeSettings settings, IDifficultyBeatmap difficultyBeatmap, BeatmapObjectManager beatmapObjectManager)
+        public BreaktimeManager(BreaktimeLoader loader, BreaktimeSettings settings, IDifficultyBeatmap difficultyBeatmap, BeatmapObjectManager beatmapObjectManager)
         {
             _loader = loader;
             _settings = settings;
@@ -25,7 +23,7 @@ namespace Enhancements.Breaktime
             _beatmapObjectManager = beatmapObjectManager;
         }
 
-        protected void Start()
+        public void Initialize()
         {
             List<BeatmapObjectData> objects = new List<BeatmapObjectData>();
             var lines = _difficultyBeatmap.beatmapData.beatmapLinesData;
@@ -70,7 +68,7 @@ namespace Enhancements.Breaktime
             }
         }
 
-        protected void OnDestroy()
+        public void Dispose()
         {
             _beatmapObjectManager.noteWasMissedEvent -= NoteEnded;
             _beatmapObjectManager.noteWasCutEvent -= NoteCut;
