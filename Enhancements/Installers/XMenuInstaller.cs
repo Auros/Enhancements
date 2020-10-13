@@ -1,16 +1,15 @@
-﻿using Zenject;
-using SiraUtil;
+﻿using SiraUtil;
 using UnityEngine;
 using Enhancements.UI;
 using Enhancements.Clock;
 using Enhancements.Timers;
+using Enhancements.Volume;
 using Enhancements.UI.Misc;
 using Enhancements.UI.Clock;
 using Enhancements.UI.Timers;
-using Installer = Zenject.Installer;
 using Enhancements.UI.Volume;
-using Enhancements.Volume;
 using Enhancements.UI.Breaktime;
+using Installer = Zenject.Installer;
 
 namespace Enhancements.Installers
 {
@@ -18,8 +17,9 @@ namespace Enhancements.Installers
     {
         public override void InstallBindings()
         {
+#if DEBUG
             Application.targetFrameRate = 90;
-
+#endif
             Container.BindInterfacesTo<BasicClock>().AsSingle();
             Container.BindInterfacesAndSelfTo<MenuVolumeManager>().AsSingle();
             Container.Bind<BasicClockView>().FromNewComponentOnNewGameObject(nameof(BasicClockView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
