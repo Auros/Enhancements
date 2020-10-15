@@ -59,12 +59,12 @@ namespace Enhancements.UI
             _extraTweaksSettingsView = extraTweaksSettingsView;
         }
 
-        protected override void DidActivate(bool firstActivation, ActivationType activationType)
+        protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
         {
             if (firstActivation)
             {
-                title = "Enhancements";
                 showBackButton = true;
+                SetTitle("Enhancements");
             }
             ProvideInitialViewControllers(_infoView, bottomScreenViewController: _settingsNavigationView);
             _settingsNavigationView.DidSelectSettingOption += ShowSettingsPage;
@@ -119,10 +119,10 @@ namespace Enhancements.UI
             }
             if (match != null && match != topViewController)
             {
-                ViewController.SlideAnimationDirection slide = _lastId > id ? ViewController.SlideAnimationDirection.Left : ViewController.SlideAnimationDirection.Right;
-                ReplaceTopViewController(match, slideAnimationDirection: slide);
-                SetLeftScreenViewController(leftMatch);
-                SetRightScreenViewController(rightMatch);
+                ViewController.AnimationType slide = _lastId > id ? ViewController.AnimationType.In : ViewController.AnimationType.Out;
+                ReplaceTopViewController(match, animationType: slide, animationDirection: ViewController.AnimationDirection.Horizontal);
+                SetLeftScreenViewController(leftMatch, ViewController.AnimationType.In);
+                SetRightScreenViewController(rightMatch, ViewController.AnimationType.In);
                 _lastId = id;
             }
         }

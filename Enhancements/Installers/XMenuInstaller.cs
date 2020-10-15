@@ -10,6 +10,7 @@ using Enhancements.UI.Timers;
 using Enhancements.UI.Volume;
 using Enhancements.UI.Breaktime;
 using Installer = Zenject.Installer;
+using BeatSaberMarkupLanguage;
 
 namespace Enhancements.Installers
 {
@@ -22,25 +23,26 @@ namespace Enhancements.Installers
 #endif
             Container.BindInterfacesTo<BasicClock>().AsSingle();
             Container.BindInterfacesAndSelfTo<MenuVolumeManager>().AsSingle();
-            Container.Bind<BasicClockView>().FromNewComponentOnNewGameObject(nameof(BasicClockView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<NewReminderView>().FromNewComponentOnNewGameObject(nameof(NewReminderView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<NotificationView>().FromNewComponentOnNewGameObject(nameof(NotificationView)).AsSingle().OnInstantiated(Utilities.SetupViewController).NonLazy();
 
-            Container.Bind<XInfoView>().FromNewComponentOnNewGameObject(nameof(XInfoView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            //Container.Bind<OptidraSettingsView>().FromNewComponentOnNewGameObject(nameof(OptidraSettingsView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<MiscSettingsInfoView>().FromNewComponentOnNewGameObject(nameof(MiscSettingsInfoView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<ClockSettingsInfoView>().FromNewComponentOnNewGameObject(nameof(ClockSettingsInfoView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<TimersSettingsInfoView>().FromNewComponentOnNewGameObject(nameof(TimersSettingsInfoView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<VolumeSettingsInfoView>().FromNewComponentOnNewGameObject(nameof(VolumeSettingsInfoView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<ClockSettingsPosColView>().FromNewComponentOnNewGameObject(nameof(ClockSettingsPosColView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<ClockSettingsFormatView>().FromNewComponentOnNewGameObject(nameof(ClockSettingsFormatView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<ExtraTweaksSettingsView>().FromNewComponentOnNewGameObject(nameof(ExtraTweaksSettingsView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<BreaktimeSettingsInfoView>().FromNewComponentOnNewGameObject(nameof(BreaktimeSettingsInfoView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<BreaktimeSettingsGlobalView>().FromNewComponentOnNewGameObject(nameof(BreaktimeSettingsGlobalView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<BreaktimeSettingsProfileView>().FromNewComponentOnNewGameObject(nameof(BreaktimeSettingsProfileView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-            Container.Bind<XSettingsNavigationController>().FromNewComponentOnNewGameObject(nameof(XSettingsNavigationController)).AsSingle().OnInstantiated(Utilities.SetupViewController);
+            Container.BindViewController<BasicClockView>(BeatSaberUI.CreateViewController<BasicClockView>());
+            Container.BindViewController<NewReminderView>(BeatSaberUI.CreateViewController<NewReminderView>());
+            Container.BindViewController<NotificationView>(BeatSaberUI.CreateViewController<NotificationView>());
 
-            Container.Bind<XSettingsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(XSettingsFlowCoordinator)).AsSingle();
+            Container.BindViewController<XInfoView>(BeatSaberUI.CreateViewController<XInfoView>());
+            Container.BindViewController<MiscSettingsInfoView>(BeatSaberUI.CreateViewController<MiscSettingsInfoView>());
+            Container.BindViewController<ClockSettingsInfoView>(BeatSaberUI.CreateViewController<ClockSettingsInfoView>());
+            Container.BindViewController<TimersSettingsInfoView>(BeatSaberUI.CreateViewController<TimersSettingsInfoView>());
+            Container.BindViewController<VolumeSettingsInfoView>(BeatSaberUI.CreateViewController<VolumeSettingsInfoView>());
+            Container.BindViewController<ClockSettingsPosColView>(BeatSaberUI.CreateViewController<ClockSettingsPosColView>());
+            Container.BindViewController<ClockSettingsFormatView>(BeatSaberUI.CreateViewController<ClockSettingsFormatView>());
+            Container.BindViewController<ExtraTweaksSettingsView>(BeatSaberUI.CreateViewController<ExtraTweaksSettingsView>());
+            Container.BindViewController<BreaktimeSettingsInfoView>(BeatSaberUI.CreateViewController<BreaktimeSettingsInfoView>());
+            Container.BindViewController<BreaktimeSettingsGlobalView>(BeatSaberUI.CreateViewController<BreaktimeSettingsGlobalView>());
+            Container.BindViewController<BreaktimeSettingsProfileView>(BeatSaberUI.CreateViewController<BreaktimeSettingsProfileView>());
+            Container.BindViewController<XSettingsNavigationController>(BeatSaberUI.CreateViewController<XSettingsNavigationController>());
+            Container.BindFlowCoordinator<XSettingsFlowCoordinator>(BeatSaberUI.CreateFlowCoordinator<XSettingsFlowCoordinator>());
+
+            //Container.Bind<XSettingsFlowCoordinator>().FromNewComponentOnNewGameObject(nameof(XSettingsFlowCoordinator)).AsSingle();
 
             Container.BindInterfacesAndSelfTo<MenuButtonManager>().AsSingle();
         }

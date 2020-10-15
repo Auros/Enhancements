@@ -36,9 +36,9 @@ namespace Enhancements.UI.Timers
             _settings = settings;
         }
 
-        protected override void DidActivate(bool firstActivation, ActivationType type)
+        protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
         {
-            base.DidActivate(firstActivation, type);
+            base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
             if (firstActivation)
             {
                 exampleImage.SetImage("http://cdn.auros.dev/sira/enhancements/timers.gif");

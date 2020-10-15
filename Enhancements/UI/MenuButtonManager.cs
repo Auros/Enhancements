@@ -1,5 +1,7 @@
 ﻿using System;
 using Zenject;
+using System.Threading;
+using System.Threading.Tasks;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.MenuButtons;
 
@@ -18,8 +20,9 @@ namespace Enhancements.UI
 			menuButton = new MenuButton("Enhancements", SummonFlowCoordinator);
 		}
 
-		public void Initialize()
+		public async void Initialize()
 		{
+			await Task.Run(() => Thread.Sleep(100));
 			MenuButtons.instance.RegisterButton(menuButton);
 		}
 

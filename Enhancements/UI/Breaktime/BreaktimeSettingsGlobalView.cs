@@ -71,7 +71,7 @@ namespace Enhancements.UI.Breaktime
             Profiles.Clear();
             Profiles.AddRange(_settings.Profiles.Select(x => (object)x.Name));
 
-            dropdown?.tableView.ReloadData();
+            dropdown?.UpdateChoices();
             parserParams?.EmitEvent("get");
         }
 

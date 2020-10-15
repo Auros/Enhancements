@@ -12,7 +12,7 @@ namespace Enhancements
         private const string RESOURCE_PATH = "Enhancements.Resources.";
         private const string BUNDLE_PATH = RESOURCE_PATH + "enhancements3.asset";
 
-        private readonly Dictionary<string, Texture2D> _textures = new Dictionary<string, Texture2D>();
+        private readonly Dictionary<string, Sprite> _sprites = new Dictionary<string, Sprite>();
         private static readonly Dictionary<string, TMP_FontAsset> _fonts = new Dictionary<string, TMP_FontAsset>();
         private static TMP_FontAsset _cachedTekoFont;
 
@@ -42,18 +42,18 @@ namespace Enhancements
             }
         }
 
-        public Texture2D GetIcon(string name)
+        public Sprite GetIcon(string name)
         {
             string source = name + ".png";
-            if (!_textures.TryGetValue(source, out Texture2D texture))
+            if (!_sprites.TryGetValue(source, out Sprite sprite))
             {
-                texture = BeatSaberMarkupLanguage.Utilities.FindTextureInAssembly(RESOURCE_PATH + source);
-                if (texture != null)
+                sprite = BeatSaberMarkupLanguage.Utilities.FindSpriteInAssembly(RESOURCE_PATH + source);
+                if (sprite != null)
                 {
-                    _textures.Add(source, texture);
+                    _sprites.Add(source, sprite);
                 }
             }
-            return texture;
+            return sprite;
         }
 
         public TMP_FontAsset GetFont(string name)

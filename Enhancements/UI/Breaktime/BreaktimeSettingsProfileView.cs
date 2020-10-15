@@ -173,8 +173,8 @@ namespace Enhancements.UI.Breaktime
             ImageOptions.AddRange(_loader.GetImageFileInfo().Select(x => x.Name));
             AudioOptions.AddRange(_loader.GetAudioFileInfo().Select(x => x.Name));
 
-            imageDropdown?.tableView.ReloadData();
-            audioDropdown?.tableView.ReloadData();
+            imageDropdown?.UpdateChoices();
+            audioDropdown?.UpdateChoices();
             parserParams?.EmitEvent("update-lists");
         }
 

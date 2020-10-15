@@ -46,7 +46,7 @@ namespace Enhancements.Timers
             get => _floatingScreen.gameObject.activeInHierarchy;
             set
             {
-                _floatingScreen.SetRootViewController(value ? this : null, false);
+                _floatingScreen.SetRootViewController(value ? this : null, value ? AnimationType.In : AnimationType.Out);
                 // TODO: DISABLE OR ENABLE THE SCREEN AFTER ANIMATION COMPLETED
             }
         }

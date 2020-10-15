@@ -6,6 +6,7 @@ using Enhancements.Timers;
 using Enhancements.Volume;
 using Enhancements.Breaktime;
 using Enhancements.UI.Breaktime;
+using BeatSaberMarkupLanguage;
 
 namespace Enhancements.Installers
 {
@@ -31,13 +32,13 @@ namespace Enhancements.Installers
             var textAndHuds = !_playerDataModel.playerData.playerSpecificSettings.noTextsAndHuds;
             if (_clockSettings.Enabled && _clockSettings.ShowInGame && textAndHuds)
             {
-                Container.Bind<BasicClockView>().FromNewComponentOnNewGameObject(nameof(BasicClockView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
-                Container.Bind<NewReminderView>().FromNewComponentOnNewGameObject(nameof(NewReminderView)).AsSingle().OnInstantiated(Utilities.SetupViewController);
+                Container.BindViewController<BasicClockView>(BeatSaberUI.CreateViewController<BasicClockView>());
+                Container.BindViewController<NewReminderView>(BeatSaberUI.CreateViewController<NewReminderView>());
                 Container.BindInterfacesTo<BasicClock>().AsSingle();
             }
             if (_timerSettings.Enabled && _timerSettings.NotifyInGame && textAndHuds)
             {
-                Container.Bind<NotificationView>().FromNewComponentOnNewGameObject(nameof(NotificationView)).AsSingle().OnInstantiated(Utilities.SetupViewController).NonLazy();
+                Container.BindViewController<NotificationView>(BeatSaberUI.CreateViewController<NotificationView>());
             }
             Container.BindInterfacesAndSelfTo<GameVolumeModifier>().AsSingle();
             if (_miscSettings.ButtonLockMenu || _miscSettings.ButtonLockRestart || _miscSettings.ButtonLockContinue)

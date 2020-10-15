@@ -11,7 +11,7 @@ namespace Enhancements.Breaktime
         private BreaktimeSettings _settings;
         private IDifficultyBeatmap _difficultyBeatmap;
         private BeatmapObjectManager _beatmapObjectManager;
-        private readonly Dictionary<int, BeatmapObjectData> breaks = new Dictionary<int, BeatmapObjectData>();
+        private readonly Dictionary<Tuple<NoteLineLayer, int, float>, BeatmapObjectData> breaks = new Dictionary<Tuple<NoteLineLayer, int, float>, BeatmapObjectData>();
 
         public event Action<float> BreakDetected;
 
@@ -27,13 +27,13 @@ namespace Enhancements.Breaktime
         {
             List<BeatmapObjectData> objects = new List<BeatmapObjectData>();
             var lines = _difficultyBeatmap.beatmapData.beatmapLinesData;
-            for (int i = 0; i < lines.Length; i++)
+            for (int i = 0; i < lines.Count(); i++)
             {
                 var line = lines[i];
-                for (int n = 0; n < line.beatmapObjectsData.Length; n++)
+                for (int n = 0; n < line.beatmapObjectsData.Count(); n++)
                 {
                     var objectData = line.beatmapObjectsData[n];
-                    if (objectData.beatmapObjectType != BeatmapObjectType.Obstacle)
+                    if (objectData.beatmapObjectType == BeatmapObjectType.Note)
                     {
                         objects.Add(objectData);
                     }
@@ -42,12 +42,12 @@ namespace Enhancements.Breaktime
             objects = objects.OrderBy(x => x.time).ToList();
             for (int i = 0; i < objects.Count() - 1; i++)
             {
-                var first = objects[i];
+                var first = objects[i] as NoteData;
                 var second = objects[i + 1];
-
+                
                 if (second.time - first.time > _settings.MinimumBreakTime)
                 {
-                    breaks.Add(first.id, second);
+                    breaks.Add(new Tuple<NoteLineLayer, int, float>(first.noteLineLayer, first.lineIndex, first.time), second);
                 }
             }
 
@@ -55,14 +55,15 @@ namespace Enhancements.Breaktime
             _beatmapObjectManager.noteWasMissedEvent += NoteEnded;
         }
 
-        private void NoteCut(INoteController noteController, NoteCutInfo _)
+        private void NoteCut(NoteController noteController, NoteCutInfo _)
         {
             NoteEnded(noteController);
         }
 
-        private void NoteEnded(INoteController noteController)
+        private void NoteEnded(NoteController noteController)
         {
-            if (breaks.TryGetValue(noteController.noteData.id, out BeatmapObjectData data))
+            var first = noteController.noteData as NoteData;
+            if (breaks.TryGetValue(new Tuple<NoteLineLayer, int, float>(first.noteLineLayer, first.lineIndex, first.time), out BeatmapObjectData data))
             {
                 BreakDetected?.Invoke(data.time);
             }

@@ -105,12 +105,12 @@ namespace Enhancements.UI.Clock
         {
             formatOptions.Clear();
             formatOptions.AddRange(_settings.Formats);
-            dropdown?.tableView.ReloadData();
+            dropdown?.UpdateChoices();
         }
 
-        protected override void DidDeactivate(DeactivationType deactivationType)
+        protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
         {
-            base.DidDeactivate(deactivationType);
+            base.DidDeactivate(removedFromHierarchy, screenSystemDisabling);
             parserParams.EmitEvent("hide-keyboard");
         }
 

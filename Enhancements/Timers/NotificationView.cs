@@ -60,7 +60,7 @@ namespace Enhancements.Timers
             set
             {
                 _notifier.IsViewing = value;
-                _floatingScreen.SetRootViewController(value ? this : null, false);
+                _floatingScreen.SetRootViewController(value ? this : null, value ? AnimationType.In : AnimationType.Out);
                 // TODO: DISABLE OR ENABLE THE SCREEN AFTER ANIMATION COMPLETED
             }
         }

@@ -19,10 +19,10 @@ namespace Enhancements.Breaktime
 
         private readonly BreaktimeSettings _settings;
         private readonly CachedMediaAsyncLoader _mediaLoader;
-        private readonly CachedSpriteMediaAsyncLoader _spriteLoader;
+        private readonly CachedMediaAsyncLoader _spriteLoader;
         private readonly CancellationTokenSource _cancellationTokenSource;
 
-        public BreaktimeLoader(BreaktimeSettings settings, CachedMediaAsyncLoader mediaLoader, CachedSpriteMediaAsyncLoader spriteLoader)
+        public BreaktimeLoader(BreaktimeSettings settings, CachedMediaAsyncLoader mediaLoader, CachedMediaAsyncLoader spriteLoader)
         {
             _settings = settings;
             _mediaLoader = mediaLoader;
@@ -73,7 +73,7 @@ namespace Enhancements.Breaktime
             {
                 try
                 {
-                    spr = await _spriteLoader.LoadSpriteAsync(Path.Combine(IMAGE_FOLDER, profile.ImagePath), _cancellationTokenSource.Token, Vector2.zero);
+                    spr = await _spriteLoader.LoadSpriteAsync(Path.Combine(IMAGE_FOLDER, profile.ImagePath), _cancellationTokenSource.Token);
                 }
                 catch { }
             }

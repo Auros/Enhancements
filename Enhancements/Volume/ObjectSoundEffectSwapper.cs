@@ -4,7 +4,7 @@ using IPA.Utilities;
 
 namespace Enhancements.Volume
 {
-    [HarmonyPatch(typeof(EffectPoolsInstaller), "ManualInstallBindings")]
+    [HarmonyPatch(typeof(EffectPoolsManualInstaller), "ManualInstallBindings")]
     internal class ObjectSoundEffectSwapper
     {
         private static readonly FieldAccessor<NoteCutSoundEffect, float>.Accessor GetGoodCutVolume = FieldAccessor<NoteCutSoundEffect, float>.GetAccessor("_goodCutVolume");

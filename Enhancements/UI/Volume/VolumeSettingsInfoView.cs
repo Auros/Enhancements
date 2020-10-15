@@ -72,9 +72,11 @@ namespace Enhancements.UI.Volume
             _fireworkPool = fireworkPool;
         }
 
-        protected override void DidDeactivate(DeactivationType deactivationType)
+
+
+        protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
         {
-            base.DidDeactivate(deactivationType);
+            base.DidDeactivate(removedFromHierarchy, screenSystemDisabling);
             var items = _fireworkPool.InactiveItems;
             for (int i = 0; i < items.Count(); i++)
             {
