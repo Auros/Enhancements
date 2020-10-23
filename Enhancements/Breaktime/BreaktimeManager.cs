@@ -7,7 +7,6 @@ namespace Enhancements.Breaktime
 {
     public class BreaktimeManager : IInitializable, IDisposable
     {
-        private BreaktimeLoader _loader;
         private BreaktimeSettings _settings;
         private IDifficultyBeatmap _difficultyBeatmap;
         private BeatmapObjectManager _beatmapObjectManager;
@@ -15,9 +14,8 @@ namespace Enhancements.Breaktime
 
         public event Action<float> BreakDetected;
 
-        public BreaktimeManager(BreaktimeLoader loader, BreaktimeSettings settings, IDifficultyBeatmap difficultyBeatmap, BeatmapObjectManager beatmapObjectManager)
+        public BreaktimeManager(BreaktimeSettings settings, IDifficultyBeatmap difficultyBeatmap, BeatmapObjectManager beatmapObjectManager)
         {
-            _loader = loader;
             _settings = settings;
             _difficultyBeatmap = difficultyBeatmap;
             _beatmapObjectManager = beatmapObjectManager;
@@ -50,7 +48,6 @@ namespace Enhancements.Breaktime
                     breaks.Add(new Tuple<NoteLineLayer, int, float>(first.noteLineLayer, first.lineIndex, first.time), second);
                 }
             }
-
             _beatmapObjectManager.noteWasCutEvent += NoteCut;
             _beatmapObjectManager.noteWasMissedEvent += NoteEnded;
         }
@@ -62,7 +59,7 @@ namespace Enhancements.Breaktime
 
         private void NoteEnded(NoteController noteController)
         {
-            var first = noteController.noteData as NoteData;
+            var first = noteController.noteData;
             if (breaks.TryGetValue(new Tuple<NoteLineLayer, int, float>(first.noteLineLayer, first.lineIndex, first.time), out BeatmapObjectData data))
             {
                 BreakDetected?.Invoke(data.time);

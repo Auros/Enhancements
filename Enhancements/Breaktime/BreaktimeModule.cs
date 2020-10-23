@@ -5,12 +5,13 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using com.spacepuppy.Tween;
 using Enhancements.Breaktime;
 using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
-using com.spacepuppy.Tween;
+using System.Linq.Expressions;
 
 namespace Enhancements.UI.Breaktime
 {
@@ -62,7 +63,7 @@ namespace Enhancements.UI.Breaktime
                 return;
             }
             var assets = await _loader.GetProfileAssets(profile);
-            
+            this.gameObject.SetActive(true);
             StartCoroutine(HandleBreak(time, profile, assets));
         }
 
@@ -79,12 +80,10 @@ namespace Enhancements.UI.Breaktime
                 SetupVisuals(profile, assets);
                 StartCoroutine(textUpdate);
                 ModifyVisuals(profile);
-
                 if (profile.Animation == Animation.SlideUp)
                 {
                     StartCoroutine(ActivateSlidingAnimation(endPoint));
                 }
-
                 yield return new WaitUntil(() => _audioTimeSyncController.songTime > endPoint - 2f);
                 StopCoroutine(textUpdate);
                 _floatingScreen.ScreenPosition = new Vector3(0f, 1.5f, 4f);
@@ -171,13 +170,13 @@ namespace Enhancements.UI.Breaktime
             if (_floatingScreen == null)
             {
                 _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(75f, 75f), false, new Vector3(0f, 1.5f, 4f), Quaternion.identity);
-                _floatingScreen.GetComponent<Image>().enabled = false;
+                //_floatingScreen.GetComponent<Image>().enabled = false;
                 _floatingScreen.SetRootViewController(null, AnimationType.In);
                 _floatingScreen.gameObject.SetActive(false);
             }
         }
 
-        protected void Start()
+        public void Start()
         {
             _breaktimeManager.BreakDetected += BreakDetected;
         }

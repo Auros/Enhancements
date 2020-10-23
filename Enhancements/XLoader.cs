@@ -47,7 +47,9 @@ namespace Enhancements
             string source = name + ".png";
             if (!_sprites.TryGetValue(source, out Sprite sprite))
             {
-                sprite = BeatSaberMarkupLanguage.Utilities.FindSpriteInAssembly(RESOURCE_PATH + source);
+                var tex = BeatSaberMarkupLanguage.Utilities.FindTextureInAssembly(RESOURCE_PATH + source);
+                tex.wrapMode = TextureWrapMode.Clamp;
+                sprite = BeatSaberMarkupLanguage.Utilities.LoadSpriteFromTexture(tex, 300);
                 if (sprite != null)
                 {
                     _sprites.Add(source, sprite);

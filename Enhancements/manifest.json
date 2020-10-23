@@ -7,8 +7,7 @@
     "BeatSaberMarkupLanguage": "^1.3.5"
   },
   "description": "",
-  "features": [],
-  "gameVersion": "1.11.1",
+  "gameVersion": "1.12.2",
   "id": "Enhancements",
   "name": "Enhancements",
   "version": "3.0.0"

@@ -27,7 +27,7 @@ namespace Enhancements.Clock
         public void Initialize()
         {
             _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 50f), false, _clockSettings.Position, Quaternion.Euler(_clockSettings.Rotation));
-            _floatingScreen.GetComponent<Image>().enabled = false;
+            //_floatingScreen.GetComponent<Image>().enabled = false;
             _floatingScreen.SetRootViewController(_basicClockView, HMUI.ViewController.AnimationType.Out);
 
             _disabled = !_clockSettings.Enabled;

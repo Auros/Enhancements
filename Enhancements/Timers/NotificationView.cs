@@ -108,7 +108,7 @@ namespace Enhancements.Timers
 
         private void CreateScreen()
         {
-            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(100f, 25f), false, new Vector3(0f, 3.5f, 2.1f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
+            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(100f, 50f), false, new Vector3(0f, 3.5f, 2.1f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
             Visible = false;
         }
 

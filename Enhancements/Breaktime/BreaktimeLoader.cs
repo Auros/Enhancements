@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using IPA.Utilities;
-using SiraUtil.Tools;
 using System.Threading;
 using System.Reflection;
 using System.Threading.Tasks;

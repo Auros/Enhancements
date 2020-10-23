@@ -1,29 +1,25 @@
-﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="80">
+﻿<vertical vertical-fit="PreferredSize" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="80" pref-height="10">
     <text text="~title" font-size="8" align="Center" />
   </horizontal>
-  <horizontal size-delta-x="20" anchor-pos-y="-13" ignore-layout="true">
-    <bottom-button-panel>
-      <button text="Snooze" event-click="show-modal" />
-      <button text="Dismiss" on-click="dismiss" />
-    </bottom-button-panel>
+  <horizontal>
+    <button text="Snooze" event-click="show-modal" pref-width="30" pref-height="12" />
+    <action-button text="Dismiss" on-click="dismiss" pref-width="30" pref-height="12" color="red" />
   </horizontal>
   <modal size-delta-x="100" size-delta-y="50" show-event="show-modal" hide-event="hide-modal">
-    <vertical size-delta-x="90" size-delta-y="50" pref-width="90" pref-height="50" spacing="-60" anchor-pos-y="7.4">
-      <horizontal bg="panel-top" pref-width="80">
+    <vertical child-align="UpperCenter">
+      <horizontal bg="panel-top" pref-width="80" pref-height="10">
         <text text="Snooze" font-size="8" align="Center" />
       </horizontal>
       <horizontal>
-        <settings-container>
+        <vertical bg="round-rect-panel" pad="2">
           <increment-setting text="Length" get-event="get" min="1" max="60" integer-only="true" value="length" apply-on-change="true" />
           <dropdown-list-setting options="unit-options" formatter="format-units" get-event="get-units" value="unit" text="Unit" apply-on-change="true" />
-        </settings-container>
+        </vertical>
       </horizontal>
-      <horizontal size-delta-x="10.5" anchor-pos-y="-32.5" ignore-layout="true">
-        <bottom-button-panel>
-          <button text="Cancel" on-click="cancel" />
-          <button text="Confirm" on-click="confirm" />
-        </bottom-button-panel>
+      <horizontal size-delta-x="10.5" anchor-pos-y="-32.5">
+        <button text="Cancel" on-click="cancel" pref-width="30" pref-height="12" />
+        <action-button text="Confirm" on-click="confirm" pref-width="30" pref-height="12" />
       </horizontal>
     </vertical>
   </modal>

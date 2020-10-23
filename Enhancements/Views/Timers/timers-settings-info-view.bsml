@@ -1,15 +1,17 @@
-﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="130" horizontal-fit="PreferredSize">
+﻿<vertical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" pref-width="120" horizontal-fit="PreferredSize">
     <text text="Timers" align="Center" font-size="10" />
   </horizontal>
-  <horizontal pref-width="150" spacing="10" bg="round-rect-panel" pad="2">
-    <text text="Add reminders to your game to make sure you don't forget stuff. You can click on the &lt;color=#e3365f&gt;Clock&lt;/color&gt; to easily create a new reminder anywhere." />
+  <horizontal spacing="10" bg="round-rect-panel" pad="2">
+    <vertical pref-width="100">
+      <text text="Add reminders to your game to make sure you don't forget stuff. You can click on the &lt;color=#e3365f&gt;Clock&lt;/color&gt; to easily create a new reminder anywhere." />
+    </vertical>
   </horizontal>
-  <horizontal spacing="10"  bg="round-rect-panel" pad="1">
+  <horizontal spacing="5" bg="round-rect-panel" pad="2">
     <img id="example" pref-width="65" pref-height="40" preserve-aspect="true" />
-    <settings-container pref-width="65">
+    <vertical pref-width="40">
       <bool-setting text="Enabled" value="enabled" apply-on-change="true" />
       <bool-setting text="Notify In Game" value="notify" apply-on-change="true" />
-    </settings-container>
+    </vertical>
   </horizontal>
 </vertical>

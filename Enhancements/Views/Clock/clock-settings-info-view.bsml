@@ -1,4 +1,4 @@
-﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+﻿<vertical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
   <horizontal bg="panel-top" pref-width="130" horizontal-fit="PreferredSize">
     <text text="Clock" align="Center" font-size="10" />
   </horizontal>
@@ -18,9 +18,9 @@
       The clock was originally made by &lt;color=#73a5f5&gt;taz030485&lt;/color&gt; in 2018 in a mod called Beat Saber Tweaks. Taz stopped modding at the beginning of 2019 and Megalon took over the mod. Eventually the mod was dissolved and its most useful features were then put into Enhancements with more features." />
     </vertical>
   </horizontal>
-  <horizontal pad="1">
-    <settings-container>
+  <horizontal bg="round-rect-panel" pad="1">
+    <vertical>
       <bool-setting text="Enabled" value="enabled" apply-on-change="true" />
-    </settings-container>
+    </vertical>
   </horizontal>
 </vertical>

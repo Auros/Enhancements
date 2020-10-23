@@ -3,6 +3,9 @@
     <text text="Breaktime" align="Center" font-size="10" />
   </horizontal>
   <horizontal pad="2" bg="round-rect-panel" pref-width="80">
-    <text text="Inspired by the breaktime effect from osu!. When there is a significant break in the level you are playing, a customizable notification appears and tells you how much time there is until the next note." align="Center" />
+    <vertical pref-width="80">
+      <text text="Inspired by the breaktime effect from osu!. When there is a significant break in the level you are playing, a customizable notification appears and tells you how much time there is until the next note." align="Center" />
+      <img id="example" pref-width="50" pref-height="30" preserve-aspect="true" />
+    </vertical>
   </horizontal>
 </vertical>

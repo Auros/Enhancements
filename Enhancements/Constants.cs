@@ -9,9 +9,6 @@
         <size=150%><color=#888888>VERSION 3.0.0</color></size>
         An entirely new overhaul to the mod! Now with easier to use UI, more features, and better performance.
         -    New: Completely new UI menu
-        -    New: Optidra
-        -    Optidra: Can now change default note pool sizes
-        -    Optidra: Can now change default bomb pool sizes
         -    New: Timers
         -    Timers: Create reminders in game
         -    Breaktime: Improved Performance

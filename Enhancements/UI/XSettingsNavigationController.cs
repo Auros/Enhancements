@@ -1,9 +1,10 @@
 ﻿using HMUI;
+using System;
 using Zenject;
+using IPA.Utilities;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
-using System;
 
 namespace Enhancements.UI
 {
@@ -74,12 +75,26 @@ namespace Enhancements.UI
                 )
             });
             tableList.tableView.ReloadData();
+            // Monkey Patch
+            foreach (var imageView in tableList.GetComponentsInChildren<ImageView>())
+            {
+                imageView.SetField("_skew", 0f);
+                imageView.SetVerticesDirty();
+                if (imageView.gameObject.name == "Artwork")
+                {
+                    imageView.transform.localScale = new UnityEngine.Vector3(0.6f, 0.5f, 0.5f);
+                }
+            }
             SelectFirstCell();
         }
 
         public void SelectFirstCell()
         {
             tableList?.tableView.SelectCellWithIdx(0);
+        }
+        protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
+        {
+            base.DidDeactivate(removedFromHierarchy, screenSystemDisabling);
         }
     }
 }
