@@ -1,16 +1,16 @@
-﻿<vertical spacing="0" child-align="UpperCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+﻿<vertical vertical-fit="PreferredSize" spacing="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" bg-color="orange" pref-width="100" horizontal-fit="PreferredSize">
     <text text="Formatting and Size" align="Center" font-size="7" />
   </horizontal>
   <horizontal>
     <vertical>
-      <vertical bg="round-rect-panel" pad="2">
+      <vertical bg="round-rect-panel" bg-color="grey" pad="2">
         <bool-setting text="Show In Game" value="show-ingame" apply-on-change="true" />
         <increment-setting text="Size" min="1" max="20" integer-only="true" value="size" apply-on-change="true" />
         <dropdown-list-setting options="font-options" text="Font" value="font" apply-on-change="true" />
         <dropdown-list-setting id="dropdown" options="format-options" text="Format" value="format" formatter="formatter-formatter" apply-on-change="true" />
       </vertical>
-      <vertical bg="round-rect-panel" pad="2">
+      <vertical bg="round-rect-panel" bg-color="grey" pad="2">
         <text text="Advanced Settings" size-delta-y="4" color="grey" />
         <string-setting text="Custom Locale" value="locale"/>
         <horizontal>

@@ -2,6 +2,7 @@
 
 namespace Enhancements.Volume
 {
+    // Cringe
     [HarmonyPatch(typeof(MainSettingsModelSO), "Load")]
     internal class BeatSaber
     {

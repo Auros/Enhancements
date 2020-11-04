@@ -1,8 +1,8 @@
-﻿<vertical spacing="0" child-align="UpperCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+﻿<vertical vertical-fit="PreferredSize" spacing="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" bg-color="orange" pref-width="100" horizontal-fit="PreferredSize">
     <text text="Location and Color" align="Center" font-size="7" />
   </horizontal>
-  <horizontal bg="round-rect-panel" pad="2">
+  <horizontal bg="round-rect-panel" bg-color="grey" pad="2">
     <vertical>
       <horizontal>
         <vertical>
@@ -22,7 +22,7 @@
           </vertical>
         </vertical>
       </horizontal>
-      <horizontal bg="round-rect-panel" pad="2">
+      <horizontal bg="round-rect-panel" bg-color="white" pad="2">
         <vertical>
           <color-setting text="Color" value="color" apply-on-change="true" />
           <slider-setting text="Opacity" value="opacity" apply-on-change="true" increment="0.1" min="0" max="1" />

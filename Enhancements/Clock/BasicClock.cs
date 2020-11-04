@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Globalization;
 using BeatSaberMarkupLanguage.FloatingScreen;
+using VRUIControls;
+using IPA.Utilities;
 
 namespace Enhancements.Clock
 {
@@ -15,18 +17,21 @@ namespace Enhancements.Clock
         private readonly ClockSettings _clockSettings;
         private readonly BasicClockView _basicClockView;
         private readonly IClockController _clockController;
+        private readonly PhysicsRaycasterWithCache _physicsRaycasterWithCache;
 
-        public BasicClock(XLoader loader, ClockSettings clockSettings, BasicClockView basicClockView, IClockController clockController)
+        public BasicClock(XLoader loader, ClockSettings clockSettings, BasicClockView basicClockView, IClockController clockController, PhysicsRaycasterWithCache physicsRaycasterWithCache)
         {
             _loader = loader;
             _clockSettings = clockSettings;
             _basicClockView = basicClockView;
             _clockController = clockController;
+            _physicsRaycasterWithCache = physicsRaycasterWithCache;
         }
 
         public void Initialize()
         {
             _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(150f, 50f), false, _clockSettings.Position, Quaternion.Euler(_clockSettings.Rotation));
+            _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
             //_floatingScreen.GetComponent<Image>().enabled = false;
             _floatingScreen.SetRootViewController(_basicClockView, HMUI.ViewController.AnimationType.Out);
 

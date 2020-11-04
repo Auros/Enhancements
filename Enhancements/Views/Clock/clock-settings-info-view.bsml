@@ -1,9 +1,14 @@
 ﻿<vertical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="130" horizontal-fit="PreferredSize">
+  <horizontal bg="panel-top" bg-color="orange" pref-width="130" horizontal-fit="PreferredSize">
     <text text="Clock" align="Center" font-size="10" />
   </horizontal>
+  <horizontal bg="round-rect-panel" bg-color="grey" pad="1">
+    <vertical>
+      <bool-setting text="Enabled" value="enabled" apply-on-change="true" />
+    </vertical>
+  </horizontal>
   <horizontal spacing="10">
-    <vertical bg="round-rect-panel" pad="3" pref-width="60">
+    <vertical bg="round-rect-panel" bg-color="grey" pad="3" pref-width="60">
       <text text="Features" align="Center" font-size="7" underlined="true" />
       <text text="- Adds a clock to the game" />
       <text text="- Change the Color" />
@@ -12,15 +17,10 @@
       <text text="- Change the Format" />
       <text text="- Change the Location" />
     </vertical>
-    <vertical bg="round-rect-panel" pad="3" pref-width="60">
+    <vertical bg="round-rect-panel" bg-color="grey" pad="3" pref-width="60">
       <text text="History" align="Center" font-size="7" underlined="true" />
       <text font-size="3.5" text="
       The clock was originally made by &lt;color=#73a5f5&gt;taz030485&lt;/color&gt; in 2018 in a mod called Beat Saber Tweaks. Taz stopped modding at the beginning of 2019 and Megalon took over the mod. Eventually the mod was dissolved and its most useful features were then put into Enhancements with more features." />
-    </vertical>
-  </horizontal>
-  <horizontal bg="round-rect-panel" pad="1">
-    <vertical>
-      <bool-setting text="Enabled" value="enabled" apply-on-change="true" />
     </vertical>
   </horizontal>
 </vertical>

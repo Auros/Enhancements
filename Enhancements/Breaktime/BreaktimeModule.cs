@@ -11,7 +11,6 @@ using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
-using System.Linq.Expressions;
 
 namespace Enhancements.UI.Breaktime
 {

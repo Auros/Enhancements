@@ -9,6 +9,8 @@ using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
+using VRUIControls;
+using IPA.Utilities;
 
 namespace Enhancements.Timers
 {
@@ -20,6 +22,7 @@ namespace Enhancements.Timers
         private FloatingScreen _floatingScreen;
         private ITimerController _timerController;
         private ITimeNotification _currentNotification;
+        private PhysicsRaycasterWithCache _physicsRaycasterWithCache;
 
         [UIParams]
         protected BSMLParserParams parserParams;
@@ -66,8 +69,9 @@ namespace Enhancements.Timers
         }
 
         [Inject]
-        public void Construct(ITimerController controller, Notifier notifier)
+        public void Construct(ITimerController controller, Notifier notifier, PhysicsRaycasterWithCache physicsRaycasterWithCache)
         {
+            _physicsRaycasterWithCache = physicsRaycasterWithCache;
             _notifier = notifier;
             _timerController = controller;
             unitOptions = new List<object>();
@@ -108,7 +112,8 @@ namespace Enhancements.Timers
 
         private void CreateScreen()
         {
-            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(100f, 50f), false, new Vector3(0f, 3.5f, 2.1f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
+            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(130f, 70f), false, new Vector3(0f, 3.5f, 2.1f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
+            _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
             Visible = false;
         }
 

@@ -1,8 +1,8 @@
 ﻿<vertical child-control-height="false" spacing="0" child-align="UpperCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+  <horizontal bg="panel-top" bg-color="purple" pref-width="100" horizontal-fit="PreferredSize">
     <text text="Tweaks" align="Center" font-size="7" />
   </horizontal>
-  <horizontal bg="round-rect-panel" pad="2" child-align="MiddleCenter">
+  <horizontal bg="round-rect-panel" bg-color="grey" pad="2" child-align="MiddleCenter">
     <vertical>
       <text text="V-BPM 360 Fix" align="Center" font-size="6" underlined="true" />
       <vertical pref-width="60">
@@ -13,7 +13,7 @@
       <text text="Prevents old maps with BPM changes from being detected as 360 maps." />
     </vertical>
   </horizontal>
-  <horizontal bg="round-rect-panel" pad="2">
+  <horizontal bg="round-rect-panel" bg-color="grey" pad="2">
     <vertical>
       <text text="Button Lock" align="Center" font-size="6" underlined="true" />
       <vertical pref-width="60">

@@ -2,11 +2,17 @@
 using Zenject;
 using UnityEngine;
 using System.Linq;
+using VRUIControls;
+using IPA.Utilities;
 using System.Collections.Generic;
 using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
+using BeatSaberMarkupLanguage.Components;
+using BeatSaberMarkupLanguage.Components.Settings;
+using HMUI;
+using UnityEngine.UI;
 
 namespace Enhancements.Timers
 {
@@ -16,9 +22,22 @@ namespace Enhancements.Timers
     {
         private FloatingScreen _floatingScreen;
         private ITimerController _timerController;
+        private PhysicsRaycasterWithCache _physicsRaycasterWithCache;
 
         [UIParams]
         protected BSMLParserParams parserParams;
+
+        [UIComponent("string-setting")]
+        protected StringSetting stringSetting;
+
+        [UIComponent("dropdown")]
+        protected DropDownListSetting dropdownSetting;
+
+        [UIComponent("cancel-button")]
+        protected Button cancelButton;
+
+        [UIComponent("create-button")]
+        protected Button createButton;
 
         [UIValue("text")]
         protected string Text { get; set; } = "New Notification";
@@ -47,12 +66,11 @@ namespace Enhancements.Timers
             set
             {
                 _floatingScreen.SetRootViewController(value ? this : null, value ? AnimationType.In : AnimationType.Out);
-                // TODO: DISABLE OR ENABLE THE SCREEN AFTER ANIMATION COMPLETED
             }
         }
 
         [Inject]
-        public void Construct(ITimerController timerController)
+        public void Construct(ITimerController timerController, PhysicsRaycasterWithCache physicsRaycasterWithCache)
         {
             unitOptions = new List<object>();
             unitOptions.AddRange(new TimeType[]
@@ -62,6 +80,7 @@ namespace Enhancements.Timers
                 TimeType.Hours,
             }.Select(x => x as object));
             _timerController = timerController;
+            _physicsRaycasterWithCache = physicsRaycasterWithCache;
             CreateScreen();
         }
 
@@ -73,8 +92,20 @@ namespace Enhancements.Timers
 
         private void CreateScreen()
         {
-            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(100f, 60f), false, new Vector3(0f, 3.5f, 2.25f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
+            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(130f, 70f), false, new Vector3(0f, 3.5f, 2.25f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
+            _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
             Visible = false;
+        }
+
+        [UIAction("#post-parse")]
+        protected void Parsed()
+        {
+            stringSetting.modalKeyboard.transform.localPosition = new Vector3(0f, 0f, -10f);
+            var modalGO = dropdownSetting.dropdown.GetField<ModalView, DropdownWithTableView>("_modalView").gameObject;
+            modalGO.transform.localPosition = new Vector3(modalGO.transform.localPosition.x, modalGO.transform.localPosition.y, -5f);
+
+            cancelButton.gameObject.SetActive(true);
+            createButton.gameObject.SetActive(true);
         }
 
         [UIAction("format-units")]

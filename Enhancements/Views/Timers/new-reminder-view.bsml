@@ -1,16 +1,16 @@
-﻿<vertical horizontal-fit="PreferredSize" vertical-fit="Unconstrained" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+﻿<vertical horizontal-fit="PreferredSize" vertical-fit="PreferredSize" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
   <horizontal bg="panel-top" pref-width="80">
     <text text="Create A Reminder" font-size="8" align="Center" />
   </horizontal>
   <horizontal>
     <vertical background="round-rect-panel" bg-color="cyan" pad="2">
-      <string-setting text="Text" get-event="get" value="text" apply-on-change="true" />
+      <string-setting id="string-setting" text="Text" get-event="get" value="text" apply-on-change="true" />
       <increment-setting text="Length" get-event="get" min="1" max="60" integer-only="true" value="length" apply-on-change="true" />
-      <dropdown-list-setting options="unit-options" formatter="format-units" get-event="get-units" value="unit" text="Unit" apply-on-change="true" />
+      <dropdown-list-setting id="dropdown" options="unit-options" formatter="format-units" get-event="get-units" value="unit" text="Unit" apply-on-change="true" />
     </vertical>
   </horizontal>
   <horizontal>
-    <button pref-width="35" text="Cancel" on-click="cancel" />
-    <button pref-width="35" text="Create" on-click="create" />
+    <button id="cancel-button" pref-width="35" text="Cancel" on-click="cancel" />
+    <button id="create-button" pref-width="35" text="Create" on-click="create" />
   </horizontal>
 </vertical>

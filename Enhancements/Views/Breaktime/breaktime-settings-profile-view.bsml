@@ -1,8 +1,8 @@
 ﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+  <horizontal bg="panel-top" bg-color="green" pref-width="100" horizontal-fit="PreferredSize">
     <text text="Profile Manager" align="Center" font-size="7" />
   </horizontal>
-  <horizontal bg="round-rect-panel" pad="2">
+  <horizontal bg="round-rect-panel" bg-color="grey" pad="2">
     <vertical>
       <horizontal>
         <text text="~mode-text" align="Center" font-size="5" underlined="true" />

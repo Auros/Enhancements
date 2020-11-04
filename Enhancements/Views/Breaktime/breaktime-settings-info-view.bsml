@@ -1,8 +1,8 @@
 ﻿<vertical child-control-height="false" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="120">
+  <horizontal bg="panel-top" bg-color="green" pref-width="120">
     <text text="Breaktime" align="Center" font-size="10" />
   </horizontal>
-  <horizontal pad="2" bg="round-rect-panel" pref-width="80">
+  <horizontal pad="2" bg="round-rect-panel" bg-color="grey" pref-width="80">
     <vertical pref-width="80">
       <text text="Inspired by the breaktime effect from osu!. When there is a significant break in the level you are playing, a customizable notification appears and tells you how much time there is until the next note." align="Center" />
       <img id="example" pref-width="50" pref-height="30" preserve-aspect="true" />

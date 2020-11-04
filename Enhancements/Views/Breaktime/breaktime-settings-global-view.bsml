@@ -1,9 +1,9 @@
-﻿<vertical child-align="UpperCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <horizontal bg="panel-top" pref-width="100" horizontal-fit="PreferredSize">
+﻿<vertical child-align="UpperCenter" vertical-fit="PreferredSize" spacing="2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <horizontal bg="panel-top" bg-color="green" pref-width="100" horizontal-fit="PreferredSize">
     <text text="Global Settings" align="Center" font-size="7" />
   </horizontal>
   <horizontal>
-    <vertical bg="round-rect-panel" pad="2">
+    <vertical bg="round-rect-panel" bg-color="grey" pad="2">
       <bool-setting text="Enabled" value="enabled" apply-on-change="true" />
       <dropdown-list-setting id="dropdown" get-event="get" text="Selected Profile" value="selected-profile" options="profiles" apply-on-change="true" />
       <dropdown-list-setting text="Randomize Mode" value="randomize-mode" options="randomize-modes" formatter="format-random" apply-on-change="true" />
