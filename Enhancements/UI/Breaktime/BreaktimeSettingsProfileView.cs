@@ -41,6 +41,18 @@ namespace Enhancements.UI.Breaktime
         [UIComponent("audio-list")]
         protected DropDownListSetting audioDropdown;
 
+        private string _buttonText = "Switch To Edit Mode";
+        [UIValue("button-text")]
+        public string ButtonText
+        {
+            get => _buttonText;
+            set
+            {
+                _buttonText = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         private bool _createMode = true;
         [UIValue("create-mode")]
         public bool CreateMode
@@ -183,6 +195,7 @@ namespace Enhancements.UI.Breaktime
         {
             CreateMode = !CreateMode;
             ModeText = CreateMode ? "Create New Profile" : $"Editing <color=#f2493d>{_settings.SelectedProfile}</color>";
+            ButtonText = CreateMode ? "Switch To Edit Mode" : "Switch To Create Mode";
             if (!CreateMode)
             {
                 _currentProfile = _loader.SelectedProfile();

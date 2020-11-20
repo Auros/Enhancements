@@ -6,7 +6,7 @@
     <vertical>
       <horizontal>
         <text text="~mode-text" align="Center" font-size="5" underlined="true" />
-        <action-button text="Switch Mode" on-click="switch" />
+        <action-button text="~button-text" on-click="switch" />
       </horizontal>
       <vertical>
             <string-setting get-event="upd" value="name" apply-on-change="true" text="Name" />
