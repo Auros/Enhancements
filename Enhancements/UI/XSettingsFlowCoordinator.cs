@@ -6,6 +6,7 @@ using Enhancements.UI.Timers;
 using Enhancements.UI.Volume;
 using BeatSaberMarkupLanguage;
 using Enhancements.UI.Breaktime;
+using System.Threading.Tasks;
 
 namespace Enhancements.UI
 {
@@ -65,8 +66,8 @@ namespace Enhancements.UI
             {
                 showBackButton = true;
                 SetTitle("Enhancements");
+                ProvideInitialViewControllers(_infoView, bottomScreenViewController: _settingsNavigationView);
             }
-            ProvideInitialViewControllers(_infoView, bottomScreenViewController: _settingsNavigationView);
             _settingsNavigationView.DidSelectSettingOption += ShowSettingsPage;
             _breaktimeSettingsProfileView.ProfilesUpdated += ProfilesUpdated;
             _settingsNavigationView?.SelectFirstCell();
@@ -121,6 +122,10 @@ namespace Enhancements.UI
             {
                 ViewController.AnimationType slide = _lastId > id ? ViewController.AnimationType.In : ViewController.AnimationType.Out;
                 ReplaceTopViewController(match, animationType: slide, animationDirection: ViewController.AnimationDirection.Horizontal);
+                SetLeftScreenViewController(leftMatch, ViewController.AnimationType.None);
+                SetRightScreenViewController(rightMatch, ViewController.AnimationType.None);
+                SetLeftScreenViewController(null, ViewController.AnimationType.None);
+                SetRightScreenViewController(null, ViewController.AnimationType.None);
                 SetLeftScreenViewController(leftMatch, ViewController.AnimationType.In);
                 SetRightScreenViewController(rightMatch, ViewController.AnimationType.In);
                 _lastId = id;

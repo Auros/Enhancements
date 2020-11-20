@@ -1,18 +1,17 @@
-﻿using System;
+﻿using HMUI;
+using System;
 using Zenject;
 using UnityEngine;
 using System.Linq;
 using VRUIControls;
 using IPA.Utilities;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
-using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.Components.Settings;
-using HMUI;
-using UnityEngine.UI;
 
 namespace Enhancements.Timers
 {

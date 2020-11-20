@@ -1,7 +1,10 @@
-﻿using System;
+﻿using HMUI;
+using System;
 using Zenject;
 using UnityEngine;
 using System.Linq;
+using VRUIControls;
+using IPA.Utilities;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -9,8 +12,7 @@ using BeatSaberMarkupLanguage.Parser;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
-using VRUIControls;
-using IPA.Utilities;
+using BeatSaberMarkupLanguage.Components.Settings;
 
 namespace Enhancements.Timers
 {
@@ -26,6 +28,12 @@ namespace Enhancements.Timers
 
         [UIParams]
         protected BSMLParserParams parserParams;
+
+        [UIComponent("dropdown")]
+        protected DropDownListSetting dropdownSetting;
+
+        [UIComponent("snooze-modal")]
+        protected RectTransform snoozeModal;
 
         private int _length = 5;
         [UIValue("length")]
@@ -64,7 +72,6 @@ namespace Enhancements.Timers
             {
                 _notifier.IsViewing = value;
                 _floatingScreen.SetRootViewController(value ? this : null, value ? AnimationType.In : AnimationType.Out);
-                // TODO: DISABLE OR ENABLE THE SCREEN AFTER ANIMATION COMPLETED
             }
         }
 
@@ -81,8 +88,16 @@ namespace Enhancements.Timers
                 TimeType.Minutes,
                 TimeType.Hours,
             }.Select(x => x as object));
-            CreateScreen();
+            _ = CreateScreen();
             _notifier.NotificationPing += ShowNotification;
+        }
+
+        [UIAction("#post-parse")]
+        protected void Parsed()
+        {
+            var modalGO = dropdownSetting.dropdown.GetField<ModalView, DropdownWithTableView>("_modalView").gameObject;
+            modalGO.transform.localPosition = new Vector3(modalGO.transform.localPosition.x, modalGO.transform.localPosition.y, -5f);
+            snoozeModal.transform.localPosition = new Vector3(snoozeModal.transform.localPosition.x, snoozeModal.transform.localPosition.y, -10f);
         }
 
         protected void OnEnable()
@@ -110,10 +125,12 @@ namespace Enhancements.Timers
             }
         }
 
-        private void CreateScreen()
+        private async Task CreateScreen()
         {
             _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(130f, 70f), false, new Vector3(0f, 3.5f, 2.1f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
             _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
+            Visible = true;
+            await SiraUtil.Utilities.PauseChamp;
             Visible = false;
         }
 

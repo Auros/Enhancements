@@ -1,12 +1,12 @@
 ﻿using IPA;
 using IPA.Loader;
+using HarmonyLib;
 using SiraUtil.Zenject;
 using IPA.Config.Stores;
+using System.Reflection;
 using Enhancements.Installers;
 using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
-using HarmonyLib;
-using System.Reflection;
 
 namespace Enhancements
 {
@@ -24,7 +24,7 @@ namespace Enhancements
             _harmony = new Harmony("dev.auros.enhancements");
             zenjector.OnApp<XInstaller>().WithParameters(config, metadata.Version);
             zenjector.OnMenu<XMenuInstaller>();
-            zenjector.OnGame<XGameInstaller>();
+            zenjector.OnGame<XGameInstaller>(false).ShortCircuitForTutorial();
         }
 
         [OnEnable]

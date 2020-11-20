@@ -62,7 +62,7 @@ namespace Enhancements.UI.Breaktime
                 return;
             }
             var assets = await _loader.GetProfileAssets(profile);
-            this.gameObject.SetActive(true);
+            gameObject.SetActive(true);
             StartCoroutine(HandleBreak(time, profile, assets));
         }
 
@@ -90,7 +90,11 @@ namespace Enhancements.UI.Breaktime
                 {
                     yield return new WaitForSeconds(1f);
                 }
-                _floatingScreen.SetRootViewController(null, profile.Animation == Animation.FadeIn ? AnimationType.Out : AnimationType.None);
+                _floatingScreen.SetRootViewController(null, profile.Animation == Animation.FadeIn ? AnimationType.In : AnimationType.None);
+                if (profile.Animation == Animation.FadeIn)
+                {
+                    yield return new WaitForSeconds(1f);
+                }
                 _floatingScreen.gameObject.SetActive(false);
                 _breakHappening = false;
             }
