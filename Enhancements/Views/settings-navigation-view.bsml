@@ -1,3 +1,3 @@
-﻿<horizontal child-align="MiddleCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <list id="list" list-style="Box" list-direction="Horizontal" visible-cells="6"  align-to-center="true" select-cell="option-selected" />
+﻿<horizontal anchor-pos-y="12" child-align="MiddleCenter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
+  <list size-delta-y="25" id="list" list-style="Box" list-direction="Horizontal" visible-cells="6"  align-to-center="true" select-cell="option-selected" />
 </horizontal>

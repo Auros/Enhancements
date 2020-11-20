@@ -11,11 +11,11 @@ namespace Enhancements.Installers
 {
     public class XGameInstaller : Installer
     {
-        private MiscSettings _miscSettings;
-        private ClockSettings _clockSettings;
-        private TimerSettings _timerSettings;
-        private PlayerDataModel _playerDataModel;
-        private BreaktimeSettings _breaktimeSettings;
+        private readonly MiscSettings _miscSettings;
+        private readonly ClockSettings _clockSettings;
+        private readonly TimerSettings _timerSettings;
+        private readonly PlayerDataModel _playerDataModel;
+        private readonly BreaktimeSettings _breaktimeSettings;
 
         public XGameInstaller(MiscSettings miscSettings, ClockSettings clockSettings, TimerSettings timerSettings, PlayerDataModel playerDataModel, BreaktimeSettings breaktimeSettings)
         {
@@ -42,7 +42,7 @@ namespace Enhancements.Installers
             Container.BindInterfacesAndSelfTo<GameVolumeModifier>().AsSingle();
             if (_miscSettings.ButtonLockMenu || _miscSettings.ButtonLockRestart || _miscSettings.ButtonLockContinue)
             {
-                Container.Bind<ButtonLock>().FromNewComponentOnRoot().AsSingle().NonLazy();
+                Container.BindInterfacesTo<ButtonLock>().FromNewComponentOnRoot().AsSingle();
             }
             if (_breaktimeSettings.Enabled && textAndHuds)
             {

@@ -5,6 +5,8 @@ using IPA.Utilities;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
+using UnityEngine;
+using System.Threading.Tasks;
 
 namespace Enhancements.UI
 {
@@ -32,7 +34,7 @@ namespace Enhancements.UI
         }
 
         [UIAction("#post-parse")]
-        protected void Parsed()
+        protected async Task Parsed()
         {
             tableList.data.AddRange(new CustomListTableData.CustomCellInfo[]
             {
@@ -82,10 +84,13 @@ namespace Enhancements.UI
                 imageView.SetVerticesDirty();
                 if (imageView.gameObject.name == "Artwork")
                 {
-                    imageView.transform.localScale = new UnityEngine.Vector3(0.6f, 0.5f, 0.5f);
+                    imageView.transform.localScale = new Vector3(0.55f, 0.65f, 0.55f);
                 }
             }
             SelectFirstCell();
+            await SiraUtil.Utilities.PauseChamp;
+            var rt = (tableList.transform as RectTransform);
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x, 25);
         }
 
         public void SelectFirstCell()
