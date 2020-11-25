@@ -7,6 +7,7 @@ using BeatSaberMarkupLanguage.Components;
 using BeatSaberMarkupLanguage.ViewControllers;
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace Enhancements.UI
 {
@@ -14,6 +15,7 @@ namespace Enhancements.UI
     [HotReload(RelativePathToLayout = @"..\Views\settings-navigation-view.bsml")]
     public class XSettingsNavigationController : BSMLAutomaticViewController
     {
+        private readonly List<ImageView> _imageViews = new List<ImageView>();
         public event Action<string, int> DidSelectSettingOption;
 
         [UIComponent("list")]
@@ -34,7 +36,7 @@ namespace Enhancements.UI
         }
 
         [UIAction("#post-parse")]
-        protected async Task Parsed()
+        protected void Parsed()
         {
             tableList.data.AddRange(new CustomListTableData.CustomCellInfo[]
             {
@@ -77,21 +79,13 @@ namespace Enhancements.UI
                 )
             });
             tableList.tableView.ReloadData();
-            // Monkey Patch
-            foreach (var imageView in tableList.GetComponentsInChildren<ImageView>())
-            {
-                imageView.SetField("_skew", 0f);
-                imageView.SetVerticesDirty();
-                if (imageView.gameObject.name == "Artwork")
-                {
-                    imageView.transform.localScale = new Vector3(0.55f, 0.65f, 0.55f);
-                    //imageView.transform.localScale = new Vector3(0.55f, 0.55f, 0.55f);
-                }
-            }
             SelectFirstCell();
-            await SiraUtil.Utilities.PauseChamp;
-            var rt = (tableList.transform as RectTransform);
-            rt.sizeDelta = new Vector2(rt.sizeDelta.x, 25);
+        }
+
+        protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
+        {
+            base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
+            _ = ViewControllerMonkeyCleanup();
         }
 
         public void SelectFirstCell()
@@ -101,6 +95,26 @@ namespace Enhancements.UI
         protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
         {
             base.DidDeactivate(removedFromHierarchy, screenSystemDisabling);
+        }
+
+        private async Task ViewControllerMonkeyCleanup()
+        {
+            var rt = tableList.transform as RectTransform;
+            rt.sizeDelta = new Vector2(rt.sizeDelta.x, 25);
+            await SiraUtil.Utilities.PauseChamp;
+            if (_imageViews.Count == 0)
+            {
+                _imageViews.AddRange(tableList.GetComponentsInChildren<ImageView>());
+            }
+            foreach (var imageView in _imageViews)
+            {
+                imageView.SetField("_skew", 0f);
+                imageView.SetVerticesDirty();
+                if (imageView.gameObject.name == "Artwork")
+                {
+                    imageView.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                }
+            }
         }
     }
 }

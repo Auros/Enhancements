@@ -84,7 +84,6 @@ namespace Enhancements.UI.Breaktime
                     StartCoroutine(ActivateSlidingAnimation(endPoint));
                 }
                 yield return new WaitUntil(() => _audioTimeSyncController.songTime > endPoint - 2f);
-                StopCoroutine(textUpdate);
                 _floatingScreen.ScreenPosition = new Vector3(0f, 1.5f, 4f);
                 if (profile.Animation == Animation.SlideUp)
                 {
@@ -95,6 +94,7 @@ namespace Enhancements.UI.Breaktime
                 {
                     yield return new WaitForSeconds(1f);
                 }
+                StopCoroutine(textUpdate);
                 _floatingScreen.gameObject.SetActive(false);
                 _breakHappening = false;
             }
