@@ -71,8 +71,8 @@ namespace Enhancements.UI
                 ),
                 new CustomListTableData.CustomCellInfo
                 (
-                    "Mini Settings and Optidra\n",
-                    "Miscellaneous Tweaks and Experimental Settings",
+                    "Mini Settings\n",
+                    "Miscellaneous Tweaks",
                     _loader.GetIcon("settings")
                 )
             });
@@ -85,6 +85,7 @@ namespace Enhancements.UI
                 if (imageView.gameObject.name == "Artwork")
                 {
                     imageView.transform.localScale = new Vector3(0.55f, 0.65f, 0.55f);
+                    //imageView.transform.localScale = new Vector3(0.55f, 0.55f, 0.55f);
                 }
             }
             SelectFirstCell();

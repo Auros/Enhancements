@@ -6,12 +6,12 @@ using Enhancements.UI.Timers;
 using Enhancements.UI.Volume;
 using BeatSaberMarkupLanguage;
 using Enhancements.UI.Breaktime;
-using System.Threading.Tasks;
 
 namespace Enhancements.UI
 {
     public class XSettingsFlowCoordinator : FlowCoordinator
     {
+        private bool _activated;
         private int _lastId = 0;
         private XInfoView _infoView;
         private MainFlowCoordinator _mainFlowCoordinator;
@@ -112,7 +112,7 @@ namespace Enhancements.UI
                     leftMatch = null;
                     rightMatch = null;
                     break;
-                case "Mini Settings and Optidra":
+                case "Mini Settings":
                     match = _miscSettingsInfoView;
                     leftMatch = _extraTweaksSettingsView;
                     rightMatch = null;
@@ -124,10 +124,14 @@ namespace Enhancements.UI
                 ReplaceTopViewController(match, animationType: slide, animationDirection: ViewController.AnimationDirection.Horizontal);
                 SetLeftScreenViewController(leftMatch, ViewController.AnimationType.None);
                 SetRightScreenViewController(rightMatch, ViewController.AnimationType.None);
-                SetLeftScreenViewController(null, ViewController.AnimationType.None);
-                SetRightScreenViewController(null, ViewController.AnimationType.None);
-                SetLeftScreenViewController(leftMatch, ViewController.AnimationType.In);
-                SetRightScreenViewController(rightMatch, ViewController.AnimationType.In);
+                if (!_activated)
+                {
+                    SetLeftScreenViewController(null, ViewController.AnimationType.None);
+                    SetRightScreenViewController(null, ViewController.AnimationType.None);
+                    SetLeftScreenViewController(leftMatch, ViewController.AnimationType.In);
+                    SetRightScreenViewController(rightMatch, ViewController.AnimationType.In);
+                    _activated = true;
+                }
                 _lastId = id;
             }
         }

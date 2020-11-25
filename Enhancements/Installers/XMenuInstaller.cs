@@ -1,5 +1,4 @@
 ﻿using SiraUtil;
-using UnityEngine;
 using Enhancements.UI;
 using Enhancements.Clock;
 using Enhancements.Timers;
@@ -17,9 +16,6 @@ namespace Enhancements.Installers
     {
         public override void InstallBindings()
         {
-#if DEBUG
-            Application.targetFrameRate = 90;
-#endif
             Container.BindInterfacesTo<BasicClock>().AsSingle();
             Container.BindInterfacesAndSelfTo<MenuVolumeManager>().AsSingle();
 
@@ -27,19 +23,19 @@ namespace Enhancements.Installers
             Container.BindViewController<NewReminderView>();
             Container.BindViewController<NotificationView>();
 
-            Container.BindViewController<XInfoView>();
-            Container.BindViewController<MiscSettingsInfoView>();
-            Container.BindViewController<ClockSettingsInfoView>();
-            Container.BindViewController<TimersSettingsInfoView>();
-            Container.BindViewController<VolumeSettingsInfoView>();
-            Container.BindViewController<ClockSettingsPosColView>();
-            Container.BindViewController<ClockSettingsFormatView>();
-            Container.BindViewController<ExtraTweaksSettingsView>();
-            Container.BindViewController<BreaktimeSettingsInfoView>();
-            Container.BindViewController<BreaktimeSettingsGlobalView>();
-            Container.BindViewController<BreaktimeSettingsProfileView>();
-            Container.BindViewController<XSettingsNavigationController>();
-            Container.BindFlowCoordinator<XSettingsFlowCoordinator>();
+            Container.Bind<XInfoView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<MiscSettingsInfoView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<ClockSettingsInfoView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<TimersSettingsInfoView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<VolumeSettingsInfoView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<ClockSettingsPosColView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<ClockSettingsFormatView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<ExtraTweaksSettingsView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<BreaktimeSettingsInfoView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<BreaktimeSettingsGlobalView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<BreaktimeSettingsProfileView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<XSettingsNavigationController>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<XSettingsFlowCoordinator>().FromNewComponentOnNewGameObject().AsSingle();
 
             Container.BindInterfacesAndSelfTo<MenuButtonManager>().AsSingle();
         }
