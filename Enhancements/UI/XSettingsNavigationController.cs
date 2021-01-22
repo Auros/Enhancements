@@ -112,7 +112,7 @@ namespace Enhancements.UI
                 imageView.SetVerticesDirty();
                 if (imageView.gameObject.name == "Artwork")
                 {
-                    imageView.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+                    imageView.transform.localScale = new Vector3(0.75f, 0.4f, 1f);
                 }
             }
         }

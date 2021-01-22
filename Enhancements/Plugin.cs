@@ -21,10 +21,17 @@ namespace Enhancements
         {
             Log = logger;
             Config config = conf.Generated<Config>();
+
+            if (config.Version.ToString() == "0.0.0" && config.Clock.Position == new UnityEngine.Vector3(0f, 2.8f, 2.45f))
+            {
+                config.Clock.Position = new UnityEngine.Vector3(0f, 3f, 3.9f);
+            }
+            config.Version = metadata.Version;
+
             _harmony = new Harmony("dev.auros.enhancements");
             zenjector.OnApp<XInstaller>().WithParameters(config, metadata.Version);
-            zenjector.OnMenu<XMenuInstaller>();
             zenjector.OnGame<XGameInstaller>(false).ShortCircuitForTutorial();
+            zenjector.OnMenu<XMenuInstaller>();
         }
 
         [OnEnable]

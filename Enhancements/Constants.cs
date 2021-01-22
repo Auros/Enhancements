@@ -6,6 +6,13 @@
         internal const string LATESTRELEASE = "https://github.com/Auros/Enhancements/releases/latest";
 
         internal const string CHANGELOG = @"
+        <size=150%><color=#888888>VERSION 3.0.1</color></size>
+        Some bug fixes for the new 1.13.2 Beat Saber update.
+        -    Added Version Reference In Config
+        -    Fixed bug with Reminders not requeuing in the menu if Notify In Game is disabled.
+        -    Made the navigation icons look normal.
+        -    Fixed curving with the UI.
+
         <size=150%><color=#888888>VERSION 3.0.0</color></size>
         An entirely new overhaul to the mod! Now with easier to use UI, more features, and better performance.
         -    New: Completely new UI menu

@@ -11,7 +11,6 @@ namespace Enhancements.UI
 {
     public class XSettingsFlowCoordinator : FlowCoordinator
     {
-        private bool _activated;
         private int _lastId = 0;
         private XInfoView _infoView;
         private MainFlowCoordinator _mainFlowCoordinator;
@@ -124,14 +123,6 @@ namespace Enhancements.UI
                 ReplaceTopViewController(match, animationType: slide, animationDirection: ViewController.AnimationDirection.Horizontal);
                 SetLeftScreenViewController(leftMatch, ViewController.AnimationType.None);
                 SetRightScreenViewController(rightMatch, ViewController.AnimationType.None);
-                if (!_activated)
-                {
-                    SetLeftScreenViewController(null, ViewController.AnimationType.None);
-                    SetRightScreenViewController(null, ViewController.AnimationType.None);
-                    SetLeftScreenViewController(leftMatch, ViewController.AnimationType.In);
-                    SetRightScreenViewController(rightMatch, ViewController.AnimationType.In);
-                    _activated = true;
-                }
                 _lastId = id;
             }
         }

@@ -37,7 +37,6 @@ namespace Enhancements.Timers
             {
                 return;
             }
-
             if ((!_settings.NotifyInGame && _gameScenesManager.currentScenesContainer.TryResolve<IDifficultyBeatmap>() != null) || IsViewing)
             {
                 _queue.Enqueue(notification);

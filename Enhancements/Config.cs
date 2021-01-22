@@ -1,18 +1,18 @@
-﻿using System;
-using UnityEngine;
-using IPA.Config.Data;
-using IPA.Config.Stores;
+﻿using SemVer;
 using Enhancements.Misc;
 using Enhancements.Clock;
 using Enhancements.Timers;
 using Enhancements.Volume;
-using IPA.Config.Stores.Attributes;
+using SiraUtil.Converters;
 using Enhancements.Breaktime;
+using IPA.Config.Stores.Attributes;
 
 namespace Enhancements
 {
     public class Config
     {
+        [NonNullable, UseConverter(typeof(VersionConverter))]
+        public virtual Version Version { get; set; } = new Version("0.0.0");
         [NonNullable]
         public virtual ClockSettings Clock { get; set; } = new ClockSettings();
         [NonNullable]

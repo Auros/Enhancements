@@ -13,6 +13,7 @@ using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
 using BeatSaberMarkupLanguage.Components.Settings;
+using UnityEngine.SceneManagement;
 
 namespace Enhancements.Timers
 {
@@ -20,6 +21,7 @@ namespace Enhancements.Timers
     [HotReload(RelativePathToLayout = @"..\Views\Timers\notification-view.bsml")]
     public class NotificationView : BSMLAutomaticViewController
     {
+        private string _startScene;
         private Notifier _notifier;
         private FloatingScreen _floatingScreen;
         private ITimerController _timerController;
@@ -79,6 +81,7 @@ namespace Enhancements.Timers
         public void Construct(ITimerController controller, Notifier notifier, PhysicsRaycasterWithCache physicsRaycasterWithCache)
         {
             _physicsRaycasterWithCache = physicsRaycasterWithCache;
+            _startScene = gameObject.scene.name;
             _notifier = notifier;
             _timerController = controller;
             unitOptions = new List<object>();
@@ -90,6 +93,13 @@ namespace Enhancements.Timers
             }.Select(x => x as object));
             _ = CreateScreen();
             _notifier.NotificationPing += ShowNotification;
+            SceneManager.activeSceneChanged += SceneChanged;
+        }
+
+        private void SceneChanged(Scene oldScene, Scene newScene)
+        {
+            if (_startScene == newScene.name)
+                Catch();
         }
 
         [UIAction("#post-parse")]
@@ -109,10 +119,19 @@ namespace Enhancements.Timers
             }
         }
 
+        protected void OnDisable()
+        {
+            if (!(_notifier is null))
+            {
+                _notifier.NotificationPing -= ShowNotification;
+            }
+        }
+
         protected override void OnDestroy()
         {
             base.OnDestroy();
             _notifier.NotificationPing -= ShowNotification;
+            SceneManager.activeSceneChanged -= SceneChanged;
         }
 
         public void ShowNotification(ITimeNotification notification)
@@ -185,7 +204,6 @@ namespace Enhancements.Timers
         [UIAction("dismiss")]
         protected void Dismiss()
         {
-
             Visible = false;
             Catch();
         }

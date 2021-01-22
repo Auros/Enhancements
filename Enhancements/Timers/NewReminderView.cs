@@ -91,7 +91,7 @@ namespace Enhancements.Timers
 
         private void CreateScreen()
         {
-            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(130f, 70f), false, new Vector3(0f, 3.5f, 2.25f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
+            _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(130f, 70f), false, new Vector3(0f, 3.5f, 2.5f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
             _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
             Visible = false;
         }
