@@ -11,6 +11,8 @@ namespace Enhancements
 {
     public class Config
     {
+        internal static Config Value;
+
         [NonNullable, UseConverter(typeof(VersionConverter))]
         public virtual Version Version { get; set; } = new Version("0.0.0");
         [NonNullable]

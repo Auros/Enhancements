@@ -21,6 +21,7 @@ namespace Enhancements
         {
             Log = logger;
             Config config = conf.Generated<Config>();
+            Config.Value = config;
 
             if (config.Version.ToString() == "0.0.0" && config.Clock.Position == new UnityEngine.Vector3(0f, 2.8f, 2.45f))
             {

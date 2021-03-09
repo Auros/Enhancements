@@ -11,7 +11,7 @@
       <increment-setting text="Bad Cut" value="bad-cut" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
       <increment-setting text="Music" value="music" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
       <increment-setting text="Song Preview" value="song-preview" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
-      <increment-setting text="Menu Background" value="background" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
+      <!--<increment-setting text="Menu Background" value="background" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />-->
       <increment-setting text="Fireworks" value="fireworks" formatter="percent" increment=".05" min="0" max="1" apply-on-change="true" />
     </vertical>
   </horizontal>

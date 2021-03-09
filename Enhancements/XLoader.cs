@@ -31,7 +31,7 @@ namespace Enhancements
                 AssetBundle bundle = AssetBundle.LoadFromStream(Assembly.GetExecutingAssembly().GetManifestResourceStream(BUNDLE_PATH));
 
                 // Load Fonts
-                _cachedTekoFont = Resources.FindObjectsOfTypeAll<TMP_FontAsset>().LastOrDefault(f2 => f2.name == "Teko-Medium SDF No Glow");
+                _cachedTekoFont = Resources.FindObjectsOfTypeAll<TMP_FontAsset>().LastOrDefault(f2 => f2.name == "Teko-Medium SDF");
                 var fonts = bundle.LoadAllAssets<TMP_FontAsset>();
                 for (int i = 0; i < fonts.Length; i++)
                 {

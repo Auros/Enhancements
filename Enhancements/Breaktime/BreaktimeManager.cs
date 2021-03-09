@@ -55,7 +55,7 @@ namespace Enhancements.Breaktime
             }
         }
 
-        private void NoteCut(NoteController noteController, NoteCutInfo _)
+        private void NoteCut(NoteController noteController, in NoteCutInfo _)
         {
             NoteEnded(noteController);
         }
