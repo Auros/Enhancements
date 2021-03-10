@@ -6,6 +6,11 @@
         internal const string LATESTRELEASE = "https://github.com/Auros/Enhancements/releases/latest";
 
         internal const string CHANGELOG = @"
+        <size=150%><color=#888888>VERSION 3.0.2</color></size>
+        Some changes for the new 1.13.4 Beat Saber update.
+        -    Changed the menu preview system slightly.
+        -    Removed menu background setting! It's now a base game feature.
+
         <size=150%><color=#888888>VERSION 3.0.1</color></size>
         Some bug fixes for the new 1.13.2 Beat Saber update.
         -    Added Version Reference In Config
