@@ -7,8 +7,8 @@
     "BeatSaberMarkupLanguage": "^1.3.5"
   },
   "description": "Adds various extra features and tweaks into Beat Saber like a clock and volume adjustment!",
-  "gameVersion": "1.13.4",
+  "gameVersion": "1.13.5",
   "id": "Enhancements",
   "name": "Enhancements",
-  "version": "3.0.2"
+  "version": "3.0.3"
 }

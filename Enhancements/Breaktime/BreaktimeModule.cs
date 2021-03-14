@@ -51,7 +51,7 @@ namespace Enhancements.UI.Breaktime
             _breaktimeManager = breaktimeManager;
             _audioTimeSyncController = audioTimeSyncController;
             _audioSource = gameObject.AddComponent<AudioSource>();
-            _audioSource.volume = Enhancements.Volume.BeatSaber.Volume;
+            _audioSource.outputAudioMixerGroup = _audioTimeSyncController.audioSource.outputAudioMixerGroup;
         }
 
         internal async void StartBreak(float time)
