@@ -6,6 +6,9 @@
         internal const string LATESTRELEASE = "https://github.com/Auros/Enhancements/releases/latest";
 
         internal const string CHANGELOG = @"
+        <size=150%><color=#888888>VERSION 3.0.4</color></size>
+        -    Fixed a critical bug for the new Beat Saber Update (1.15.0)
+
         <size=150%><color=#888888>VERSION 3.0.3</color></size>
         -    Fixed a bug which played the level failed audio at normal volume if music volume is turned down.
 

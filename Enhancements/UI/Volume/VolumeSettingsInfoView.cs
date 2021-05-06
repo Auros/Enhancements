@@ -3,6 +3,7 @@ using Enhancements.Volume;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
 using System.Linq;
+using IPA.Utilities;
 
 namespace Enhancements.UI.Volume
 {
@@ -12,7 +13,9 @@ namespace Enhancements.UI.Volume
     {
         private VolumeSettings _settings;
         private MenuVolumeManager _menuVolume;
+        private FireworksController _fireworksController;
         private FireworkItemController.Pool _fireworkPool;
+        private static readonly FieldAccessor<FireworksController, FireworkItemController.Pool>.Accessor FireworkPool = FieldAccessor<FireworksController, FireworkItemController.Pool>.GetAccessor("_fireworkItemPool");
 
         [UIValue("good-cut")]
         protected float GoodCut
@@ -65,14 +68,19 @@ namespace Enhancements.UI.Volume
         }
 
         [Inject]
-        public void Construct(VolumeSettings settings, MenuVolumeManager menuVolume, FireworkItemController.Pool fireworkPool)
+        public void Construct(VolumeSettings settings, MenuVolumeManager menuVolume, FireworksController fireworkController)
         {
             _settings = settings;
             _menuVolume = menuVolume;
-            _fireworkPool = fireworkPool;
+            _fireworksController = fireworkController;
         }
 
+        protected override void DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
+        {
 
+            _fireworkPool = FireworkPool(ref _fireworksController);
+            base.DidActivate(firstActivation, addedToHierarchy, screenSystemEnabling);
+        }
 
         protected override void DidDeactivate(bool removedFromHierarchy, bool screenSystemDisabling)
         {

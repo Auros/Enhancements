@@ -6,7 +6,7 @@ using IPA.Utilities;
 
 namespace Enhancements.Volume
 {
-    [HarmonyPatch(typeof(MenuInstaller), "InstallBindings")]
+    [HarmonyPatch(typeof(FireworksItemPoolInstaller), "InstallBindings")]
     internal class FireworkSoundEffectSwapper
     {
         internal static FieldAccessor<FireworkItemController, AudioSource>.Accessor GetFireworkControllerAudioSource = FieldAccessor<FireworkItemController, AudioSource>.GetAccessor("_audioSource");
