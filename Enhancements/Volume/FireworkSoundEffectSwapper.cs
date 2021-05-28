@@ -11,7 +11,7 @@ namespace Enhancements.Volume
     {
         internal static FieldAccessor<FireworkItemController, AudioSource>.Accessor GetFireworkControllerAudioSource = FieldAccessor<FireworkItemController, AudioSource>.GetAccessor("_audioSource");
 
-        internal static void Prefix(MenuInstaller __instance, FireworkItemController ____fireworkItemControllerPrefab)
+        internal static void Prefix(FireworksItemPoolInstaller __instance, FireworkItemController ____fireworkItemControllerPrefab)
         {
             var mib = __instance as MonoInstallerBase;
             var container = Accessors.GetDiContainer(ref mib);
