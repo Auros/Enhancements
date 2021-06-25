@@ -6,6 +6,7 @@ using Enhancements.Timers;
 using Enhancements.Volume;
 using Enhancements.Breaktime;
 using Enhancements.UI.Breaktime;
+using System;
 
 namespace Enhancements.Installers
 {
@@ -31,13 +32,13 @@ namespace Enhancements.Installers
             var textAndHuds = !_playerDataModel.playerData.playerSpecificSettings.noTextsAndHuds;
             if (_clockSettings.Enabled && _clockSettings.ShowInGame && textAndHuds)
             {
-                Container.BindViewController<BasicClockView>();
-                Container.BindViewController<NewReminderView>();
+                Container.Bind(typeof(BasicClockView), typeof(IInitializable)).To<BasicClockView>().FromNewComponentAsViewController().AsSingle();
+                Container.Bind(typeof(NewReminderView), typeof(IInitializable)).To<NewReminderView>().FromNewComponentAsViewController().AsSingle();
                 Container.BindInterfacesTo<BasicClock>().AsSingle();
             }
             if (_timerSettings.Enabled && _timerSettings.NotifyInGame && textAndHuds)
             {
-                Container.BindViewController<NotificationView>();
+                Container.Bind(typeof(NotificationView), typeof(IInitializable), typeof(IDisposable)).To<NotificationView>().FromNewComponentAsViewController().AsSingle();
             }
             Container.BindInterfacesAndSelfTo<GameVolumeModifier>().AsSingle();
             if (_miscSettings.ButtonLockMenu || _miscSettings.ButtonLockRestart || _miscSettings.ButtonLockContinue)
@@ -47,7 +48,7 @@ namespace Enhancements.Installers
             if (_breaktimeSettings.Enabled && textAndHuds)
             {
                 Container.BindInterfacesAndSelfTo<BreaktimeManager>().AsSingle();
-                Container.BindViewController<BreaktimeModule>(true);
+                Container.Bind(typeof(BreaktimeModule), typeof(IInitializable)).To<BreaktimeModule>().FromNewComponentAsViewController().AsSingle();
             }
         }
     }

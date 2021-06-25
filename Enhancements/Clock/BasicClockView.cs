@@ -10,7 +10,7 @@ namespace Enhancements.Clock
 {
     [ViewDefinition("Enhancements.Views.Clock.basic-clock.bsml")]
     [HotReload(RelativePathToLayout = @"..\Views\Clock\basic-clock.bsml")]
-    public class BasicClockView : BSMLAutomaticViewController
+    public class BasicClockView : BSMLAutomaticViewController, IInitializable
     {
         private XLoader _loader;
         private TimerSettings _timerSettings;
@@ -79,6 +79,11 @@ namespace Enhancements.Clock
             {
                 _newReminderView.Visible = true;
             }
+        }
+
+        public void Initialize()
+        {
+
         }
     }
 }

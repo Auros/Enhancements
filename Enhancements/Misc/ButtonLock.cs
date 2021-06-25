@@ -49,8 +49,8 @@ namespace Enhancements.Misc
             else if (_multiplayerLocalActivePlayerInGameMenuViewController != null)
             {
                 _menuButton = DisconnectButton(ref _multiplayerLocalActivePlayerInGameMenuViewController);
-                _menuButton = GiveUpButton(ref _multiplayerLocalActivePlayerInGameMenuViewController);
-                _menuButton = ResumeButton(ref _multiplayerLocalActivePlayerInGameMenuViewController);
+                _restartButton = GiveUpButton(ref _multiplayerLocalActivePlayerInGameMenuViewController);
+                _continueButton = ResumeButton(ref _multiplayerLocalActivePlayerInGameMenuViewController);
             }
         }
 

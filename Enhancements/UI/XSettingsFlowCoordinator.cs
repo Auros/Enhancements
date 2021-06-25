@@ -11,6 +11,7 @@ namespace Enhancements.UI
 {
     public class XSettingsFlowCoordinator : FlowCoordinator
     {
+        private Config _config;
         private int _lastId = 0;
         private XInfoView _infoView;
         private MainFlowCoordinator _mainFlowCoordinator;
@@ -32,13 +33,14 @@ namespace Enhancements.UI
         private ExtraTweaksSettingsView _extraTweaksSettingsView;
 
         [Inject]
-        public void Construct(XInfoView infoView, MainFlowCoordinator mainFlowCoordinator, XSettingsNavigationController settingsNavigationView,
+        public void Construct(Config config, XInfoView infoView, MainFlowCoordinator mainFlowCoordinator, XSettingsNavigationController settingsNavigationView,
                               ClockSettingsInfoView clockSettingsInfoView, ClockSettingsPosColView clockSettingsPosColView, ClockSettingsFormatView clockSettingsFormatView,
                               TimersSettingsInfoView timersSettingsInfoView,
                               BreaktimeSettingsInfoView breaktimeSettingsInfoView, BreaktimeSettingsGlobalView breaktimeSettingsGlobalView, BreaktimeSettingsProfileView breaktimeSettingsProfileView,
                               VolumeSettingsInfoView volumeSettingsInfoView,
                               MiscSettingsInfoView miscSettingsInfoView, ExtraTweaksSettingsView extraTweaksSettingsView)
         {
+            _config = config;
             _infoView = infoView;
             _mainFlowCoordinator = mainFlowCoordinator;
             _settingsNavigationView = settingsNavigationView;
@@ -129,6 +131,7 @@ namespace Enhancements.UI
 
         protected override void BackButtonWasPressed(ViewController topViewController)
         {
+            _config.Changed();
             _settingsNavigationView.DidSelectSettingOption -= ShowSettingsPage;
             _breaktimeSettingsProfileView.ProfilesUpdated -= ProfilesUpdated;
             base.BackButtonWasPressed(topViewController);

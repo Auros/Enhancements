@@ -19,7 +19,7 @@ namespace Enhancements.Timers
 {
     [ViewDefinition("Enhancements.Views.Timers.notification-view.bsml")]
     [HotReload(RelativePathToLayout = @"..\Views\Timers\notification-view.bsml")]
-    public class NotificationView : BSMLAutomaticViewController
+    public class NotificationView : BSMLAutomaticViewController, IInitializable, IDisposable
     {
         private string _startScene;
         private Notifier _notifier;
@@ -91,9 +91,7 @@ namespace Enhancements.Timers
                 TimeType.Minutes,
                 TimeType.Hours,
             }.Select(x => x as object));
-            _ = CreateScreen();
-            _notifier.NotificationPing += ShowNotification;
-            SceneManager.activeSceneChanged += SceneChanged;
+            gameObject.SetActive(true);
         }
 
         private void SceneChanged(Scene oldScene, Scene newScene)
@@ -114,28 +112,21 @@ namespace Enhancements.Timers
         {
             if (!(_notifier is null))
             {
-                _notifier.NotificationPing += ShowNotification;
                 Catch();
             }
         }
 
-        protected void OnDisable()
-        {
-            if (!(_notifier is null))
-            {
-                _notifier.NotificationPing -= ShowNotification;
-            }
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            _notifier.NotificationPing -= ShowNotification;
-            SceneManager.activeSceneChanged -= SceneChanged;
-        }
-
         public void ShowNotification(ITimeNotification notification)
         {
+            if (SceneManager.GetActiveScene().name == _startScene)
+                ShowNotificationAsync(notification);
+        }
+
+        private async void ShowNotificationAsync(ITimeNotification notification)
+        {
+            Plugin.Log.Info("HELLO?!");
+            if (_floatingScreen == null)
+                await CreateScreen();
             if (!(notification is null))
             {
                 _currentNotification = notification;
@@ -148,9 +139,9 @@ namespace Enhancements.Timers
         {
             _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(130f, 70f), false, new Vector3(0f, 3.5f, 2.1f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
             _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
+            _floatingScreen.gameObject.SetActive(true);
             Visible = true;
             await SiraUtil.Utilities.PauseChamp;
-            Visible = false;
         }
 
         [UIAction("format-units")]
@@ -216,6 +207,19 @@ namespace Enhancements.Timers
             {
                 ShowNotification(nextNotif);
             }
+        }
+
+        public void Initialize()
+        {
+            _notifier.NotificationPing += ShowNotification;
+            SceneManager.activeSceneChanged += SceneChanged;
+        }
+
+        public void Dispose()
+        {
+            _notifier.IsViewing = false;
+            _notifier.NotificationPing -= ShowNotification;
+            SceneManager.activeSceneChanged -= SceneChanged;
         }
     }
 }

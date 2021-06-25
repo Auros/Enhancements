@@ -17,7 +17,7 @@ namespace Enhancements.Timers
 {
     [ViewDefinition("Enhancements.Views.Timers.new-reminder-view.bsml")]
     [HotReload(RelativePathToLayout = @"..\Views\Timers\new-reminder-view.bsml")]
-    public class NewReminderView : BSMLAutomaticViewController
+    public class NewReminderView : BSMLAutomaticViewController, IInitializable
     {
         private FloatingScreen _floatingScreen;
         private ITimerController _timerController;
@@ -80,6 +80,7 @@ namespace Enhancements.Timers
             }.Select(x => x as object));
             _timerController = timerController;
             _physicsRaycasterWithCache = physicsRaycasterWithCache;
+            gameObject.SetActive(true);
             CreateScreen();
         }
 
@@ -93,6 +94,7 @@ namespace Enhancements.Timers
         {
             _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(130f, 70f), false, new Vector3(0f, 3.5f, 2.5f), Quaternion.Euler(new Vector3(325f, 0f, 0f)));
             _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
+            _floatingScreen.gameObject.SetActive(true);
             Visible = false;
         }
 
@@ -142,6 +144,11 @@ namespace Enhancements.Timers
             }
             _timerController.RegisterNotification(new GenericNotification(Text, time));
             Visible = false;
+        }
+
+        public void Initialize()
+        {
+
         }
     }
 }

@@ -15,7 +15,6 @@ namespace Enhancements.UI.Breaktime
     [HotReload(RelativePathToLayout = @"..\..\Views\Breaktime\breaktime-settings-global-view.bsml")]
     public class BreaktimeSettingsGlobalView : BSMLAutomaticViewController
     {
-        private BreaktimeLoader _loader;
         private BreaktimeSettings _settings;
 
         [UIParams]
@@ -59,9 +58,8 @@ namespace Enhancements.UI.Breaktime
         }
 
         [Inject]
-        public void Construct(BreaktimeLoader loader, BreaktimeSettings settings)
+        public void Construct(BreaktimeSettings settings)
         {
-            _loader = loader;
             _settings = settings;
             LoadProfiles();
         }

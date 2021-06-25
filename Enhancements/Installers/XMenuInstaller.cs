@@ -9,6 +9,8 @@ using Enhancements.UI.Timers;
 using Enhancements.UI.Volume;
 using Enhancements.UI.Breaktime;
 using Installer = Zenject.Installer;
+using Zenject;
+using System;
 
 namespace Enhancements.Installers
 {
@@ -19,9 +21,9 @@ namespace Enhancements.Installers
             Container.BindInterfacesTo<BasicClock>().AsSingle();
             Container.BindInterfacesAndSelfTo<MenuVolumeManager>().AsSingle();
 
-            Container.BindViewController<BasicClockView>();
-            Container.BindViewController<NewReminderView>();
-            Container.BindViewController<NotificationView>();
+            Container.Bind<BasicClockView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind<NewReminderView>().FromNewComponentAsViewController().AsSingle();
+            Container.Bind(typeof(NotificationView), typeof(IInitializable), typeof(IDisposable)).To<NotificationView>().FromNewComponentAsViewController().AsSingle();
 
             Container.Bind<XInfoView>().FromNewComponentAsViewController().AsSingle();
             Container.Bind<MiscSettingsInfoView>().FromNewComponentAsViewController().AsSingle();

@@ -16,7 +16,7 @@ namespace Enhancements.UI.Breaktime
 {
     [ViewDefinition("Enhancements.Views.Breaktime.breaktime-module.bsml")]
     [HotReload(RelativePathToLayout = @"..\Views\Breaktime\breaktime-module.bsml")]
-    public class BreaktimeModule : BSMLAutomaticViewController
+    public class BreaktimeModule : BSMLAutomaticViewController, IInitializable
     {
         private bool _breakHappening;
         private BreaktimeLoader _loader;
@@ -52,6 +52,7 @@ namespace Enhancements.UI.Breaktime
             _audioTimeSyncController = audioTimeSyncController;
             _audioSource = gameObject.AddComponent<AudioSource>();
             _audioSource.outputAudioMixerGroup = _audioTimeSyncController.audioSource.outputAudioMixerGroup;
+            gameObject.SetActive(true);
         }
 
         internal async void StartBreak(float time)
@@ -63,7 +64,7 @@ namespace Enhancements.UI.Breaktime
             }
             var assets = await _loader.GetProfileAssets(profile);
             gameObject.SetActive(true);
-            StartCoroutine(HandleBreak(time, profile, assets));
+            _audioTimeSyncController.StartCoroutine(HandleBreak(time, profile, assets));
         }
 
         internal IEnumerator HandleBreak(float timeUntilEnd, Profile profile, Tuple<Sprite, AudioClip> assets)
@@ -72,16 +73,17 @@ namespace Enhancements.UI.Breaktime
             {
                 CreateScreen();
                 _breakHappening = true;
-                _floatingScreen.gameObject.SetActive(true);
                 var endPoint = timeUntilEnd + _audioTimeSyncController.songTime;
+                gameObject.SetActive(true);
+                _floatingScreen.gameObject.SetActive(true);
                 _floatingScreen.SetRootViewController(this, profile.Animation == Animation.FadeIn ? AnimationType.In : AnimationType.None);
                 IEnumerator textUpdate = UpdateText(endPoint);
                 SetupVisuals(profile, assets);
-                StartCoroutine(textUpdate);
+                _audioTimeSyncController.StartCoroutine(textUpdate);
                 ModifyVisuals(profile);
                 if (profile.Animation == Animation.SlideUp)
                 {
-                    StartCoroutine(ActivateSlidingAnimation(endPoint));
+                    _audioTimeSyncController.StartCoroutine(ActivateSlidingAnimation(endPoint));
                 }
                 yield return new WaitUntil(() => _audioTimeSyncController.songTime > endPoint - 2f);
                 _floatingScreen.ScreenPosition = new Vector3(0f, 1.5f, 4f);
@@ -94,8 +96,8 @@ namespace Enhancements.UI.Breaktime
                 {
                     yield return new WaitForSeconds(1f);
                 }
-                StopCoroutine(textUpdate);
-                _floatingScreen.gameObject.SetActive(false);
+                _audioTimeSyncController.StopCoroutine(textUpdate);
+                _floatingScreen.gameObject.SetActive(true);
                 _breakHappening = false;
             }
         }
@@ -173,9 +175,12 @@ namespace Enhancements.UI.Breaktime
             if (_floatingScreen == null)
             {
                 _floatingScreen = FloatingScreen.CreateFloatingScreen(new Vector2(75f, 75f), false, new Vector3(0f, 1.5f, 4f), Quaternion.identity);
-                //_floatingScreen.GetComponent<Image>().enabled = false;
                 _floatingScreen.SetRootViewController(null, AnimationType.In);
                 _floatingScreen.gameObject.SetActive(false);
+            }
+            else
+            {
+                _floatingScreen.gameObject.SetActive(true);
             }
         }
 
@@ -193,6 +198,11 @@ namespace Enhancements.UI.Breaktime
         {
             _breaktimeManager.BreakDetected -= BreakDetected;
             base.OnDestroy();
+        }
+
+        public void Initialize()
+        {
+
         }
     }
 }

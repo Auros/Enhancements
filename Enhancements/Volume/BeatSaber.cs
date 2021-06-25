@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Enhancements.Volume
 {
-    [HarmonyPatch(typeof(SongPreviewPlayer), nameof(SongPreviewPlayer.CrossfadeTo), argumentTypes: new Type[] { typeof(AudioClip), typeof(float), typeof(float), typeof(bool) })]
+    [HarmonyPatch(typeof(SongPreviewPlayer), nameof(SongPreviewPlayer.CrossfadeTo), argumentTypes: new Type[] { typeof(AudioClip), typeof(float), typeof(float), typeof(float), typeof(bool) })]
     internal class PreviewPatcher
     {
         internal static void Postfix(ref float ____volumeScale, bool isDefault)
