@@ -43,7 +43,6 @@ namespace Enhancements.Timers
             }
             else
             {
-                Plugin.Log.Info("notifier");
                 NotificationPing?.Invoke(notification);
             }
         }

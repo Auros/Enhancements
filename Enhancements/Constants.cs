@@ -6,6 +6,13 @@
         internal const string LATESTRELEASE = "https://github.com/Auros/Enhancements/releases/latest";
 
         internal const string CHANGELOG = @"
+        <size=150%><color=#888888>VERSION 3.0.10</color></size>
+        -    Updated for Beat Saber 1.16.3
+
+        <size=150%><color=#888888>VERSION 3.0.9</color></size>
+        -    Fixed an issue with Button Lock in multiplayer
+        -    Some internal cleanup
+
         <size=150%><color=#888888>VERSION 3.0.7</color></size>
         -    Updated to Beat Saber (1.16.2)
         -    Fixed a bug where timers would not properly after some time if they weren't dismissed in game.

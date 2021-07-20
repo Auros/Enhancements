@@ -124,7 +124,6 @@ namespace Enhancements.Timers
 
         private async void ShowNotificationAsync(ITimeNotification notification)
         {
-            Plugin.Log.Info("HELLO?!");
             if (_floatingScreen == null)
                 await CreateScreen();
             if (!(notification is null))
