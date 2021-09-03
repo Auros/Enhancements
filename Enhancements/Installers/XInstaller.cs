@@ -1,8 +1,8 @@
-﻿using SemVer;
-using Zenject;
+﻿using Zenject;
 using Enhancements.Clock;
 using Enhancements.Timers;
 using Enhancements.Breaktime;
+using Version = Hive.Versioning.Version;
 
 namespace Enhancements.Installers
 {

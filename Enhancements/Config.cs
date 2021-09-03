@@ -1,11 +1,11 @@
-﻿using SemVer;
-using Enhancements.Misc;
+﻿using Enhancements.Breaktime;
 using Enhancements.Clock;
+using Enhancements.Misc;
 using Enhancements.Timers;
 using Enhancements.Volume;
-using SiraUtil.Converters;
-using Enhancements.Breaktime;
 using IPA.Config.Stores.Attributes;
+using SiraUtil.Converters;
+using Version = Hive.Versioning.Version;
 
 namespace Enhancements
 {
@@ -13,7 +13,7 @@ namespace Enhancements
     {
         internal static Config Value;
 
-        [NonNullable, UseConverter(typeof(VersionConverter))]
+        [NonNullable, UseConverter(typeof(HiveVersionConverter))]
         public virtual Version Version { get; set; } = new Version("0.0.0");
         [NonNullable]
         public virtual ClockSettings Clock { get; set; } = new ClockSettings();

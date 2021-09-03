@@ -1,13 +1,13 @@
-﻿using TMPro;
-using SemVer;
-using Zenject;
-using UnityEngine;
-using BeatSaberMarkupLanguage.Attributes;
+﻿using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.ViewControllers;
+using TMPro;
+using UnityEngine;
+using Zenject;
+using Version = Hive.Versioning.Version;
 
 namespace Enhancements.UI
 {
-	[ViewDefinition("Enhancements.Views.info-view.bsml")]
+    [ViewDefinition("Enhancements.Views.info-view.bsml")]
 	[HotReload(RelativePathToLayout = @"..\Views\info-view.bsml")]
     public class XInfoView : BSMLAutomaticViewController
     {

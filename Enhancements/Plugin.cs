@@ -27,10 +27,10 @@ namespace Enhancements
             {
                 config.Clock.Position = new UnityEngine.Vector3(0f, 3f, 3.9f);
             }
-            config.Version = metadata.Version;
+            config.Version = metadata.HVersion;
 
             _harmony = new Harmony("dev.auros.enhancements");
-            zenjector.OnApp<XInstaller>().WithParameters(config, metadata.Version);
+            zenjector.OnApp<XInstaller>().WithParameters(config, metadata.HVersion);
             zenjector.OnGame<XGameInstaller>(false).ShortCircuitForTutorial();
             zenjector.OnMenu<XMenuInstaller>();
         }
