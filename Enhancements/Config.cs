@@ -13,7 +13,7 @@ namespace Enhancements
     {
         internal static Config Value;
 
-        [NonNullable, UseConverter(typeof(HiveVersionConverter))]
+        [NonNullable, UseConverter(typeof(VersionConverter))]
         public virtual Version Version { get; set; } = new Version("0.0.0");
         [NonNullable]
         public virtual ClockSettings Clock { get; set; } = new ClockSettings();

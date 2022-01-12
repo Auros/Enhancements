@@ -7,12 +7,15 @@ using System.Reflection;
 using Enhancements.Installers;
 using Conf = IPA.Config.Config;
 using IPALogger = IPA.Logging.Logger;
+using IPA.Utilities;
+using UnityEngine;
 
 namespace Enhancements
 {
     [Plugin(RuntimeOptions.DynamicInit)]
     public class Plugin
     {
+        public static readonly FieldAccessor<AudioTimeSyncController, AudioSource>.Accessor AudioSource = FieldAccessor<AudioTimeSyncController, AudioSource>.GetAccessor("_audioSource");
         internal static IPALogger Log { get; set; }
         private readonly Harmony _harmony;
 
@@ -30,9 +33,9 @@ namespace Enhancements
             config.Version = metadata.HVersion;
 
             _harmony = new Harmony("dev.auros.enhancements");
-            zenjector.OnApp<XInstaller>().WithParameters(config, metadata.HVersion);
-            zenjector.OnGame<XGameInstaller>(false).ShortCircuitForTutorial();
-            zenjector.OnMenu<XMenuInstaller>();
+            zenjector.Install<XInstaller>(Location.App, config, metadata.HVersion);
+            zenjector.Install<XGameInstaller>(Location.Player);
+            zenjector.Install<XMenuInstaller>(Location.Menu);
         }
 
         [OnEnable]
@@ -44,7 +47,7 @@ namespace Enhancements
         [OnDisable]
         public void OnDisable()
         {
-            _harmony.UnpatchAll("dev.auros.enhancements");
+            _harmony.UnpatchSelf();
         }
     }
 }

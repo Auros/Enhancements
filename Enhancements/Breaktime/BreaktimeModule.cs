@@ -11,6 +11,7 @@ using BeatSaberMarkupLanguage;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
+using IPA.Utilities;
 
 namespace Enhancements.UI.Breaktime
 {
@@ -51,7 +52,7 @@ namespace Enhancements.UI.Breaktime
             _breaktimeManager = breaktimeManager;
             _audioTimeSyncController = audioTimeSyncController;
             _audioSource = gameObject.AddComponent<AudioSource>();
-            _audioSource.outputAudioMixerGroup = _audioTimeSyncController.audioSource.outputAudioMixerGroup;
+            _audioSource.outputAudioMixerGroup = Plugin.AudioSource(ref _audioTimeSyncController).outputAudioMixerGroup;
             gameObject.SetActive(true);
         }
 

@@ -25,10 +25,8 @@ namespace Enhancements.Clock
         [UseConverter(typeof(HexColorConverter))]
         public virtual Color Color { get; set; } = Color.white;
 
-        [UseConverter(typeof(Vector3Converter))]
         public virtual Vector3 Position { get; set; } = new Vector3(0f, 3f, 3.9f);
 
-        [UseConverter(typeof(Vector3Converter))]
         public virtual Vector3 Rotation { get; set; } = new Vector3(325f, 0f, 0f);
 
         [NonNullable]

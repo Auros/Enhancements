@@ -140,7 +140,7 @@ namespace Enhancements.Timers
             _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
             _floatingScreen.gameObject.SetActive(true);
             Visible = true;
-            await SiraUtil.Utilities.PauseChamp;
+            await SiraUtil.Extras.Utilities.PauseChamp;
         }
 
         [UIAction("format-units")]

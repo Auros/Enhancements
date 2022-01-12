@@ -17,15 +17,15 @@ namespace Enhancements.Breaktime
         private static readonly System.Random _random = new System.Random();
 
         private readonly BreaktimeSettings _settings;
-        private readonly CachedMediaAsyncLoader _mediaLoader;
-        private readonly CachedMediaAsyncLoader _spriteLoader;
+        private readonly AudioClipAsyncLoader _audioClipAsyncLoader;
+        private readonly CachedMediaAsyncLoader _cachedMediaAsyncLoader;
         private readonly CancellationTokenSource _cancellationTokenSource;
 
-        public BreaktimeLoader(BreaktimeSettings settings, CachedMediaAsyncLoader mediaLoader, CachedMediaAsyncLoader spriteLoader)
+        public BreaktimeLoader(BreaktimeSettings settings, AudioClipAsyncLoader audioClipAsyncLoader, CachedMediaAsyncLoader cachedMediaAsyncLoader)
         {
             _settings = settings;
-            _mediaLoader = mediaLoader;
-            _spriteLoader = spriteLoader;
+            _audioClipAsyncLoader = audioClipAsyncLoader;
+            _cachedMediaAsyncLoader = cachedMediaAsyncLoader;
             _cancellationTokenSource = new CancellationTokenSource();
             if (!Directory.Exists(IMAGE_FOLDER))
             {
@@ -72,7 +72,7 @@ namespace Enhancements.Breaktime
             {
                 try
                 {
-                    spr = await _spriteLoader.LoadSpriteAsync(Path.Combine(IMAGE_FOLDER, profile.ImagePath), _cancellationTokenSource.Token);
+                    spr = await _cachedMediaAsyncLoader.LoadSpriteAsync(Path.Combine(IMAGE_FOLDER, profile.ImagePath), _cancellationTokenSource.Token);
                 }
                 catch { }
             }
@@ -80,7 +80,7 @@ namespace Enhancements.Breaktime
             {
                 try
                 {
-                    clip = await _mediaLoader.LoadAudioClipAsync(Path.Combine(AUDIO_FOLDER, profile.AudioPath), _cancellationTokenSource.Token);
+                    clip = await _audioClipAsyncLoader.Load(Path.Combine(AUDIO_FOLDER, profile.AudioPath));
                 }
                 catch { }
             }

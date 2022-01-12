@@ -101,7 +101,7 @@ namespace Enhancements.UI
         {
             var rt = tableList.transform as RectTransform;
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, 25);
-            await SiraUtil.Utilities.PauseChamp;
+            await SiraUtil.Extras.Utilities.PauseChamp;
             if (_imageViews.Count == 0)
             {
                 _imageViews.AddRange(tableList.GetComponentsInChildren<ImageView>());
