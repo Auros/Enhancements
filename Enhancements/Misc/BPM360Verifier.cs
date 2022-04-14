@@ -8,33 +8,29 @@ namespace Enhancements.Misc
     [HarmonyPatch(typeof(GameplayCoreInstaller), "InstallBindings")]
     internal class BPM360Verifier
     {
-        internal static readonly PropertyAccessor<BeatmapData, int>.Setter SetRotationCount = PropertyAccessor<BeatmapData, int>.GetSetter("spawnRotationEventsCount");
         internal static readonly PropertyAccessor<MonoInstallerBase, DiContainer>.Getter GetDiContainer = PropertyAccessor<MonoInstallerBase, DiContainer>.GetGetter("Container");
 
-        internal static void Prefix(ref GameplayCoreInstaller __instance, ref GameplayCoreSceneSetupData ____sceneSetupData)
+        internal static void Postfix(ref GameplayCoreInstaller __instance, ref GameplayCoreSceneSetupData ____sceneSetupData)
         {
             var container = GetContainer(__instance);
             var settings = container.Resolve<MiscSettings>();
             if (settings.BPMFixEnabled)
             {
                 bool actually360 = false;
-                var data = ____sceneSetupData.difficultyBeatmap.beatmapData.beatmapEventsData;
-                var spawnRotationProcessor = new SpawnRotationProcessor();
-                for (int i = 0; i < data.Count; i++)
+                foreach (var item in ____sceneSetupData.transformedBeatmapData.allBeatmapDataItems)
                 {
-                    var bmEvent = data[i];
-                    if (bmEvent.type == BeatmapEventType.Event14 || bmEvent.type == BeatmapEventType.Event15)
+                    if (item is SpawnRotationBeatmapEventData rotation)
                     {
-                        if (spawnRotationProcessor.RotationForEventValue(bmEvent.value) != 0)
+                        if (rotation.rotation != 0)
                         {
                             actually360 = true;
+                            break;
                         }
                     }
                 }
                 if (!actually360)
                 {
-                    var beatmapData = ____sceneSetupData.difficultyBeatmap.beatmapData;
-                    SetRotationCount(ref beatmapData, 0);
+                    container.Unbind<BeatLineManager>();
                 }
             }
         }

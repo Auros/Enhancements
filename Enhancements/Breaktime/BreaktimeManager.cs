@@ -8,35 +8,29 @@ namespace Enhancements.Breaktime
     public class BreaktimeManager : IInitializable, IDisposable
     {
         private readonly BreaktimeSettings _settings;
-        private readonly IDifficultyBeatmap _difficultyBeatmap;
+        private readonly IReadonlyBeatmapData _readonlyBeatmapData;
         private readonly BeatmapObjectManager _beatmapObjectManager;
         private readonly Dictionary<Tuple<NoteLineLayer, int, float>, BeatmapObjectData> breaks = new Dictionary<Tuple<NoteLineLayer, int, float>, BeatmapObjectData>();
 
         public event Action<float> BreakDetected;
 
-        public BreaktimeManager(BreaktimeSettings settings, [InjectOptional] IDifficultyBeatmap difficultyBeatmap, [InjectOptional] BeatmapObjectManager beatmapObjectManager)
+        public BreaktimeManager(BreaktimeSettings settings, [InjectOptional] IReadonlyBeatmapData readonlyBeatmapData, [InjectOptional] BeatmapObjectManager beatmapObjectManager)
         {
             _settings = settings;
-            _difficultyBeatmap = difficultyBeatmap;
+            _readonlyBeatmapData = readonlyBeatmapData;
             _beatmapObjectManager = beatmapObjectManager;
         }
 
         public void Initialize()
         {
-            if (_difficultyBeatmap != null)
+            if (_readonlyBeatmapData != null)
             {
                 List<BeatmapObjectData> objects = new List<BeatmapObjectData>();
-                var lines = _difficultyBeatmap.beatmapData.beatmapLinesData;
-                for (int i = 0; i < lines.Count(); i++)
+                foreach (var item in _readonlyBeatmapData.allBeatmapDataItems)
                 {
-                    var line = lines[i];
-                    for (int n = 0; n < line.beatmapObjectsData.Count(); n++)
+                    if (item is NoteData noteData)
                     {
-                        var objectData = line.beatmapObjectsData[n];
-                        if (objectData.beatmapObjectType == BeatmapObjectType.Note)
-                        {
-                            objects.Add(objectData);
-                        }
+                        objects.Add(noteData);
                     }
                 }
                 objects = objects.OrderBy(x => x.time).ToList();
@@ -71,7 +65,7 @@ namespace Enhancements.Breaktime
 
         public void Dispose()
         {
-            if (_difficultyBeatmap != null)
+            if (_readonlyBeatmapData != null)
             {
                 _beatmapObjectManager.noteWasMissedEvent -= NoteEnded;
                 _beatmapObjectManager.noteWasCutEvent -= NoteCut;
