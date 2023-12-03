@@ -103,10 +103,16 @@ namespace Enhancements.UI.Breaktime
             }
         }
 
+        private Color addAlphaToColor(Color color, float alpha)
+        {
+            color.a = alpha;
+            return color;
+        }
+
         private void ModifyVisuals(Profile profile)
         {
-            image.color = profile.ImageColor.ColorWithAlpha(profile.ImageOpacity);
-            text.color = profile.TextColor.ColorWithAlpha(profile.ImageOpacity);
+            image.color = addAlphaToColor(profile.ImageColor, profile.ImageOpacity);
+            text.color = addAlphaToColor(profile.TextColor, profile.ImageOpacity);
         }
 
         internal IEnumerator UpdateText(float endPoint)
