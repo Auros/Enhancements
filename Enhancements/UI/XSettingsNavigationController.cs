@@ -38,7 +38,7 @@ namespace Enhancements.UI
         [UIAction("#post-parse")]
         protected void Parsed()
         {
-            tableList.data.AddRange(new CustomListTableData.CustomCellInfo[]
+            CustomListTableData.CustomCellInfo[] newCustomCellInfo = new CustomListTableData.CustomCellInfo[]
             {
                 new CustomListTableData.CustomCellInfo
                 (
@@ -78,6 +78,12 @@ namespace Enhancements.UI
                     _loader.GetIcon("settings")
                 )
             });
+
+            foreach (var element in newCustomCellInfo)
+            {
+                tableList.data.Add(element);
+            }
+            
             tableList.tableView.ReloadData();
             SelectFirstCell();
         }
