@@ -77,13 +77,13 @@ namespace Enhancements.UI
                     "Miscellaneous Tweaks",
                     _loader.GetIcon("settings")
                 )
-            });
+            };
 
             foreach (var element in newCustomCellInfo)
             {
                 tableList.data.Add(element);
             }
-            
+
             tableList.tableView.ReloadData();
             SelectFirstCell();
         }
