@@ -173,6 +173,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Misc\BPM360Verifier.cs" />
     <Compile Include="Misc\ButtonLock.cs" />
+    <Compile Include="Misc\FilePathSongAudioClipProvider.cs" />
     <Compile Include="Misc\OptidraBeatmapObjectSwap.cs" />
     <Compile Include="Installers\XGameInstaller.cs" />
     <Compile Include="Misc\MiscSettings.cs" />
