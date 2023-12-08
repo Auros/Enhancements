@@ -6,6 +6,7 @@ using IPA.Utilities;
 using System.Threading;
 using System.Reflection;
 using System.Threading.Tasks;
+using Enhancements.Misc;
 
 namespace Enhancements.Breaktime
 {
@@ -80,7 +81,7 @@ namespace Enhancements.Breaktime
             {
                 try
                 {
-                    clip = await _audioClipAsyncLoader.Load(Path.Combine(AUDIO_FOLDER, profile.AudioPath));
+                    clip = await _audioClipAsyncLoader.Load(new FilePathSongAudioClipProvider(Path.Combine(AUDIO_FOLDER, profile.AudioPath)));
                 }
                 catch { }
             }

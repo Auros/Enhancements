@@ -65,7 +65,7 @@ namespace Enhancements.Clock
                 {
                     _basicClockView.ClockSize = _clockSettings.Size;
                     _basicClockView.Font = _loader.GetFont(_clockSettings.Font);
-                    _basicClockView.ClockColor = _clockSettings.Color.ColorWithAlpha(_clockSettings.Opacity);
+                    _basicClockView.ClockColor = addAlphaToColor(_clockSettings.Color, _clockSettings.Opacity);
                     _floatingScreen.ScreenPosition = _clockSettings.Position;
                     _floatingScreen.ScreenRotation = Quaternion.Euler(_clockSettings.Rotation);
                     _clockSettings.IsDirty = false;
@@ -77,6 +77,12 @@ namespace Enhancements.Clock
                 _basicClockView.ClockText = "";
                 _floatingScreen.gameObject.SetActive(false);
             }
+        }
+
+        private Color addAlphaToColor(Color color, float alpha)
+        {
+            color.a = alpha;
+            return color;
         }
     }
 }

@@ -22,7 +22,10 @@ namespace Enhancements.Timers
 
         public ITimeNotification NextNotification()
         {
-            _queue.TryDequeue(out ITimeNotification notif);
+            // If there's no items, just return null now
+            if (_queue.Count == 0) return null;
+
+            ITimeNotification notif = _queue.Dequeue();
             return notif;
         }
 
